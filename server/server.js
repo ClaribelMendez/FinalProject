@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config()
 const db = require('../server/db/db-connection.js'); 
+const path = require('path');
+
 
 const app = express();
 
@@ -43,6 +45,13 @@ app.post('/api/students', cors(), async (req, res) => {
     );
     console.log(result.rows[0]);
     res.json(result.rows[0]);
+});
+
+app.get('/about',function (req, res) {
+    res.sendFile(path.join(__dirname, 'about.html'));
+    // res.send('hey im working');
+    //res.send('about.html');
+    //res.render('about.html');
 });
 
 // console.log that your server is up and running
