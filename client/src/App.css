@@ -64,6 +64,8 @@
   grid-auto-rows: auto;
    
   grid-gap: 1rem;
+
+  
    
   }
 
@@ -89,4 +91,12 @@
 .container {
   width: 30%;
   padding: 2px 16px;
+  height: 10rem;
+  width: fit-content;
+  /* block-size: fit-content; */
+  border: 2px solid #ccc;
+  padding: 5px;
+  margin-bottom: 1em;
+  
 }
+

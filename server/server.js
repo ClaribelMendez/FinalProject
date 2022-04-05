@@ -17,37 +17,29 @@ app.get('/', (req, res) => {
 });
 
 //create the get request
-app.get('/api/students', cors(), async (req, res) => {
-    // const STUDENTS = [
-
-    //     { id: 1, firstName: 'Lisa', lastName: 'Lee' },
-    //     { id: 2, firstName: 'Eileen', lastName: 'Long' },
-    //     { id: 3, firstName: 'Fariba', lastName: 'Dako' },
-    //     { id: 4, firstName: 'Cristina', lastName: 'Rodriguez' },
-    //     { id: 5, firstName: 'Andrea', lastName: 'Trejo' },
-    // ];
-    // res.json(STUDENTS);
+app.get('/form', cors(), async (req, res) => {
+   
     try{
-        const { rows: students } = await db.query('SELECT * FROM students');
-        res.send(students);
+        const { rows: posts } = await db.query('SELECT * FROM posts');
+        res.send(posts);
     } catch (e){
         return res.status(400).json({e});
     }
 });
 
 //create the POST request
-app.post('/api/students', cors(), async (req, res) => {
-    const newUser = { firstname: req.body.firstname, lastname: req.body.lastname }
-    console.log([newUser.firstname, newUser.lastname]);
+app.post('/form', cors(), async (req, res) => {
+    const newPost = { date: req.body.date, title: req.body.title, content: req.body.content }
+    console.log([newPost.date, newPost.title, newPost.content]);
     const result = await db.query(
-        'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
-        [newUser.firstname, newUser.lastname]
+        'INSERT INTO posts(date, title, content) VALUES($1, $2, $3) RETURNING *',
+        [newPost.date, newPost.title, newPost.content]
     );
     console.log(result.rows[0]);
     res.json(result.rows[0]);
 });
 
-app.get('/about',function (req, res) {
+app.get('/form',function (req, res) {
     res.sendFile(path.join(__dirname, 'about.html'));
     // res.send('hey im working');
     //res.send('about.html');
@@ -56,5 +48,5 @@ app.get('/about',function (req, res) {
 
 // console.log that your server is up and running
 app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`);
+    console.log(`Server listening on ${PORT}`)
 });

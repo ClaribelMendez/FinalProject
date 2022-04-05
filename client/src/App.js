@@ -1,29 +1,36 @@
 import './App.css';
-import Students from './components/students';
+import Blog from './components/blogposts';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Post from './components/post'
+// import Post from './components/post' 
+import Form from './components/form'
+
 
 
 function App() {
   return (
     <><Router>
       <div className="App">
+        
         <div className="content">
+  
           <nav>
 
-            <a href="/contacts">Students</a>  &nbsp;
-              <a href="/Form">Form</a>
+            <a href="/Contact">Contact</a>  &nbsp;
+              <a href="/form">Form</a>
               {/* <li><a href="/whale">About Us</a></li> */}
             
           </nav>
 
           <Routes>
-            <Route path="/contacts" element={<Students />} />
+            <Route path="/form" element={<Form />} />
+          </Routes>
+          <Routes>
+            <Route path="/Blog" element={ <Blog />} />
           </Routes>
         </div>
       </div>
     </Router><div>               
-       <Post />
+       {/* <Post /> */}
       </div></>
     
   );
