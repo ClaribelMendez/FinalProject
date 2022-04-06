@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 //create the get request
-app.get('/form', cors(), async (req, res) => {
+app.get('/api/blogposts', cors(), async (req, res) => {
    
     try{
         const { rows: posts } = await db.query('SELECT * FROM posts');
@@ -28,7 +28,7 @@ app.get('/form', cors(), async (req, res) => {
 });
 
 //create the POST request
-app.post('/form', cors(), async (req, res) => {
+app.post('/api/blogposts', cors(), async (req, res) => {
     const newPost = { date: req.body.date, title: req.body.title, content: req.body.content }
     console.log([newPost.date, newPost.title, newPost.content]);
     const result = await db.query(

@@ -2,9 +2,11 @@ import { useState } from "react";
 
 const Form = (props) => {
     const [posts, setPosts] = useState({
-        Date: "",
-        Title: "",
-        Content: ""
+        date: "",
+        title: "",
+        content: "",
+        image: "",
+        altText: ""
     });
 
     //create functions that handle the event of the user typing into the form
@@ -26,11 +28,25 @@ const Form = (props) => {
 
     }
 
+    const handleImageChange = (event) => {
+        const image = event.target.value;
+        setPosts((posts) => ({ ...posts, image }));
+
+    }
+
+    const handleAltText = (event) => {
+        const altText = event.target.value;
+        setPosts((posts) => ({ ...posts, altText }));
+
+    }
+
+
+
 
 
     //A function to handle the post request
     const postBlogPost = (newPost) => {
-        return fetch('http://localhost:4002/form', {
+        return fetch('http://localhost:4002/api/blogposts', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'}, 
         body: JSON.stringify(newPost)
@@ -79,6 +95,24 @@ const Form = (props) => {
                     required
                     value={posts.content}
                     onChange={handleContentChange}
+                />
+                  <label>Image</label>
+                <input
+                    type="url"
+                    id="add-image"
+                    placeholder=""
+                    required
+                    value={posts.image}
+                    onChange={handleImageChange}
+                />
+                  <label>Alt text</label>
+                <input
+                    type="text"
+                    id="add-altText"
+                    placeholder=""
+                    required
+                    value={posts.altText}
+                    onChange={handleAltText}
                 />
             </fieldset>
             <button type="submit">Add</button>

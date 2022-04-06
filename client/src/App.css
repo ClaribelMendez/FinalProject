@@ -65,7 +65,11 @@
    
   grid-gap: 1rem;
 
-  
+
+  width: 100%;
+
+  float: left;
+
    
   }
 
@@ -73,12 +77,14 @@
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
+  float: left
 }
 
 .card img {
   width: 100%;
-  height: 15vw;
+  height: 50%;
   object-fit: cover;
+
 
 }
 
@@ -93,10 +99,23 @@
   padding: 2px 16px;
   height: 10rem;
   width: fit-content;
-  /* block-size: fit-content; */
+  block-size: fit-content;
   border: 2px solid #ccc;
   padding: 5px;
   margin-bottom: 1em;
+  float: left;
+
+
   
 }
 
+.card-footer{
+  position:absolute;
+    bottom:0;
+    width:100%;
+    border-radius: dotted
+  }
+
+ul li {
+  display: inline-block
+}

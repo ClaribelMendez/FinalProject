@@ -24,14 +24,15 @@ function BlogPosts() {
 
 
     return (
-      <div className="blogposts">
-        <ul>
+      <div className="cards" >
+        
             {posts.map(post =>
-                <li key={post.id}> {post.date} {post.title} {post.content}</li>)}
-        </ul>
-        <Form addPost={addPost} />
+                <button key={post.id}> <img src= {post.image} alt = '{post.altText}' style={{width: "100%"}}/>  <div className='container' >{post.title} <div className='card-footer'>{post.date}</div>{post.content}</div> 
+                </button> )}
       </div>
     );
   }
   
   export default BlogPosts;
+
+  
