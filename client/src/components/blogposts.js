@@ -7,7 +7,7 @@ function BlogPosts() {
 
     const [editingPostId, setEditingPostId] = useState(null);
 
-    const loadStudents = () => {
+    const loadPosts = () => {
         fetch("http://localhost:4002/api/blogposts")
             .then((response) => response.json())
             .then(posts => {
@@ -17,16 +17,16 @@ function BlogPosts() {
 
     // Use effect hook to render the students in the app. This will change any time that our initial state change
     useEffect(() => {
-        loadStudents();
+        loadPosts();
     }, []);
 
     const onDelete = (post) => {
-        return fetch(`/api/blogposts/${post.id}`, {
+        return fetch(`http://localhost:4002/api/blogposts/${post.id}`, {
             method: "DELETE"
         }).then((response) =>{
             //console.log(response);
             if(response.ok){
-                loadStudents();
+                loadPosts();
             }
         })
     }
@@ -73,7 +73,7 @@ function BlogPosts() {
                         return (
                         <li key={post.id} className='card'>  {post.date} <img src= {post.image} 
                         alt = '{post.alt}' /> <div className='container' >{post.title} {post.content} </div>
-                        <button type="button" onClick={() =>{onDelete(post)}}>X</button> 
+                        <button type="button" onClick={() =>{onDelete(post)}}>Delete</button> 
                         <button type="button" onClick={() => {onEdit(post)}}>Edit</button></li>
                         );
                     }}

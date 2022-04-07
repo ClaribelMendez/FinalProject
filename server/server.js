@@ -47,12 +47,12 @@ app.post('/api/blogposts', cors(), async (req, res) => {
     res.json(result.rows[0]);
 });
 
-app.put('/api/blogposts/:id', cors(), async (req, res) =>{
-    const postsId = req.params.id;
+app.put('/api/blogposts/:postId', cors(), async (req, res) =>{
+    const postsId = req.params.postId;
     const updatePost = { id: req.body.id, date: req.body.date, title: req.body.title, content: req.body.content,image: req.body.image, alt: req.body.alt   }
     //console.log(req.params);
     // UPDATE students SET lastname = 'TestMarch' WHERE id = 1;
-    console.log(postId);
+    console.log(postsId);
     console.log(updatePost);
     const query = `UPDATE posts SET title=$1, content=$2, date=$3, image=$4, alt=$5 WHERE id = ${postsId} RETURNING *`;
     console.log(query);

@@ -59,14 +59,14 @@ const Form = (props) => {
           return response.json()
       }).then((data) => {
         console.log("From the post ", data);
-        props.addPost(data);
+        props.savePost(data);
       
     });
     }
 
         //a function to handle the Update request
         const updatePost = (existingPost) =>{
-            return fetch(`/api/blogposts/${existingPost.id}`, {
+            return fetch(`http://localhost:4002/api/blogposts/${existingPost.id}`, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'}, 
                 body: JSON.stringify(existingPost)
