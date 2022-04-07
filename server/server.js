@@ -29,14 +29,34 @@ app.get('/api/blogposts', cors(), async (req, res) => {
 
 //create the POST request
 app.post('/api/blogposts', cors(), async (req, res) => {
-    const newPost = { date: req.body.date, title: req.body.title, content: req.body.content }
-    console.log([newPost.date, newPost.title, newPost.content]);
+    const newPost = { date: req.body.date, title: req.body.title, content: req.body.content,image: req.body.image, alt: req.body.alt  }
+    console.log([newPost.date, newPost.title, newPost.content, newPost.image, newPost.alt]);
     const result = await db.query(
-        'INSERT INTO posts(date, title, content) VALUES($1, $2, $3) RETURNING *',
-        [newPost.date, newPost.title, newPost.content]
+        'INSERT INTO posts(date, title, content, image, alt) VALUES($1, $2, $3, $4, $5) RETURNING *',
+        [newPost.date, newPost.title, newPost.content,  newPost.image, newPost.alt]
     );
     console.log(result.rows[0]);
     res.json(result.rows[0]);
+});
+
+app.put('/api/blogposts/:postsId', cors(), async (req, res) =>{
+    const postsId = req.params.postsId;
+    const updatePost = { id: req.body.id, date: req.body.date, title: req.body.title, content: req.body.content,image: req.body.image, alt: req.body.alt   }
+    //console.log(req.params);
+    // UPDATE students SET lastname = 'TestMarch' WHERE id = 1;
+    console.log(postId);
+    console.log(updatePost);
+    const query = `UPDATE posts SET title=$1, content=$2, date=$3, image=$4, alt=$5 WHERE id = ${postsId} RETURNING *`;
+    console.log(query);
+    const values = [updatePost.title, updatePost.content,updatePost.date,updatePost.image, updatePost.alt];
+    try{
+        const updated = await db.query(query, values);
+        console.log(updated.rows[0]);
+        res.send(updated.rows[0]);
+    } catch (e){
+        console.log(e);
+        return res.status(400).json({e});
+    }
 });
 
 app.get('/form',function (req, res) {

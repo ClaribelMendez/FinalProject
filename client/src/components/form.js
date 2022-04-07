@@ -6,7 +6,7 @@ const Form = (props) => {
         title: "",
         content: "",
         image: "",
-        altText: ""
+        alt: ""
     });
 
     //create functions that handle the event of the user typing into the form
@@ -34,9 +34,9 @@ const Form = (props) => {
 
     }
 
-    const handleAltText = (event) => {
-        const altText = event.target.value;
-        setPosts((posts) => ({ ...posts, altText }));
+    const handlealt = (event) => {
+        const alt = event.target.value;
+        setPosts((posts) => ({ ...posts, alt }));
 
     }
 
@@ -59,11 +59,32 @@ const Form = (props) => {
     });
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        postBlogPost(posts);
-        
-    };
+        //a function to handle the Update request
+        const updatePost = (existingPost) =>{
+            return fetch(`/api/blogposts/${existingPost.id}`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'}, 
+                body: JSON.stringify(existingPost)
+              }).then((response) => {
+                return response.json()
+              }).then((data) => {
+                console.log("From put request ", data);
+                props.savePost(data);
+              
+            });
+    
+        }
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            if(posts.id){
+                updatePost(posts);
+            } else {
+                postBlogPost(posts);
+            } 
+            
+        };
+    
 
     return (
         <form onSubmit={handleSubmit}>
@@ -108,14 +129,14 @@ const Form = (props) => {
                   <label>Alt text</label>
                 <input
                     type="text"
-                    id="add-altText"
+                    id="add-alt"
                     placeholder=""
                     required
-                    value={posts.altText}
-                    onChange={handleAltText}
+                    value={posts.alt}
+                    onChange={handlealt}
                 />
             </fieldset>
-            <button type="submit">Add</button>
+            <button type="submit">{!posts.id ? "Add" : "Save"}</button>
         </form>
     );
 };
