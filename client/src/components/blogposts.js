@@ -7,17 +7,29 @@ function BlogPosts() {
 
     const [editingPostId, setEditingPostId] = useState(null);
 
-
-    useEffect(() => {
+    const loadStudents = () => {
         fetch("http://localhost:4002/api/blogposts")
-        .then((response) => response.json())
-        .then(post =>{
-       setPosts(post)     
-        })
-        
+            .then((response) => response.json())
+            .then(posts => {
+                setPosts(posts);
+            })
+    }
+
+    // Use effect hook to render the students in the app. This will change any time that our initial state change
+    useEffect(() => {
+        loadStudents();
     }, []);
 
-    
+    const onDelete = (post) => {
+        return fetch(`/api/blogposts/${post.id}`, {
+            method: "DELETE"
+        }).then((response) =>{
+            //console.log(response);
+            if(response.ok){
+                loadStudents();
+            }
+        })
+    }
 
     const addPost = (newPost) => {
         //console.log(newStudent);
@@ -53,22 +65,21 @@ function BlogPosts() {
 
     return (
       <div className="cards" >
-        
         <ul>
                 {posts.map((post) => {
                     if(post.id === editingPostId){
                         return <Form initialPost={post} savedPost={updatePost} />
                     } else {
                         return (
-                        <li key={post.id}> {post.title} {post.content} {post.date} <img src= {post.image} 
-                        alt = '{post.alt}' style={{width: "100%"}}/>
-                        {/* <button type="button" onClick={() =>{onDelete(post)}}>X</button>  */}
+                        <li key={post.id} className='card'>  {post.date} <img src= {post.image} 
+                        alt = '{post.alt}' /> <div className='container' >{post.title} {post.content} </div>
+                        <button type="button" onClick={() =>{onDelete(post)}}>X</button> 
                         <button type="button" onClick={() => {onEdit(post)}}>Edit</button></li>
                         );
                     }}
                     )}
             </ul>
-            <Form savePost={addPost} />
+            {/* <Form savePost={addPost} /> */}
         </div>
     );
 }

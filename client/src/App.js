@@ -19,6 +19,12 @@ function App() {
             <a href="/Contact">Contact</a>  &nbsp;
               <a href="/form">Form</a>
               <a href="/blogposts">Blogposts</a>
+              <br></br>
+              <br></br>
+              <br></br>
+
+              <br></br>
+
 
               {/* <li><a href="/whale">About Us</a></li> */}
             

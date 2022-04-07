@@ -1,13 +1,18 @@
 import { useState } from "react";
 
 const Form = (props) => {
-    const [posts, setPosts] = useState({
-        date: "",
+    const {initialPost = {
+        id: null, 
+        date: "", 
         title: "",
         content: "",
         image: "",
-        alt: ""
-    });
+        alt: ""   }} = props;
+
+
+    // We're using that initial student as our initial state                       
+    const [posts, setPosts] = useState(initialPost);
+
 
     //create functions that handle the event of the user typing into the form
     const handleDateChange = (event) => {

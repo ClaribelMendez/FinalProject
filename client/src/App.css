@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap");
+
+
 .App {
   text-align: center;
 }
@@ -65,25 +68,25 @@
    
   grid-gap: 1rem;
 
-
   width: 100%;
 
-  float: left;
-
+ /* float: left */
    
   }
 
-.card {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  float: left
-}
+  .card {
+    background-color: white;
+    border: 1px solid #bacdd8;
+    border-radius: 5px;
+    /* padding: 8px; */
+  
+  }
 
-.card img {
+img {
   width: 100%;
-  height: 50%;
   object-fit: cover;
+  /* border-radius: 12px; */
+  height: 214px;
 
 
 }
@@ -95,27 +98,35 @@
 
 /* Add some padding inside the card container */
 .container {
-  width: 30%;
-  padding: 2px 16px;
-  height: 10rem;
-  width: fit-content;
-  block-size: fit-content;
-  border: 2px solid #ccc;
-  padding: 5px;
-  margin-bottom: 1em;
-  float: left;
+  max-width: 300px;
 
+  /* Center the container in middle on horizontal axis */
+  margin: 0 auto;
+
+  /* Add empty space above the container (20% of the view height) */
+  /* margin-top: 20vh; */
+
+height: 80px;
+
+
+/* line-height: 20px; */
+
+overflow: hidden;
 
   
 }
 
-.card-footer{
+/* .card-footer{
   position:absolute;
     bottom:0;
     width:100%;
     border-radius: dotted
-  }
+  } */
 
+body {
+  background-color: #eaeff1;
+  font-family: "Raleway", sans-serif;
+}
 ul li {
   display: inline-block
 }
