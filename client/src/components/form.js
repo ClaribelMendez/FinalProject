@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+
 
 const Form = (props) => {
     const {initialPost = {
@@ -46,12 +48,13 @@ const Form = (props) => {
     }
 
 
+    const navigate = useNavigate()
 
 
 
     //A function to handle the post request
     const postBlogPost = (newPost) => {
-        return fetch('http://localhost:4002/api/blogposts', {
+        return fetch('http://localhost:4002/blogposts', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'}, 
         body: JSON.stringify(newPost)
@@ -66,7 +69,7 @@ const Form = (props) => {
 
         //a function to handle the Update request
         const updatePost = (existingPost) =>{
-            return fetch(`http://localhost:4002/api/blogposts/${existingPost.id}`, {
+            return fetch(`http://localhost:4002/blogposts/${existingPost.id}`, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'}, 
                 body: JSON.stringify(existingPost)
@@ -75,7 +78,6 @@ const Form = (props) => {
               }).then((data) => {
                 console.log("From put request ", data);
                 props.savePost(data);
-              
             });
     
         }
@@ -87,6 +89,8 @@ const Form = (props) => {
             } else {
                 postBlogPost(posts);
             } 
+            navigate('/blogposts')
+
             
         };
     
@@ -96,6 +100,7 @@ const Form = (props) => {
             <fieldset>
                 <label>Date</label>
                 <input
+                    reset = "reset"
                     type="Date"
                     id="add-date"
                     placeholder=""

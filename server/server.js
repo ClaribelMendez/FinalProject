@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 //create the get request
-app.get('/api/blogposts', cors(), async (req, res) => {
+app.get('/blogposts', cors(), async (req, res) => {
    
     try{
         const { rows: posts } = await db.query('SELECT * FROM posts');
@@ -27,7 +27,7 @@ app.get('/api/blogposts', cors(), async (req, res) => {
     }
 });
 
-app.delete('/api/blogposts/:id', cors(), async (req, res) =>{
+app.delete('/blogposts/:id', cors(), async (req, res) =>{
     const postId = req.params.id;
     //console.log(req.params);
     await db.query('DELETE FROM posts WHERE id=$1', [postId]);
@@ -36,7 +36,7 @@ app.delete('/api/blogposts/:id', cors(), async (req, res) =>{
 });
 
 //create the POST request
-app.post('/api/blogposts', cors(), async (req, res) => {
+app.post('/blogposts', cors(), async (req, res) => {
     const newPost = { date: req.body.date, title: req.body.title, content: req.body.content,image: req.body.image, alt: req.body.alt  }
     console.log([newPost.date, newPost.title, newPost.content, newPost.image, newPost.alt]);
     const result = await db.query(
@@ -47,7 +47,7 @@ app.post('/api/blogposts', cors(), async (req, res) => {
     res.json(result.rows[0]);
 });
 
-app.put('/api/blogposts/:postId', cors(), async (req, res) =>{
+app.put('/blogposts/:postId', cors(), async (req, res) =>{
     const postsId = req.params.postId;
     const updatePost = { id: req.body.id, date: req.body.date, title: req.body.title, content: req.body.content,image: req.body.image, alt: req.body.alt   }
     //console.log(req.params);

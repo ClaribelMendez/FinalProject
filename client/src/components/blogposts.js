@@ -8,7 +8,7 @@ function BlogPosts() {
     const [editingPostId, setEditingPostId] = useState(null);
 
     const loadPosts = () => {
-        fetch("http://localhost:4002/api/blogposts")
+        fetch("http://localhost:4002/blogposts")
             .then((response) => response.json())
             .then(posts => {
                 setPosts(posts);
@@ -21,7 +21,7 @@ function BlogPosts() {
     }, []);
 
     const onDelete = (post) => {
-        return fetch(`http://localhost:4002/api/blogposts/${post.id}`, {
+        return fetch(`http://localhost:4002/blogposts/${post.id}`, {
             method: "DELETE"
         }).then((response) =>{
             //console.log(response);
@@ -65,20 +65,19 @@ function BlogPosts() {
 
     return (
       <div className="cards" >
-        <ul>
+        
                 {posts.map((post) => {
                     if(post.id === editingPostId){
                         return <Form initialPost={post} savedPost={updatePost} />
                     } else {
                         return (
-                        <li key={post.id} className='card'>  {post.date} <img src= {post.image} 
-                        alt = '{post.alt}' /> <div className='container' >{post.title} {post.content} </div>
+                        <button key={post.id} className='card'>  {post.date} <img src={post.image} alt={post.alt}
+                        /> <div className='container' >{post.title} {post.content} </div>
                         <button type="button" onClick={() =>{onDelete(post)}}>Delete</button> 
-                        <button type="button" onClick={() => {onEdit(post)}}>Edit</button></li>
+                        <button type="button" onClick={() => {onEdit(post)}}>Edit</button></button>
                         );
                     }}
                     )}
-            </ul>
             {/* <Form savePost={addPost} /> */}
         </div>
     );
