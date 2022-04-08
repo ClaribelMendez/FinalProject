@@ -67,6 +67,13 @@ app.put('/blogposts/:postId', cors(), async (req, res) =>{
     }
 });
 
+    app.get('/blogposts/:blogId', cors(), async (req, res) => {
+        const blogId = req.params.blogId;
+        const getId = await db.query(`SELECT * FROM posts WHERE id=${blogId}`);
+        console.log("getId", getId.rows[0])
+        res.send(getId.rows[0])
+    })
+
 app.get('/form',function (req, res) {
     res.sendFile(path.join(__dirname, 'about.html'));
     // res.send('hey im working');
