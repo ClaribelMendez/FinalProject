@@ -1,8 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config()
+// var bodyparser= require('body-parser')
 const db = require('../server/db/db-connection.js'); 
 const path = require('path');
+
+var SpotifyWebApi = require('spotify-web-api-node');
+var spotifyApi = new SpotifyWebApi({
+    clientId: 'fcecfc72172e4cd267473117a17cbd4d',
+    clientSecret: 'a6338157c9bb5ac9c71924cb2940e1a7',
+    redirectUri: 'http://www.example.com/callback'
+  });
+spotifyApi.setAccessToken('BQDJzUe2IG_75kAlIppxubMp-bK_R22zCJ7DiWmpmHYNSw3uNljX04GIXocJ1JHIq78Cw8twwrPuvSZgHejiBym0FPB50GRqTjOeoAy1-oAQ1X0BFt0HWUQqGh37ClISaFrCqGoqZKd7uU1aVo0rjlY5PH0oN1I');
+
+
 
 
 const app = express();
@@ -10,6 +21,8 @@ const app = express();
 const PORT = 4002;
 app.use(cors());
 app.use(express.json());
+// app.use(bodyparser.json)
+// app.use(bodyparser.urlencoded({extended:true}))
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
@@ -85,3 +98,41 @@ app.get('/form',function (req, res) {
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`)
 });
+
+app.get('/search', async (req, res) => {
+    spotifyApi.getAvailableGenreSeeds()
+    .then(function(data) {
+      let genreSeeds = data.body;
+      console.log(genreSeeds);
+      res.json(genreSeeds)
+    }, function(err) {
+      console.log('Something went wrong!', err);
+      
+    })})
+
+
+
+    app.post('/genres', async (req, res) => {
+        spotifyApi.getAvailableGenreSeeds()
+        .then(function(data) {
+          let genreSeeds = data.body.genres[0];
+          console.log(genreSeeds);
+        }, function(err) {
+          console.log('Something went wrong!', err);
+        });
+    try{
+        const { rows: genres } =  await db.query('Insert * FROM genres');
+        res.send(genres);
+    } catch (e){
+        return res.status(400).json({e});
+    }
+    const genres = { genre: req.body.genres }
+// console.log([newPost.date, newPost.title, newPost.content, newPost.image, newPost.alt]);
+    const result =  await db.query(
+    'INSERT INTO genres(genres) VALUES($1)'
+    // [newPost.date, newPost.title, newPost.content,  newPost.image, newPost.alt]
+);
+    console.log(result);
+    res.json(result);
+});
+
