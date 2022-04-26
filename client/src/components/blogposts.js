@@ -1,3 +1,5 @@
+
+   
 import { useState, useEffect } from "react";
 import Form from "./form";
 
@@ -7,6 +9,8 @@ function BlogPosts() {
 
     const [editingPostId, setEditingPostId] = useState(null);
 
+    const [genre, setGenre] = useState();
+
     const loadPosts = () => {
         fetch("http://localhost:4002/blogposts")
             .then((response) => response.json())
@@ -15,12 +19,21 @@ function BlogPosts() {
             })
     }
 
+    const loadGenre = () => {
+        fetch("http://localhost:4002/form")
+            .then((response) => response.json())
+            .then(genre => {
+                setGenre(genre);
+            })
+    }
+
     
 
 
     // Use effect hook to render the students in the app. This will change any time that our initial state change
     useEffect(() => {
-        loadPosts();
+        loadPosts()
+        loadGenre()
     }, []);
 
     const onDelete = (post) => {
@@ -65,14 +78,15 @@ function BlogPosts() {
 
   }
 
-  let handleFruitChange = (e) => {
-    setPosts(e.target.value)
+  let handleGenreSelection = (e) => {
+    setGenre(e.target.value)
+    alert('hi')
   }
 
 
     return (
       <div className="cards" >
-          <h2>{posts}</h2>
+          <h2>{genre}</h2>
         
                 {/* {posts.map((post) => {
                     if(post.id === editingPostId){
@@ -87,13 +101,13 @@ function BlogPosts() {
                     }}
                     )} */}
 
-{/* <select onChange={handleFruitChange}> 
+<select onChange={handleGenreSelection}> 
       <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
             {/* Mapping through each fruit object in our fruits array
           and returning an option element with the appropriate attributes / values.
          */}
-      {/* {posts.map((post) => <option value={post.value}>{post.genre}</option>)} */}
-    {/* </select> */} 
+      {posts.map((post) => <option key={post.id} value={post.value}>{post.genre}</option>)}
+    </select> 
             {/* <Form savePost={addPost} /> */}
         </div>
     );
