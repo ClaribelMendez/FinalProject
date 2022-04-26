@@ -12,7 +12,7 @@ var spotifyApi = new SpotifyWebApi({
     clientSecret: 'a6338157c9bb5ac9c71924cb2940e1a7',
     redirectUri: 'http://www.example.com/callback'
   });
-spotifyApi.setAccessToken('BQDVIzmSpwaMN1F6nq6lW0FPkOU87F55s7ZpxkKGYcy6z2tUkprzRE1In5liG2Ockx6pBIE8E6p7gXI_ZuTVNxodMIwAoy1lKJcd16iVvb3soJpaCkipb8-LcHyGC9S81IYQ6h2VfZthrZl17IfxPI7YGifL4fU');
+spotifyApi.setAccessToken('BQCCncm8IzVPrwBVw-xZtY8moWO33hkGmMv3QWF6qKNFADVr3-LJXHhFEruvnu-aB-vPx5OoY6FYLIrrAY5Lf12FI41Up93N6d9KittfHDuW-K2eEALy3Xwk24HQCu1FNwzAAQOzOgK64tArOBjLjwvcvAm_IBA');
 
 
 
@@ -30,16 +30,16 @@ app.get('/', (req, res) => {
     res.json({ message: 'Hello from My ExpressJS' });
 });
 
-//create the get request
-// app.get('/blogposts', cors(), async (req, res) => {
+// create the get request
+app.get('/blogposts', cors(), async (req, res) => {
    
-//     try{
-//         const { rows: genres } = await db.query('SELECT * FROM genres');
-//         res.send(genres);
-//     } catch (e){
-//         return res.status(400).json({e});
-//     }
-// });
+    try{
+        const { rows: genres } = await db.query('SELECT * FROM genres');
+        res.send(genres);
+    } catch (e){
+        return res.status(400).json({e});
+    }
+});
 
 app.delete('/blogposts/:id', cors(), async (req, res) =>{
     const postId = req.params.id;
@@ -88,12 +88,12 @@ app.put('/blogposts/:postId', cors(), async (req, res) =>{
         res.send(getId.rows[0])
     })
 
-app.get('/form',function (req, res) {
-    res.sendFile(path.join(__dirname, 'about.html'));
-    // res.send('hey im working');
-    //res.send('about.html');
-    //res.render('about.html');
-});
+// app.get('/form',function (req, res) {
+//     res.sendFile(path.join(__dirname, 'about.html'));
+//     // res.send('hey im working');
+//     //res.send('about.html');
+//     //res.render('about.html');
+// });
 
 // console.log that your server is up and running
 app.listen(PORT, () => {
@@ -162,35 +162,12 @@ app.listen(PORT, () => {
 //   res.redirect("/api/genre");
 // });
 
-// app.get("/api/genre", cors(), async (req, res) => {
-//     // console.log(req.body.city);
-//     genre = req.query.genre;
-//     // let baseURL = `http://api.openweathermap.org/data/2.5/weather?q=`;
-//     // let apiID = `&units=imperial&appid=${apiKey}`;
-//     // const userInput = (url1, url2, city) => {
-//     //   let newURL = url1 + city + url2;
-//     //   return newURL;
-//     // };
-//     // const apiURL = userInput(baseURL, apiID, city);
-//     // const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
-//     const url = `https://api.spotify.com/v1/search?q=genre%3A%techno&type=artist" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQCVzQ4ZqRlUFbxqvbDUF_qKw0FdgnOn7TqwEsXZObHldaAtIjIrgzwQPhY5592t5ZQI7myFV_yHn7YnYWy-9tJXZxskwKecoCW8AlPg7JEeRqz8Yj5Rsw6L3qDrZjRe5obxdDinPKiOE0k0K42SBPWv4FiHdq8`
-//     // console.log(city);
-  
-//     // change to api request/fetch thingy
-//     try {
-//       const response = await fetch(url);
-//       const data = await response.json();
-//       console.log(data);
-//       res.send(data);
-//     } catch (err) {
-//       console.error("Fetch error: ", err);
-//     }})
 
-app.get('/blogposts', async (req, res) => {
+app.get('/form', async (req, res) => {
     spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
     .then(function(data) {
-      console.log('Artist information', data.body.name);
-      res.json(data.body.name)
+      console.log('Artist information', data.body.id);
+      res.json(data.body.id)
     }, function(err) {
       console.error(err);
     })})
