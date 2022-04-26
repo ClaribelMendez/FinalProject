@@ -15,6 +15,9 @@ function BlogPosts() {
             })
     }
 
+    
+
+
     // Use effect hook to render the students in the app. This will change any time that our initial state change
     useEffect(() => {
         loadPosts();
@@ -62,22 +65,35 @@ function BlogPosts() {
 
   }
 
+  let handleFruitChange = (e) => {
+    setPosts(e.target.value)
+  }
+
 
     return (
       <div className="cards" >
+          <h2>{posts}</h2>
         
-                {posts.map((post) => {
+                {/* {posts.map((post) => {
                     if(post.id === editingPostId){
                         return <Form initialPost={post} savedPost={updatePost} />
                     } else {
                         return (
-                        <button key={post.id} className='card'>  {post.date} <img src={post.image} alt={post.alt}
-                        /> <div className='container' >{post.title} {post.content} </div>
+                        <button key={post.id} className='card'>  {post.name} 
+                        
                         <button type="button" onClick={() =>{onDelete(post)}}>Delete</button> 
                         <button type="button" onClick={() => {onEdit(post)}}>Edit</button></button>
                         );
                     }}
-                    )}
+                    )} */}
+
+{/* <select onChange={handleFruitChange}> 
+      <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
+            {/* Mapping through each fruit object in our fruits array
+          and returning an option element with the appropriate attributes / values.
+         */}
+      {/* {posts.map((post) => <option value={post.value}>{post.genre}</option>)} */}
+    {/* </select> */} 
             {/* <Form savePost={addPost} /> */}
         </div>
     );

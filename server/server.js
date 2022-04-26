@@ -5,13 +5,14 @@ require('dotenv').config()
 const db = require('../server/db/db-connection.js'); 
 const path = require('path');
 
+
 var SpotifyWebApi = require('spotify-web-api-node');
 var spotifyApi = new SpotifyWebApi({
     clientId: 'fcecfc72172e4cd267473117a17cbd4d',
     clientSecret: 'a6338157c9bb5ac9c71924cb2940e1a7',
     redirectUri: 'http://www.example.com/callback'
   });
-spotifyApi.setAccessToken('BQDJzUe2IG_75kAlIppxubMp-bK_R22zCJ7DiWmpmHYNSw3uNljX04GIXocJ1JHIq78Cw8twwrPuvSZgHejiBym0FPB50GRqTjOeoAy1-oAQ1X0BFt0HWUQqGh37ClISaFrCqGoqZKd7uU1aVo0rjlY5PH0oN1I');
+spotifyApi.setAccessToken('BQDVIzmSpwaMN1F6nq6lW0FPkOU87F55s7ZpxkKGYcy6z2tUkprzRE1In5liG2Ockx6pBIE8E6p7gXI_ZuTVNxodMIwAoy1lKJcd16iVvb3soJpaCkipb8-LcHyGC9S81IYQ6h2VfZthrZl17IfxPI7YGifL4fU');
 
 
 
@@ -30,15 +31,15 @@ app.get('/', (req, res) => {
 });
 
 //create the get request
-app.get('/blogposts', cors(), async (req, res) => {
+// app.get('/blogposts', cors(), async (req, res) => {
    
-    try{
-        const { rows: posts } = await db.query('SELECT * FROM posts');
-        res.send(posts);
-    } catch (e){
-        return res.status(400).json({e});
-    }
-});
+//     try{
+//         const { rows: genres } = await db.query('SELECT * FROM genres');
+//         res.send(genres);
+//     } catch (e){
+//         return res.status(400).json({e});
+//     }
+// });
 
 app.delete('/blogposts/:id', cors(), async (req, res) =>{
     const postId = req.params.id;
@@ -99,40 +100,97 @@ app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`)
 });
 
-app.get('/search', async (req, res) => {
-    spotifyApi.getAvailableGenreSeeds()
-    .then(function(data) {
-      let genreSeeds = data.body;
-      console.log(genreSeeds);
-      res.json(genreSeeds)
-    }, function(err) {
-      console.log('Something went wrong!', err);
+// app.get('/search', async (req, res) => {
+//     spotifyApi.getAvailableGenreSeeds()
+//     .then(function(data) {
+//       let genreSeeds = data.body.genres[0];
+//       console.log(genreSeeds);
+//       res.json(genreSeeds)
+//     }, function(err) {
+//       console.log('Something went wrong!', err);
       
+//     })})
+
+// app.post('/genres', cors(),  (req, res) => {
+//     spotifyApi.getAvailableGenreSeeds()
+//     .then(function(data) {
+//       let genreSeeds =  data.body.genres[0];
+//       console.log(genreSeeds);
+//       res.json(genreSeeds)
+//       const genres = { genre: req.body.genres}
+//       console.log('this is from post request');
+//       const result =  db.query(
+//           'INSERT INTO genres(genres) VALUES($1)',
+//           [newPost.genres]
+//       );
+//       console.log(result);
+//       res.json(result);
+//     }, function(err) {
+//       console.log('Something went wrong!', err);
+
+// })});
+
+
+
+//     app.post('/genres', async (req, res) => {
+//         spotifyApi.getAvailableGenreSeeds()
+//         .then(function(data) {
+//           let genreSeeds = data.body.genres[0];
+//           console.log(genreSeeds);
+//         }, function(err) {
+//           console.log('Something went wrong!', err);
+//         });
+//     try{
+//         const { rows: genres } =  await db.query('Insert * FROM genres');
+//         res.send(genres);
+//     } catch (e){
+//         return res.status(400).json({e});
+//     }
+//     const genres = { genre: req.body.genres }
+// // console.log([newPost.date, newPost.title, newPost.content, newPost.image, newPost.alt]);
+//     const result =  await db.query(
+//     'INSERT INTO genres(genres) VALUES($1)'
+//     // [newPost.date, newPost.title, newPost.content,  newPost.image, newPost.alt]
+// );
+//     console.log(result);
+//     res.json(result);
+// });
+
+// let genre;
+// app.post("/api/search-genre", (req, res) => {
+//   genre = req.body.genre;
+//   res.redirect("/api/genre");
+// });
+
+// app.get("/api/genre", cors(), async (req, res) => {
+//     // console.log(req.body.city);
+//     genre = req.query.genre;
+//     // let baseURL = `http://api.openweathermap.org/data/2.5/weather?q=`;
+//     // let apiID = `&units=imperial&appid=${apiKey}`;
+//     // const userInput = (url1, url2, city) => {
+//     //   let newURL = url1 + city + url2;
+//     //   return newURL;
+//     // };
+//     // const apiURL = userInput(baseURL, apiID, city);
+//     // const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+//     const url = `https://api.spotify.com/v1/search?q=genre%3A%techno&type=artist" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQCVzQ4ZqRlUFbxqvbDUF_qKw0FdgnOn7TqwEsXZObHldaAtIjIrgzwQPhY5592t5ZQI7myFV_yHn7YnYWy-9tJXZxskwKecoCW8AlPg7JEeRqz8Yj5Rsw6L3qDrZjRe5obxdDinPKiOE0k0K42SBPWv4FiHdq8`
+//     // console.log(city);
+  
+//     // change to api request/fetch thingy
+//     try {
+//       const response = await fetch(url);
+//       const data = await response.json();
+//       console.log(data);
+//       res.send(data);
+//     } catch (err) {
+//       console.error("Fetch error: ", err);
+//     }})
+
+app.get('/blogposts', async (req, res) => {
+    spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+    .then(function(data) {
+      console.log('Artist information', data.body.name);
+      res.json(data.body.name)
+    }, function(err) {
+      console.error(err);
     })})
-
-
-
-    app.post('/genres', async (req, res) => {
-        spotifyApi.getAvailableGenreSeeds()
-        .then(function(data) {
-          let genreSeeds = data.body.genres[0];
-          console.log(genreSeeds);
-        }, function(err) {
-          console.log('Something went wrong!', err);
-        });
-    try{
-        const { rows: genres } =  await db.query('Insert * FROM genres');
-        res.send(genres);
-    } catch (e){
-        return res.status(400).json({e});
-    }
-    const genres = { genre: req.body.genres }
-// console.log([newPost.date, newPost.title, newPost.content, newPost.image, newPost.alt]);
-    const result =  await db.query(
-    'INSERT INTO genres(genres) VALUES($1)'
-    // [newPost.date, newPost.title, newPost.content,  newPost.image, newPost.alt]
-);
-    console.log(result);
-    res.json(result);
-});
-
