@@ -12,7 +12,7 @@ var spotifyApi = new SpotifyWebApi({
     clientSecret: 'a6338157c9bb5ac9c71924cb2940e1a7',
     redirectUri: 'http://www.example.com/callback'
   });
-spotifyApi.setAccessToken('BQCps3cRf7ZZ6NiOSgD9RjWrk313ylI3DQ1_sLG_-_qudDYgYdWgytgK4bBdc4V78W8S9GZP4ry-SGnj5xJbXbOoXDPsA3p3iJ9LpgNeRpc9ayaU7zEGp2rSMfWffwwjVbgO0aRgdubnAIk-q2vcoeVFJb75TuU');
+spotifyApi.setAccessToken('BQC3nrhlYYXlvdO5eCt4_FHJ2wTdqMB4_zLF1g9G6wPetw0tPifE486aGP_5XLTYgYHWqTj1lYC1WmfrOV0NdJ_0Xz57m7k9VyKvGiNTIGnpP2KIhKXDW0mJF0auczHxSqScxSFWwCkLSpaVuOzU2aLUZ3Uz3kI');
 
 
 
@@ -170,52 +170,62 @@ app.put('/blogposts/:postId', cors(), async (req, res) =>{
 //       console.error(err);
 //     })})
 
+app.get('/albums', async (req, res) => {
+    const artistResponse = await spotifyApi.searchArtists('Kanye')
+    // res.send(artistResponse)
+    const artistResponseData =   await artistResponse.body.artists.items[0]   // res.send(artistResponseData)
+    const artistResponseDataId = await artistResponseData.id
+    const albumsResponse = await spotifyApi.getArtistAlbums(artistResponseDataId)
+    // const albumsResponseData = albumsResponse.body
+    res.send(albumsResponse.body.items[3])
+    console.log('albums response'  + albumsResponse.body[0])
+   
+})
 
 
-let artistid = '2hazSY4Ef3aB9ATXW7F5w3'
 
-var async =  require('async');
-async.waterfall([
-  function firstStep(done) {
-      let artistid;
-    app.get('/form', async (req, res) => {
-        spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
-        .then(function(data) {
-             artistid = data.body.id
+// var async =  require('async');
+// async.waterfall([
+//   function firstStep(done) {
+//       let artistid;
+    
+//         spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+//         .then(function(data) {
+//              artistid = data.body.id
 
-          console.log('Artist information', artistid);
-          res.send(artistid)
-        }, function(err) {
-          console.error(err);
-        })})
-    console.log('This is step 1');
+//           console.log('Artist information', artistid);
+//           res.send(artistid)
+//         }, function(err) {
+//           console.error(err);
+//         })
+//     console.log('This is step 1');
 
-    done(null, 'Value from step1'); // <- set value to passed to step 2
-  },
-  function secondStep(step1Result, done) {
-    spotifyApi.getArtistAlbums(`${artistid}`).then(
-        function(data) {
-          console.log('Artist albums', data.body);
-        },
-        function(err) {
-          console.error(err);
-        }
-      );
-    done(null, 'Value from step 2'); // <- set value to passed to step 3
-  },
-  function thirdStep (step2Result, done) {
-    console.log(step2Result);
+//     done(null, artistid); // <- set value to passed to step 2
+//   },
+//   function secondStep(step1Result, done) {
+//     spotifyApi.getArtistAlbums().then(
+//         function(data) {
+//           console.log('Artist albums', data.body);
+//         },
+//         function(err) {
+//           console.error(err);
+//         }
+//       );
+//     done(null, 'Value from step 2'); // <- set value to passed to step 3
+//   },
+//   function thirdStep (step2Result, done) {
+//     console.log(step2Result);
 
-    done(null); // <- no value set for the next step.
-  }
-],
-function (err) {
-  if (err) {
-    throw new Error(err);
-  } else {
-    console.log('No error happened in any steps, operation done!');
-  }
-});
+//     done(null); // <- no value set for the next step.
+//   }
+// ],
+// function (err) {
+//   if (err) {
+//     throw new Error(err);
+//   } else {
+//     console.log('No error happened in any steps, operation done!');
+//   }
+// });
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`)
