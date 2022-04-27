@@ -12,7 +12,7 @@ var spotifyApi = new SpotifyWebApi({
     clientSecret: 'a6338157c9bb5ac9c71924cb2940e1a7',
     redirectUri: 'http://www.example.com/callback'
   });
-spotifyApi.setAccessToken('BQCCncm8IzVPrwBVw-xZtY8moWO33hkGmMv3QWF6qKNFADVr3-LJXHhFEruvnu-aB-vPx5OoY6FYLIrrAY5Lf12FI41Up93N6d9KittfHDuW-K2eEALy3Xwk24HQCu1FNwzAAQOzOgK64tArOBjLjwvcvAm_IBA');
+spotifyApi.setAccessToken('BQCps3cRf7ZZ6NiOSgD9RjWrk313ylI3DQ1_sLG_-_qudDYgYdWgytgK4bBdc4V78W8S9GZP4ry-SGnj5xJbXbOoXDPsA3p3iJ9LpgNeRpc9ayaU7zEGp2rSMfWffwwjVbgO0aRgdubnAIk-q2vcoeVFJb75TuU');
 
 
 
@@ -96,9 +96,7 @@ app.put('/blogposts/:postId', cors(), async (req, res) =>{
 // });
 
 // console.log that your server is up and running
-app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`)
-});
+
 
 // app.get('/search', async (req, res) => {
 //     spotifyApi.getAvailableGenreSeeds()
@@ -163,11 +161,62 @@ app.listen(PORT, () => {
 // });
 
 
-app.get('/form', async (req, res) => {
-    spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
-    .then(function(data) {
-      console.log('Artist information', data.body.id);
-      res.json(data.body.id)
-    }, function(err) {
-      console.error(err);
-    })})
+// app.get('/form', async (req, res) => {
+//     spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+//     .then(function(data) {
+//       console.log('Artist information', data.body.id);
+//       res.send(data.body.id)
+//     }, function(err) {
+//       console.error(err);
+//     })})
+
+
+
+let artistid = '2hazSY4Ef3aB9ATXW7F5w3'
+
+var async =  require('async');
+async.waterfall([
+  function firstStep(done) {
+      let artistid;
+    app.get('/form', async (req, res) => {
+        spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+        .then(function(data) {
+             artistid = data.body.id
+
+          console.log('Artist information', artistid);
+          res.send(artistid)
+        }, function(err) {
+          console.error(err);
+        })})
+    console.log('This is step 1');
+
+    done(null, 'Value from step1'); // <- set value to passed to step 2
+  },
+  function secondStep(step1Result, done) {
+    spotifyApi.getArtistAlbums(`${artistid}`).then(
+        function(data) {
+          console.log('Artist albums', data.body);
+        },
+        function(err) {
+          console.error(err);
+        }
+      );
+    done(null, 'Value from step 2'); // <- set value to passed to step 3
+  },
+  function thirdStep (step2Result, done) {
+    console.log(step2Result);
+
+    done(null); // <- no value set for the next step.
+  }
+],
+function (err) {
+  if (err) {
+    throw new Error(err);
+  } else {
+    console.log('No error happened in any steps, operation done!');
+  }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server listening on ${PORT}`)
+});
