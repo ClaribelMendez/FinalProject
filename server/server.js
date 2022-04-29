@@ -9,12 +9,12 @@ var querystring = require('querystring');
 
 
 var SpotifyWebApi = require('spotify-web-api-node');
-// const { URLSearchParams } = require('url');
-// var spotifyApi = new SpotifyWebApi({
-//     clientId: '93026130e7544126ab0f707b7371f5f1',
-//     clientSecret: 'd41e40d2c56748289fc2474ca08f5b26',
-//     // redirectUri: 'http://localhost:8888/callback'
-//   });
+const { URLSearchParams } = require('url');
+var spotifyApi = new SpotifyWebApi({
+    clientId: '5d41a60ef3b04d87bafe4f28b56ee81a',
+    clientSecret: '29972a14b1934a21b8c1a72cb7bcfbce',
+    redirectUri: 'http://localhost:4002/callback'
+  });
 // spotifyApi.setAccessToken('BQC3nrhlYYXlvdO5eCt4_FHJ2wTdqMB4_zLF1g9G6wPetw0tPifE486aGP_5XLTYgYHWqTj1lYC1WmfrOV0NdJ_0Xz57m7k9VyKvGiNTIGnpP2KIhKXDW0mJF0auczHxSqScxSFWwCkLSpaVuOzU2aLUZ3Uz3kI');
 
 
@@ -26,8 +26,10 @@ app.use(cors());
 app.use(express.json());
 
    
-var client_id = '93026130e7544126ab0f707b7371f5f1';
-var redirect_uri = 'http://localhost:3000';
+var client_id = '5d41a60ef3b04d87bafe4f28b56ee81a';
+var redirect_uri = 'http://localhost:4002/blogposts';
+var client_secret = '29972a14b1934a21b8c1a72cb7bcfbce'
+
 
 
 app.get('/login', function(req, res) {
@@ -45,7 +47,43 @@ app.get('/login', function(req, res) {
     }));
 });
 
+// const origWarning = process.emitWarning;
+// process.emitWarning = function(...args) {
+//     if (args[2] !== 'DEP0005') {
+//         // pass any other warnings through normally
+//         return origWarning.apply(process, args);
+//     } else {
+//         'do nothing, eat the warning';
+//     }
+// }
 
+// app.get('/callback', function(req, res) {
+
+//     var code = req.query.code || null;
+//     var state = req.query.state || null;
+  
+//     if (state === null) {
+//       res.redirect('/#' +
+//         querystring.stringify({
+//           error: 'state_mismatch'
+//         }));
+//     } else {
+//       var authOptions = {
+//         url: 'https://accounts.spotify.com/api/token',
+//         form: {
+//           code: code,
+//           redirect_uri: redirect_uri,
+//           grant_type: 'authorization_code'
+//         },
+//         headers: {
+//           'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+//         },
+//         json: true
+//       };
+//     }
+//   });
+
+// 
 
 // let redirect_uri = 
 //   process.env.REDIRECT_URI || 
