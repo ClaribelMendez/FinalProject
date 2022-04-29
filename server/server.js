@@ -4,16 +4,18 @@ require('dotenv').config()
 // var bodyparser= require('body-parser')
 const db = require('../server/db/db-connection.js'); 
 const path = require('path');
+var request = require('request');
+var querystring = require('querystring');
 
 
 var SpotifyWebApi = require('spotify-web-api-node');
-var spotifyApi = new SpotifyWebApi({
-    clientId: 'fcecfc72172e4cd267473117a17cbd4d',
-    clientSecret: 'a6338157c9bb5ac9c71924cb2940e1a7',
-    redirectUri: 'http://www.example.com/callback'
-  });
-spotifyApi.setAccessToken('BQC3nrhlYYXlvdO5eCt4_FHJ2wTdqMB4_zLF1g9G6wPetw0tPifE486aGP_5XLTYgYHWqTj1lYC1WmfrOV0NdJ_0Xz57m7k9VyKvGiNTIGnpP2KIhKXDW0mJF0auczHxSqScxSFWwCkLSpaVuOzU2aLUZ3Uz3kI');
-
+// const { URLSearchParams } = require('url');
+// var spotifyApi = new SpotifyWebApi({
+//     clientId: '93026130e7544126ab0f707b7371f5f1',
+//     clientSecret: 'd41e40d2c56748289fc2474ca08f5b26',
+//     // redirectUri: 'http://localhost:8888/callback'
+//   });
+// spotifyApi.setAccessToken('BQC3nrhlYYXlvdO5eCt4_FHJ2wTdqMB4_zLF1g9G6wPetw0tPifE486aGP_5XLTYgYHWqTj1lYC1WmfrOV0NdJ_0Xz57m7k9VyKvGiNTIGnpP2KIhKXDW0mJF0auczHxSqScxSFWwCkLSpaVuOzU2aLUZ3Uz3kI');
 
 
 
@@ -22,8 +24,68 @@ const app = express();
 const PORT = 4002;
 app.use(cors());
 app.use(express.json());
-// app.use(bodyparser.json)
-// app.use(bodyparser.urlencoded({extended:true}))
+
+   
+var client_id = '93026130e7544126ab0f707b7371f5f1';
+var redirect_uri = 'http://localhost:3000';
+
+
+app.get('/login', function(req, res) {
+
+  const state = 'kyDTOy01P6DrJBT7';
+  const scope = 'user-read-private user-read-email';
+
+  res.redirect('https://accounts.spotify.com/authorize?' +
+    querystring.stringify({
+      response_type: 'code',
+      client_id: client_id,
+      scope: scope,
+      redirect_uri: redirect_uri,
+      state: state
+    }));
+});
+
+
+
+// let redirect_uri = 
+//   process.env.REDIRECT_URI || 
+//   'http://localhost:4002/callback'
+// const params = new URLSearchParams
+// app.get('/login', function(req, res) {
+//   res.redirect('https://accounts.spotify.com/authorize?' +
+//   querystring.stringify({
+//       response_type: 'code',
+//       client_id: '93026130e7544126ab0f707b7371f5f1',
+//       scope: 'user-read-private user-read-email',
+//       redirect_uri
+// }))})
+
+
+// client_id = '93026130e7544126ab0f707b7371f5f1',
+// client_secret = 'd41e40d2c56748289fc2474ca08f5b26'
+
+// app.get('/callback', function(req, res) {
+//   let code = req.query.code || null
+//   let authOptions = {
+//     url: 'https://accounts.spotify.com/api/token',
+//     form: {
+//       code: code,
+//       redirect_uri,
+//       grant_type: 'authorization_code'
+//     },
+//     headers: {
+//       'Authorization': 'Basic ' + (  Buffer.from()(
+//         client_id + ':' + client_secret
+//       ).toString('base64'))
+//     },
+//     json: true
+//   }
+//   request.post(authOptions, function(error, response, body) {
+//     var access_token = body.access_token
+//     let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
+//     res.redirect(uri + '?access_token=' + access_token)
+//   })
+// })
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
@@ -177,7 +239,7 @@ app.get('/albums', async (req, res) => {
     const artistResponseDataId = await artistResponseData.id
     const albumsResponse = await spotifyApi.getArtistAlbums(artistResponseDataId)
     // const albumsResponseData = albumsResponse.body
-    res.send(albumsResponse.body.items[3])
+    res.send(albumsResponse.body.items[4]['name'])
     console.log('albums response'  + albumsResponse.body[0])
    
 })
@@ -226,6 +288,11 @@ app.get('/albums', async (req, res) => {
 //     console.log('No error happened in any steps, operation done!');
 //   }
 // });
+
+// var client_id = 'CLIENT_ID';
+// var client_secret = 'CLIENT_SECRET';
+
+
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`)

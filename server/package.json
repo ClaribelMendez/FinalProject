@@ -23,6 +23,7 @@
     "nodemon": "^2.0.15",
     "pg-promise": "^10.11.1",
     "react-router-dom": "^6.3.0",
+    "request": "^2.88.2",
     "spotify-web-api-node": "^5.0.2"
   }
 }
