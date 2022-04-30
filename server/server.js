@@ -10,12 +10,6 @@ var querystring = require('querystring');
 
 var SpotifyWebApi = require('spotify-web-api-node');
 const { URLSearchParams } = require('url');
-var spotifyApi = new SpotifyWebApi({
-    clientId: '5d41a60ef3b04d87bafe4f28b56ee81a',
-    clientSecret: '29972a14b1934a21b8c1a72cb7bcfbce',
-    redirectUri: 'http://localhost:4002/callback'
-  });
-// spotifyApi.setAccessToken('BQC3nrhlYYXlvdO5eCt4_FHJ2wTdqMB4_zLF1g9G6wPetw0tPifE486aGP_5XLTYgYHWqTj1lYC1WmfrOV0NdJ_0Xz57m7k9VyKvGiNTIGnpP2KIhKXDW0mJF0auczHxSqScxSFWwCkLSpaVuOzU2aLUZ3Uz3kI');
 
 
 
@@ -30,22 +24,98 @@ var client_id = '5d41a60ef3b04d87bafe4f28b56ee81a';
 var redirect_uri = 'http://localhost:4002/blogposts';
 var client_secret = '29972a14b1934a21b8c1a72cb7bcfbce'
 
-
+ redirect_uri = 
+  process.env.REDIRECT_URI || 
+  'http://localhost:4002/blogposts'
 
 app.get('/login', function(req, res) {
-
-  const state = 'kyDTOy01P6DrJBT7';
-  const scope = 'user-read-private user-read-email';
-
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
       client_id: client_id,
-      scope: scope,
-      redirect_uri: redirect_uri,
-      state: state
-    }));
-});
+      scope: 'user-read-private user-read-email',
+      redirect_uri
+    }))
+})
+
+const origWarning = process.emitWarning;
+process.emitWarning = function(...args) {
+    if (args[2] !== 'DEP0005') {
+        // pass any other warnings through normally
+        return origWarning.apply(process, args);
+    } else {
+        'do nothing, eat the warning';
+    }
+}
+
+var credentials = {
+    clientId: client_id,
+    clientSecret: client_secret,
+    redirectUri: 'http://localhost:4002/blogposts'
+  };
+  
+  var spotifyApi = new SpotifyWebApi(credentials);
+  
+  // The code that's returned as a query parameter to the redirect URI
+  var code = 'AQCioKr0tXGXM_2PLVB1BfbvkiKCmFSsAhCD5nexDYcJz_zA8Eyj9pY16Z2JywnSJLfyDhQjmJcX3PsIgOutCd9_7ZI155Oj3M34nZmBeA0QPyJO6p-TN2yIQuAwbrhrVJJcHFIVs029v7c6OpboTALLNJJiAqxEX7O-eL1O_JnfOfyldr1CbO7JlmQx9RFrM6HHAH_q47s68FEYNqTQvDrC5QdGERk'
+  // Retrieve an access token and a refresh token
+  spotifyApi.authorizationCodeGrant(code).then(
+    function(data) {
+      console.log('The token expires in ' + data.body['expires_in']);
+      console.log('The access token is ' + data.body['access_token']);
+      console.log('The refresh token is ' + data.body['refresh_token']);
+  
+      // Set the access token on the API object to use it in later calls
+      spotifyApi.setAccessToken(data.body['access_token']);
+      spotifyApi.setRefreshToken(data.body['refresh_token']);
+    },
+    function(err) {
+      console.log('Something went wrong!', err);
+    }
+  );
+// AQCioKr0tXGXM_2PLVB1BfbvkiKCmFSsAhCD5nexDYcJz_zA8Eyj9pY16Z2JywnSJLfyDhQjmJcX3PsIgOutCd9_7ZI155Oj3M34nZmBeA0QPyJO6p-TN2yIQuAwbrhrVJJcHFIVs029v7c6OpboTALLNJJiAqxEX7O-eL1O_JnfOfyldr1CbO7JlmQx9RFrM6HHAH_q47s68FEYNqTQvDrC5QdGERk
+// app.get('/callback', function(req, res) {
+//   let code = req.query.code || null
+//   let authOptions = {
+//     url: 'https://accounts.spotify.com/api/token',
+//     form: {
+//       code: code,
+//       redirect_uri,
+//       grant_type: 'authorization_code'
+//     },
+//     headers: {
+//       'Authorization': 'Basic ' + (new Buffer(
+//         client_id + ':' + client_secret
+//       ).toString('base64'))
+//     },
+//     json: true
+//   }
+
+  
+//   request.post(authOptions, function(error, response, body) {
+//     var access_token = body.access_token
+//     let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
+//     res.redirect(uri + '?access_token=' + access_token)
+
+//     console.log('this is the token' + access_token)
+//   })
+// })
+
+
+// app.get('/login', function(req, res) {
+
+//   const state = 'kyDTOy01P6DrJBT7';
+//   const scope = 'user-read-private user-read-email';
+
+//   res.redirect('https://accounts.spotify.com/authorize?' +
+//     querystring.stringify({
+//       response_type: 'code',
+//       client_id: client_id,
+//       scope: scope,
+//       redirect_uri: redirect_uri,
+//       state: state
+//     }));
+// });
 
 // const origWarning = process.emitWarning;
 // process.emitWarning = function(...args) {
@@ -76,33 +146,33 @@ app.get('/login', function(req, res) {
 //           grant_type: 'authorization_code'
 //         },
 //         headers: {
-//           'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+//           'Authorization': 'Basic ' + ( new Buffer (client_id + ':' + client_secret).toString('base64'))
 //         },
 //         json: true
 //       };
 //     }
 //   });
 
-// 
 
-// let redirect_uri = 
+
+//  redirect_uri = 
 //   process.env.REDIRECT_URI || 
-//   'http://localhost:4002/callback'
+//   'http://localhost:4002/blogposts'
 // const params = new URLSearchParams
 // app.get('/login', function(req, res) {
 //   res.redirect('https://accounts.spotify.com/authorize?' +
 //   querystring.stringify({
 //       response_type: 'code',
-//       client_id: '93026130e7544126ab0f707b7371f5f1',
+//       client_id: '5d41a60ef3b04d87bafe4f28b56ee81a',
 //       scope: 'user-read-private user-read-email',
 //       redirect_uri
 // }))})
 
 
-// client_id = '93026130e7544126ab0f707b7371f5f1',
-// client_secret = 'd41e40d2c56748289fc2474ca08f5b26'
+// client_id = '5d41a60ef3b04d87bafe4f28b56ee81a',
+// client_secret = '29972a14b1934a21b8c1a72cb7bcfbce'
 
-// app.get('/callback', function(req, res) {
+// app.get('/albums', function(req, res) {
 //   let code = req.query.code || null
 //   let authOptions = {
 //     url: 'https://accounts.spotify.com/api/token',
@@ -112,7 +182,7 @@ app.get('/login', function(req, res) {
 //       grant_type: 'authorization_code'
 //     },
 //     headers: {
-//       'Authorization': 'Basic ' + (  Buffer.from()(
+//       'Authorization': 'Basic ' + ( new Buffer(
 //         client_id + ':' + client_secret
 //       ).toString('base64'))
 //     },
@@ -120,9 +190,31 @@ app.get('/login', function(req, res) {
 //   }
 //   request.post(authOptions, function(error, response, body) {
 //     var access_token = body.access_token
+//     console.log('this is the access token' + access_token)
+
 //     let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
 //     res.redirect(uri + '?access_token=' + access_token)
+  
+
+// var spotifyApi = new SpotifyWebApi({
+//     clientId: '5d41a60ef3b04d87bafe4f28b56ee81a',
+//     clientSecret: '29972a14b1934a21b8c1a72cb7bcfbce'
+//     // redirectUri: 'http://localhost:4002/blogposts'
+//   });
+// spotifyApi.setAccessToken({access_token});
 //   })
+
+// app.get('/albums', async (req, res) => {
+//     const artistResponse = await spotifyApi.searchArtists('Kanye')
+//     // res.send(artistResponse)
+//     const artistResponseData =   await artistResponse.body.artists.items[0]   // res.send(artistResponseData)
+//     const artistResponseDataId = await artistResponseData.id
+//     const albumsResponse = await spotifyApi.getArtistAlbums(artistResponseDataId)
+//     // const albumsResponseData = albumsResponse.body
+//     res.send(albumsResponse.body.items[4]['name'])
+//     console.log('albums response'  + albumsResponse.body[0])
+   
+// })
 // })
 
 //creates an endpoint for the route /api
@@ -270,17 +362,7 @@ app.put('/blogposts/:postId', cors(), async (req, res) =>{
 //       console.error(err);
 //     })})
 
-app.get('/albums', async (req, res) => {
-    const artistResponse = await spotifyApi.searchArtists('Kanye')
-    // res.send(artistResponse)
-    const artistResponseData =   await artistResponse.body.artists.items[0]   // res.send(artistResponseData)
-    const artistResponseDataId = await artistResponseData.id
-    const albumsResponse = await spotifyApi.getArtistAlbums(artistResponseDataId)
-    // const albumsResponseData = albumsResponse.body
-    res.send(albumsResponse.body.items[4]['name'])
-    console.log('albums response'  + albumsResponse.body[0])
-   
-})
+
 
 
 
