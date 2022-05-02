@@ -56,51 +56,53 @@ var credentials = {
   
   var spotifyApi = new SpotifyWebApi(credentials);
   
-  // The code that's returned as a query parameter to the redirect URI
-  var code = 'AQCioKr0tXGXM_2PLVB1BfbvkiKCmFSsAhCD5nexDYcJz_zA8Eyj9pY16Z2JywnSJLfyDhQjmJcX3PsIgOutCd9_7ZI155Oj3M34nZmBeA0QPyJO6p-TN2yIQuAwbrhrVJJcHFIVs029v7c6OpboTALLNJJiAqxEX7O-eL1O_JnfOfyldr1CbO7JlmQx9RFrM6HHAH_q47s68FEYNqTQvDrC5QdGERk'
-  // Retrieve an access token and a refresh token
-  spotifyApi.authorizationCodeGrant(code).then(
-    function(data) {
-      console.log('The token expires in ' + data.body['expires_in']);
-      console.log('The access token is ' + data.body['access_token']);
-      console.log('The refresh token is ' + data.body['refresh_token']);
-  
-      // Set the access token on the API object to use it in later calls
-      spotifyApi.setAccessToken(data.body['access_token']);
-      spotifyApi.setRefreshToken(data.body['refresh_token']);
-    },
-    function(err) {
-      console.log('Something went wrong!', err);
-    }
-  );
-// AQCioKr0tXGXM_2PLVB1BfbvkiKCmFSsAhCD5nexDYcJz_zA8Eyj9pY16Z2JywnSJLfyDhQjmJcX3PsIgOutCd9_7ZI155Oj3M34nZmBeA0QPyJO6p-TN2yIQuAwbrhrVJJcHFIVs029v7c6OpboTALLNJJiAqxEX7O-eL1O_JnfOfyldr1CbO7JlmQx9RFrM6HHAH_q47s68FEYNqTQvDrC5QdGERk
-// app.get('/callback', function(req, res) {
-//   let code = req.query.code || null
-//   let authOptions = {
-//     url: 'https://accounts.spotify.com/api/token',
-//     form: {
-//       code: code,
-//       redirect_uri,
-//       grant_type: 'authorization_code'
-//     },
-//     headers: {
-//       'Authorization': 'Basic ' + (new Buffer(
-//         client_id + ':' + client_secret
-//       ).toString('base64'))
-//     },
-//     json: true
-//   }
 
-  
-//   request.post(authOptions, function(error, response, body) {
-//     var access_token = body.access_token
-//     let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
-//     res.redirect(uri + '?access_token=' + access_token)
+// app.get('/blogposts', function(req, res) {
 
-//     console.log('this is the token' + access_token)
-//   })
+//     var code = req.query.code || null;
+//   spotifyApi.authorizationCodeGrant(code).then(
+//     function(data) {
+//       console.log('The token expires in ' + data.body['expires_in']);
+//       console.log('The access token is ' + data.body['access_token']);
+//       console.log('The refresh token is ' + data.body['refresh_token']);
+  
+//       // Set the access token on the API object to use it in later calls
+//       spotifyApi.setAccessToken(data.body['access_token']);
+//       spotifyApi.setRefreshToken(data.body['refresh_token']);
+//     },
+//     function(err) {
+//       console.log('Something went wrong!', err);
+//     }
+//   )
 // })
+app.get('/blogposts', function(req, res) {
+  let code = req.query.code || null
+  let authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    form: {
+      code: code,
+      redirect_uri,
+      grant_type: 'authorization_code'
+    },
+    headers: {
+      'Authorization': 'Basic ' + (new Buffer(
+        client_id + ':' + client_secret
+      ).toString('base64'))
+    },
+    json: true
+  }
 
+
+  
+  request.post(authOptions, function(error, response, body) {
+    var access_token = body.access_token
+    let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
+    res.redirect(uri + '?access_token=' + access_token)
+
+    console.log('this is the token' + access_token)
+  })
+
+})
 
 // app.get('/login', function(req, res) {
 
