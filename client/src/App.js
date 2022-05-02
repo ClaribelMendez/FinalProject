@@ -1,9 +1,7 @@
 import './App.css';
 // import Blog from './components/blogposts';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import BlogPosts from './components/blogposts'
-import Home from './components/home'
 // import GamePlayBackground from './components/gameplaybackground';
 
 
@@ -12,39 +10,42 @@ import Home from './components/home'
 
 function App() {
   return (
-    <><Router>
-      <div className="App">
+  <div>
+      <BlogPosts />
+    </div>
+
+//     <><Router>
+//       <div className="App">
         
-        <div className="content">
+//         <div className="content">
 
-          {/* <nav> */}
+//           {/* <nav> */}
 
-            <a href="/Contact">Contact</a>  &nbsp;
-]              <a href="/blogposts">Blogposts</a>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
+//             <a href="/Contact">Contact</a>  &nbsp;
+// ]              <a href="/blogposts">Blogposts</a>
+//               <br></br>
+//               <br></br>
+//               <br></br>
+//               <br></br>
 
-            {/* < GamePlayBackground /> */}
-          {/* </nav> */}
-          <Routes>
-            <Route path='/' element={ <Home />} />
-            </Routes>
-          <Routes>
-            <Route path="/blogposts" element={ <BlogPosts />} />
-          </Routes>
+//             {/* < GamePlayBackground /> */}
+//           {/* </nav> */}
+//           <Routes>
+//             <Route path='/' element={ <Home />} />
+//             </Routes>
+//           <Routes>
+//             <Route path="/blogposts" element={ <BlogPosts />} />
+//           </Routes>
         
-          <Routes>
+//           <Routes>
       
-    </Routes>
+//     </Routes>
   
         
-        </div>
-      </div>
-    </Router><div>               
-       {/* <Post /> */}
-      </div></>
+//         </div>
+//       </div>
+//     </Router><div>               
+//        {/* <Post /> */}
     
   );
 }

@@ -1,6 +1,7 @@
 
    
 import { useState, useEffect } from "react";
+import GamePlayBackground from "./gameplaybackground";
 // import Form from "./form";
 import Modalpopup from "./modal";
 
@@ -302,7 +303,7 @@ function BlogPosts() {
 
 
     return (
-      <div className="cards" >
+      <div className="genres"  >
    <h2>{genre}</h2>
    <div>{currentArtist}</div>
    <h2>{score}</h2>
@@ -339,7 +340,7 @@ function BlogPosts() {
       {posts.map((post) => <option key={post.id} value={post.value}>{post.genre}</option>)}
     </select> 
   
-          
+          <GamePlayBackground />
             
         </div>
     )}
