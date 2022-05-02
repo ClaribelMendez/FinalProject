@@ -11,8 +11,9 @@ function BlogPosts() {
     const [editingPostId, setEditingPostId] = useState(null);
 
     const [genre, setGenre] = useState([]);
-    const [artist, setArtist] = useState('');
-    const [randomIndex, setRandomIndex] = useState()
+    const [currentArtist, setCurrentArtist] = useState();
+    const [index, setIndex] = useState(0)
+    const [answer, setAnswer] = useState([])
     const [score, setScore] = useState(0);
  
     let subgenres =
@@ -262,26 +263,39 @@ function BlogPosts() {
   let handleArtistChosen = () => {
     let arrayOfNums =[]
     for (let i = 0; i < subgenres.length; i++){
-      arrayOfNums.push(i)
-      // console.log(arrayOfNums)
+    arrayOfNums.push(i)
     }
+    console.log(arrayOfNums)
     let randomNumber = (Math.floor(Math.random() * arrayOfNums.length));
     console.log(randomNumber)
-    let randomIndex = subgenres[randomNumber]
-    setRandomIndex(randomIndex)
-    let randomArtist = randomIndex.name
-    arrayOfNums = arrayOfNums.splice(randomNumber)
-    setArtist(randomArtist) 
-    console.log('this is the artist ' + artist)
+    setIndex(randomNumber)
+    let randomArtist = subgenres[randomNumber]['name']
+    setCurrentArtist(randomArtist)
+    console.log('this is the artist' + randomArtist)
+
+    // arrayOfNums = arrayOfNums.splice(randomNumber)
 
   }
 
-  let handleScore = (e) => {
-    if(randomIndex.indexOf(artist)){
-      alert("Object found inside the array.");
-  } else{
-      alert("Object not found.");
-  }}
+  let handleAnswer = (e) => {
+    setAnswer(e.target.value)
+    console.log(e.target.value)
+   console.log(subgenres[index]['genres'])
+    console.log(currentArtist)
+    if(subgenres[index]['genres'] == e.target.value){
+      console.log('correct')
+      setScore(score + 1)
+    }else{
+      console.log('incorrect')
+      setScore(score - 1)
+    }
+    }
+  
+
+
+  
+  
+
 
 
 
@@ -290,11 +304,14 @@ function BlogPosts() {
     return (
       <div className="cards" >
    <h2>{genre}</h2>
-   <div>{artist}</div>
-   <div>{score}</div>
+   <div>{currentArtist}</div>
+   <h2>{score}</h2>
+   <h2>{answer}</h2>
+
+
 
    <button type="button" onClick={() =>{handleArtistChosen({subgenres})}}>click me to choose artist</button> 
-      
+
       
 
                 {/* {posts.map((post) => {
@@ -309,7 +326,7 @@ function BlogPosts() {
                         );
                     }}
                     )} */}
-                  {subgenres.map((item, key) => <button type='button' value={item.genres} onClick={(e) => {handleScore(e)}} >
+                  {subgenres.map((item,index) => <button type='radio' key={item.index} value={item.genres} onClick={handleAnswer}>
                   {'\n' + item.genres}
                   </button>
                 
