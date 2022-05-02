@@ -1,9 +1,8 @@
 
    
 import { useState, useEffect } from "react";
-import Form from "./form";
-import Modalpopup from './modal'
-
+// import Form from "./form";
+import Modalpopup from "./modal";
 
 function BlogPosts() {
 
@@ -11,9 +10,177 @@ function BlogPosts() {
 
     const [editingPostId, setEditingPostId] = useState(null);
 
-    const [genre, setGenre] = useState();
+    const [genre, setGenre] = useState([]);
+    const [artist, setArtist] = useState('');
+    const [randomIndex, setRandomIndex] = useState()
+    const [score, setScore] = useState(0);
+ 
+    let subgenres =
+   [
+    
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/1on7ZQ2pvgeQF4vmIA09x5"
+            },
+            "followers": {
+              "href": null,
+              "total": 5479001
+            },
+            "genres": [
+              "brazilian rock",
+              "hard rock brasileiro",
+              "rock alternativo brasileiro",
+              "rock nacional brasileiro"
+            ],
+            "href": "https://api.spotify.com/v1/artists/1on7ZQ2pvgeQF4vmIA09x5",
+            "id": "1on7ZQ2pvgeQF4vmIA09x5",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab6761610000e5ebc409f8e59d6abb96f1b9e06f",
+                "width": 640
+              },
+              {
+                "height": 320,
+                "url": "https://i.scdn.co/image/ab67616100005174c409f8e59d6abb96f1b9e06f",
+                "width": 320
+              },
+              {
+                "height": 160,
+                "url": "https://i.scdn.co/image/ab6761610000f178c409f8e59d6abb96f1b9e06f",
+                "width": 160
+              }
+            ],
+            "name": "Charlie Brown Jr.",
+            "popularity": 76,
+            "type": "artist",
+            "uri": "spotify:artist:1on7ZQ2pvgeQF4vmIA09x5"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/53XhwfbYqKCa1cC15pYq2q"
+            },
+            "followers": {
+              "href": null,
+              "total": 39721957
+            },
+            "genres": [
+              "modern rock",
+              "rock"
+            ],
+            "href": "https://api.spotify.com/v1/artists/53XhwfbYqKCa1cC15pYq2q",
+            "id": "53XhwfbYqKCa1cC15pYq2q",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab6761610000e5eb920dc1f617550de8388f368e",
+                "width": 640
+              },
+              {
+                "height": 320,
+                "url": "https://i.scdn.co/image/ab67616100005174920dc1f617550de8388f368e",
+                "width": 320
+              },
+              {
+                "height": 160,
+                "url": "https://i.scdn.co/image/ab6761610000f178920dc1f617550de8388f368e",
+                "width": 160
+              }
+            ],
+            "name": "Imagine Dragons",
+            "popularity": 93,
+            "type": "artist",
+            "uri": "spotify:artist:53XhwfbYqKCa1cC15pYq2q"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/04gDigrS5kc9YWfZHwBETP"
+            },
+            "followers": {
+              "href": null,
+              "total": 36154581
+            },
+            "genres": [
+              "pop",
+              "pop rock"
+            ],
+            "href": "https://api.spotify.com/v1/artists/04gDigrS5kc9YWfZHwBETP",
+            "id": "04gDigrS5kc9YWfZHwBETP",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab6761610000e5eb288ac05481cedc5bddb5b11b",
+                "width": 640
+              },
+              {
+                "height": 320,
+                "url": "https://i.scdn.co/image/ab67616100005174288ac05481cedc5bddb5b11b",
+                "width": 320
+              },
+              {
+                "height": 160,
+                "url": "https://i.scdn.co/image/ab6761610000f178288ac05481cedc5bddb5b11b",
+                "width": 160
+              }
+            ],
+            "name": "Maroon 5",
+            "popularity": 90,
+            "type": "artist",
+            "uri": "spotify:artist:04gDigrS5kc9YWfZHwBETP"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/6tw6EpC9RgmSRZiZg0n22t"
+            },
+            "followers": {
+              "href": null,
+              "total": 5006817
+            },
+            "genres": [
+              "brazilian rock",
+              "mpb",
+              "rock brasiliense",
+              "rock nacional brasileiro"
+            ],
+            "href": "https://api.spotify.com/v1/artists/6tw6EpC9RgmSRZiZg0n22t",
+            "id": "6tw6EpC9RgmSRZiZg0n22t",
+            "images": [
+              {
+                "height": 1000,
+                "url": "https://i.scdn.co/image/cd410bc7c6e3591f65d9c9ee9516d2e96acfed42",
+                "width": 1000
+              },
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/d0a544a5f9e0a548536b9bc0449e50137e0dd08c",
+                "width": 640
+              },
+              {
+                "height": 200,
+                "url": "https://i.scdn.co/image/3ec7aa085b47711065443477cbd83aa39a056f13",
+                "width": 200
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/183df4c68c2028e4a59abc49c8e659429086f254",
+                "width": 64
+              }
+            ],
+            "name": "Legião Urbana",
+            "popularity": 71,
+            "type": "artist",
+            "uri": "spotify:artist:6tw6EpC9RgmSRZiZg0n22t"
+                    }]
 
-    const [show, setShow] = useState(false);
+
+
+
+    
+        
+
+
+    
+
 
 
     const loadPosts = () => {
@@ -23,6 +190,8 @@ function BlogPosts() {
                 setPosts(posts);
             })
     }
+
+
 
     // const loadGenre = () => {
     //     fetch("http://localhost:4002/form")
@@ -40,17 +209,17 @@ function BlogPosts() {
         loadPosts()
         // loadGenre()
     }, []);
-
-    const onDelete = (post) => {
-        return fetch(`http://localhost:4002/blogposts/${post.id}`, {
-            method: "DELETE"
-        }).then((response) =>{
-            //console.log(response);
-            if(response.ok){
-                loadPosts();
-            }
-        })
-    }
+// 
+    // const onDelete = (post) => {
+    //     return fetch(`http://localhost:4002/blogposts/${items}`, {
+    //         method: "POST"
+    //     }).then((response) =>{
+    //         //console.log(response);
+    //         if(response.ok){
+    //             loadPosts();
+    //         }
+    //     })
+    // }
 
     const addPost = (newPost) => {
         //console.log(newStudent);
@@ -83,20 +252,51 @@ function BlogPosts() {
 
   }
 
-  let handleGenreSelection = (e,props) => {
+
+
+  let handleGenreSelection = (e) => {
     setGenre(e.target.value)
-    props.setShow(true)
   }
+
+
+  let handleArtistChosen = () => {
+    let arrayOfNums =[]
+    for (let i = 0; i < subgenres.length; i++){
+      arrayOfNums.push(i)
+      // console.log(arrayOfNums)
+    }
+    let randomNumber = (Math.floor(Math.random() * arrayOfNums.length));
+    console.log(randomNumber)
+    let randomIndex = subgenres[randomNumber]
+    setRandomIndex(randomIndex)
+    let randomArtist = randomIndex.name
+    arrayOfNums = arrayOfNums.splice(randomNumber)
+    setArtist(randomArtist) 
+    console.log('this is the artist ' + artist)
+
+  }
+
+  let handleScore = (e) => {
+    if(randomIndex.indexOf(artist)){
+      alert("Object found inside the array.");
+  } else{
+      alert("Object not found.");
+  }}
+
+
+
 
 
     return (
       <div className="cards" >
-          {/* <h2>{genre}</h2> */}
-          <h2>{genre}</h2>
-          {/* <h2>{post.genre}</h2> */}
+   <h2>{genre}</h2>
+   <div>{artist}</div>
+   <div>{score}</div>
 
+   <button type="button" onClick={() =>{handleArtistChosen({subgenres})}}>click me to choose artist</button> 
+      
+      
 
-        
                 {/* {posts.map((post) => {
                     if(post.id === editingPostId){
                         return <Form initialPost={post} savedPost={updatePost} />
@@ -109,24 +309,24 @@ function BlogPosts() {
                         );
                     }}
                     )} */}
+                  {subgenres.map((item, key) => <button type='button' value={item.genres} onClick={(e) => {handleScore(e)}} >
+                  {'\n' + item.genres}
+                  </button>
+                
+        
+                  )}
 
-<select onChange={handleGenreSelection}> 
+
+                  <select onChange={handleGenreSelection}> 
       <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
-            {/* Mapping through each fruit object in our fruits array
-          and returning an option element with the appropriate attributes / values.
-         */}
       {posts.map((post) => <option key={post.id} value={post.value}>{post.genre}</option>)}
     </select> 
-            {/* <Form savePost={addPost} /> */}
-            < Modalpopup />
+  
+          
+            
         </div>
-    );
-}
-                // <button key={post.id}> <img src= {post.image} alt = '{post.alt}' style={{width: "100%"}}/>  <div className='container' >{post.title} <div className='card-footer'>{post.date}</div>{post.content}</div> 
-                // </button> )}
-      // </div>
-    // );
-  // }
+    )}
+                  
   
   export default BlogPosts;
 

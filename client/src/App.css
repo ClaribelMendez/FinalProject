@@ -134,7 +134,12 @@ ul li {
 .home-image{
  
   background-size: cover; 
-  object-fit: cover;
+  background-position: center;
   width: 90rem;
   height: 40rem
+}
+
+.subgenres{
+  white-space: normal;
+  width: 100%;
 }
