@@ -6,6 +6,7 @@ const db = require('../server/db/db-connection.js');
 const path = require('path');
 var request = require('request');
 var querystring = require('querystring');
+const fetch = require('node-fetch')
 
 
 var SpotifyWebApi = require('spotify-web-api-node');
@@ -48,13 +49,13 @@ process.emitWarning = function(...args) {
     }
 }
 
-var credentials = {
-    clientId: client_id,
-    clientSecret: client_secret,
-    redirectUri: 'http://localhost:4002/blogposts'
-  };
+// var credentials = {
+//     clientId: client_id,
+//     clientSecret: client_secret,
+//     redirectUri: 'http://localhost:4002/blogposts'
+//   };
   
-  var spotifyApi = new SpotifyWebApi(credentials);
+  // var spotifyApi = new SpotifyWebApi(credentials);
   
 
 // app.get('/blogposts', function(req, res) {
@@ -98,126 +99,15 @@ app.get('/blogposts', function(req, res) {
     var access_token = body.access_token
     let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
     res.redirect(uri + '?access_token=' + access_token)
-
-    console.log('this is the token' + access_token)
+    console.log('this is the token ' + access_token)
   })
-
 })
 
-// app.get('/login', function(req, res) {
-
-//   const state = 'kyDTOy01P6DrJBT7';
-//   const scope = 'user-read-private user-read-email';
-
-//   res.redirect('https://accounts.spotify.com/authorize?' +
-//     querystring.stringify({
-//       response_type: 'code',
-//       client_id: client_id,
-//       scope: scope,
-//       redirect_uri: redirect_uri,
-//       state: state
-//     }));
-// });
-
-// const origWarning = process.emitWarning;
-// process.emitWarning = function(...args) {
-//     if (args[2] !== 'DEP0005') {
-//         // pass any other warnings through normally
-//         return origWarning.apply(process, args);
-//     } else {
-//         'do nothing, eat the warning';
-//     }
-// }
-
-// app.get('/callback', function(req, res) {
-
-//     var code = req.query.code || null;
-//     var state = req.query.state || null;
-  
-//     if (state === null) {
-//       res.redirect('/#' +
-//         querystring.stringify({
-//           error: 'state_mismatch'
-//         }));
-//     } else {
-//       var authOptions = {
-//         url: 'https://accounts.spotify.com/api/token',
-//         form: {
-//           code: code,
-//           redirect_uri: redirect_uri,
-//           grant_type: 'authorization_code'
-//         },
-//         headers: {
-//           'Authorization': 'Basic ' + ( new Buffer (client_id + ':' + client_secret).toString('base64'))
-//         },
-//         json: true
-//       };
-//     }
-//   });
 
 
 
-//  redirect_uri = 
-//   process.env.REDIRECT_URI || 
-//   'http://localhost:4002/blogposts'
-// const params = new URLSearchParams
-// app.get('/login', function(req, res) {
-//   res.redirect('https://accounts.spotify.com/authorize?' +
-//   querystring.stringify({
-//       response_type: 'code',
-//       client_id: '5d41a60ef3b04d87bafe4f28b56ee81a',
-//       scope: 'user-read-private user-read-email',
-//       redirect_uri
-// }))})
-
-
-// client_id = '5d41a60ef3b04d87bafe4f28b56ee81a',
-// client_secret = '29972a14b1934a21b8c1a72cb7bcfbce'
-
-// app.get('/albums', function(req, res) {
-//   let code = req.query.code || null
-//   let authOptions = {
-//     url: 'https://accounts.spotify.com/api/token',
-//     form: {
-//       code: code,
-//       redirect_uri,
-//       grant_type: 'authorization_code'
-//     },
-//     headers: {
-//       'Authorization': 'Basic ' + ( new Buffer(
-//         client_id + ':' + client_secret
-//       ).toString('base64'))
-//     },
-//     json: true
-//   }
-//   request.post(authOptions, function(error, response, body) {
-//     var access_token = body.access_token
-//     console.log('this is the access token' + access_token)
-
-//     let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
-//     res.redirect(uri + '?access_token=' + access_token)
-  
 
 // var spotifyApi = new SpotifyWebApi({
-//     clientId: '5d41a60ef3b04d87bafe4f28b56ee81a',
-//     clientSecret: '29972a14b1934a21b8c1a72cb7bcfbce'
-//     // redirectUri: 'http://localhost:4002/blogposts'
-//   });
-// spotifyApi.setAccessToken({access_token});
-//   })
-
-// app.get('/albums', async (req, res) => {
-//     const artistResponse = await spotifyApi.searchArtists('Kanye')
-//     // res.send(artistResponse)
-//     const artistResponseData =   await artistResponse.body.artists.items[0]   // res.send(artistResponseData)
-//     const artistResponseDataId = await artistResponseData.id
-//     const albumsResponse = await spotifyApi.getArtistAlbums(artistResponseDataId)
-//     // const albumsResponseData = albumsResponse.body
-//     res.send(albumsResponse.body.items[4]['name'])
-//     console.log('albums response'  + albumsResponse.body[0])
-   
-// })
-// })
 
 //creates an endpoint for the route /api
 app.get('/', (req, res) => {
@@ -413,6 +303,54 @@ app.put('/blogposts/:postId', cors(), async (req, res) =>{
 
 // var client_id = 'CLIENT_ID';
 // var client_secret = 'CLIENT_SECRET';
+const access_token = 'BQDlWMYPf00I1WvS2QAgoeF0tJpTWPEEmeasGZFi1bLJghxl8U58dAiZ83QFqUMllTkK8iNwN0t_wtTSXkMMAdlsXQmk4vLBhXJkheBiuYzKm823873F6EXdFYqVYrNngOMY2d16wX5ADrJXVRUOLyvQpBuRYjB9k2PB'
+let artistid;
+
+app.get('/artistid', async (req, res) => {
+fetch('https://api.spotify.com/v1/artists/21E3waRsmPlU7jZsS13rcj', {
+            method: 'GET', headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + access_token
+            }
+        })
+            .then((response) => {
+                console.log(response.json().then(
+                    (data) => {
+                        // res.json(data)
+                        {artistid = data.id}
+                        {console.log(data)}
+                        return fetch(`https://api.spotify.com/v1/artists/${artistid}/top-tracks?market=ES`, {
+                            method: 'GET', headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + access_token
+                            }
+                        })
+                            .then((response) => {
+                                console.log(response.json().then(
+                                    (data) => {
+                                        res.json(data)
+                                        {console.log(data)}
+                                    }
+                                ));
+                            });
+                    })
+            )})})
+
+          
+                    
+                
+            
+                    
+                
+        
+        
+            
+        
+
+
+        
 
 
 
