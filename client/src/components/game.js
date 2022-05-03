@@ -1,11 +1,11 @@
-
-   
 import { useState, useEffect } from "react";
-import GamePlayBackground from "./gameplaybackground";
-// import Form from "./form";
-import Modalpopup from "./modal";
+import React from 'react'
+import ReactHowler from 'react-howler'
 
-function BlogPosts() {
+
+function Game() {
+
+  let track_preview = 'https://p.scdn.co/mp3-preview/bc3ab974555f9136cdbc25a003b55f93ca4b3c78?cid=774b29d4f13844c495f206cafdad9c86'
 
     const [posts, setPosts] = useState([]);
 
@@ -340,12 +340,12 @@ function BlogPosts() {
       {posts.map((post) => <option key={post.id} value={post.value}>{post.genre}</option>)}
     </select> 
   
-          <GamePlayBackground />
+          
             
         </div>
     )}
                   
   
-  export default BlogPosts;
+  export default Game;
 
   
