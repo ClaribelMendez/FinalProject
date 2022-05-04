@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import React from 'react'
-import ReactHowler from 'react-howler'
+import Sound from './sound'
+
 
 
 function Game() {
 
-  let track_preview = 'https://p.scdn.co/mp3-preview/bc3ab974555f9136cdbc25a003b55f93ca4b3c78?cid=774b29d4f13844c495f206cafdad9c86'
-
+ 
     const [posts, setPosts] = useState([]);
 
     const [editingPostId, setEditingPostId] = useState(null);
@@ -16,6 +16,7 @@ function Game() {
     const [index, setIndex] = useState(0)
     const [answer, setAnswer] = useState([])
     const [score, setScore] = useState(0);
+    const [track, setTrack] = useState('')
  
     let subgenres =
    [
@@ -193,25 +194,51 @@ function Game() {
             })
     }
 
+    let access_token = 'BQBXBmF4YblcZG_Kh3EcHCpAIapiZ1ePZ0BIyWKCwYNkDADCyXdjGUujP4xSrYFcx8LSkNMJDFInEcYFWMuOk3cS_52-Z5sVZinFtYgygmMHMeN8A7ovSBQn392E7OBopNEsSnpBmU0D2Uv1WEkIg3h1jBTNtjxEYRAO'
+    let artistid;
+    const loadtrack = () => {
+      
+      fetch('https://api.spotify.com/v1/artists/21E3waRsmPlU7jZsS13rcj', {
+        method: 'GET', headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + access_token
+        }
+    })
+        .then((response) => {
+            response.json().then(
+                (data) => {
+                    // res.json(data)
+                    artistid = data.id
+                    console.log(artistid)
+                    return fetch(`https://api.spotify.com/v1/artists/${artistid}/top-tracks?market=ES`, {
+                        method: 'GET', headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + access_token
+                        }
+                    })
+                        .then((response) => {
+                           response.json().then(
+                                (data) => {
+                                 response.json(data.tracks[0]['preview_url'])
+                                 let preview = data.tracks[0]['preview_url']
+                                    console.log(data.tracks[0]['preview_url'])
+                                    setTrack(preview)
+                                }
+                            );
+                        });
+                }
+        )})}
 
-
-    // const loadGenre = () => {
-    //     fetch("http://localhost:4002/form")
-    //         .then((response) => response.json())
-    //         .then(genre => {
-    //             setGenre(genre);
-    //         })
-    // }
-
-    
 
 
     // Use effect hook to render the students in the app. This will change any time that our initial state change
     useEffect(() => {
         loadPosts()
-        // loadGenre()
-    }, []);
-// 
+        loadtrack()
+    }, [] );
+
     // const onDelete = (post) => {
     //     return fetch(`http://localhost:4002/blogposts/${items}`, {
     //         method: "POST"
@@ -293,21 +320,14 @@ function Game() {
     }
   
 
-
-  
-  
-
-
-
-
-
-
     return (
       <div className="genres"  >
    <h2>{genre}</h2>
    <div>{currentArtist}</div>
    <h2>{score}</h2>
    <h2>{answer}</h2>
+  <Sound preview = {track}/>
+
 
 
 

@@ -146,7 +146,8 @@
   padding-bottom: 1em;
   justify-content: right;
   margin-bottom: 20%;
- display: inline-block
+ display: inline-block;
+ margin-top: 55%
 
 }  
 
@@ -154,6 +155,7 @@
   float: right;
   margin-left: 50%;
   margin-bottom: 20%;
+  
 }
 
 button {

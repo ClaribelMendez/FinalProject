@@ -21,33 +21,33 @@ app.use(cors());
 app.use(express.json());
 
    
-var client_id = '5d41a60ef3b04d87bafe4f28b56ee81a';
-var redirect_uri = 'http://localhost:4002/blogposts';
-var client_secret = '29972a14b1934a21b8c1a72cb7bcfbce'
+// var client_id = '5d41a60ef3b04d87bafe4f28b56ee81a';
+// var redirect_uri = 'http://localhost:4002/blogposts';
+// var client_secret = '29972a14b1934a21b8c1a72cb7bcfbce'
 
- redirect_uri = 
-  process.env.REDIRECT_URI || 
-  'http://localhost:4002/blogposts'
+//  redirect_uri = 
+//   process.env.REDIRECT_URI || 
+//   'http://localhost:4002/blogposts'
 
-app.get('/login', function(req, res) {
-  res.redirect('https://accounts.spotify.com/authorize?' +
-    querystring.stringify({
-      response_type: 'code',
-      client_id: client_id,
-      scope: 'user-read-private user-read-email',
-      redirect_uri
-    }))
-})
+// app.get('/login', function(req, res) {
+//   res.redirect('https://accounts.spotify.com/authorize?' +
+//     querystring.stringify({
+//       response_type: 'code',
+//       client_id: client_id,
+//       scope: 'user-read-private user-read-email',
+//       redirect_uri
+//     }))
+// })
 
-const origWarning = process.emitWarning;
-process.emitWarning = function(...args) {
-    if (args[2] !== 'DEP0005') {
-        // pass any other warnings through normally
-        return origWarning.apply(process, args);
-    } else {
-        'do nothing, eat the warning';
-    }
-}
+// const origWarning = process.emitWarning;
+// process.emitWarning = function(...args) {
+//     if (args[2] !== 'DEP0005') {
+//         // pass any other warnings through normally
+//         return origWarning.apply(process, args);
+//     } else {
+//         'do nothing, eat the warning';
+//     }
+// }
 
 // var credentials = {
 //     clientId: client_id,
@@ -55,7 +55,7 @@ process.emitWarning = function(...args) {
 //     redirectUri: 'http://localhost:4002/blogposts'
 //   };
   
-  // var spotifyApi = new SpotifyWebApi(credentials);
+//   var spotifyApi = new SpotifyWebApi(credentials);
   
 
 // app.get('/blogposts', function(req, res) {
@@ -76,32 +76,32 @@ process.emitWarning = function(...args) {
 //     }
 //   )
 // })
-app.get('/blogposts', function(req, res) {
-  let code = req.query.code || null
-  let authOptions = {
-    url: 'https://accounts.spotify.com/api/token',
-    form: {
-      code: code,
-      redirect_uri,
-      grant_type: 'authorization_code'
-    },
-    headers: {
-      'Authorization': 'Basic ' + (new Buffer(
-        client_id + ':' + client_secret
-      ).toString('base64'))
-    },
-    json: true
-  }
+// app.get('/blogposts', function(req, res) {
+//   let code = req.query.code || null
+//   let authOptions = {
+//     url: 'https://accounts.spotify.com/api/token',
+//     form: {
+//       code: code,
+//       redirect_uri,
+//       grant_type: 'authorization_code'
+//     },
+//     headers: {
+//       'Authorization': 'Basic ' + (new Buffer(
+//         client_id + ':' + client_secret
+//       ).toString('base64'))
+//     },
+//     json: true
+//   }
 
 
   
-  request.post(authOptions, function(error, response, body) {
-    var access_token = body.access_token
-    let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
-    res.redirect(uri + '?access_token=' + access_token)
-    console.log('this is the token ' + access_token)
-  })
-})
+//   request.post(authOptions, function(error, response, body) {
+//     var access_token = body.access_token
+//     let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
+//     res.redirect(uri + '?access_token=' + access_token)
+//     console.log('this is the token ' + access_token)
+//   })
+// })
 
 
 
@@ -303,10 +303,10 @@ app.put('/blogposts/:postId', cors(), async (req, res) =>{
 
 // var client_id = 'CLIENT_ID';
 // var client_secret = 'CLIENT_SECRET';
-const access_token = 'BQDlWMYPf00I1WvS2QAgoeF0tJpTWPEEmeasGZFi1bLJghxl8U58dAiZ83QFqUMllTkK8iNwN0t_wtTSXkMMAdlsXQmk4vLBhXJkheBiuYzKm823873F6EXdFYqVYrNngOMY2d16wX5ADrJXVRUOLyvQpBuRYjB9k2PB'
+const access_token = 'BQDulK2xdc5auRTrBgNXod_l6mJQESHHZZcKNWthRtVyTu59_-kgJRiiDvaUiqXQblr5X3QbvlqutZrn035RBmIhxH71o9rGSi1IdPWwzBfNSFGE5AfxK0Ed8MBtgBd3pLnVb3olGSprluCIwhMNTXWHl8JekOXS_HBa'
 let artistid;
 
-app.get('/artistid', async (req, res) => {
+app.get('/gameplay', async (req, res) => {
 fetch('https://api.spotify.com/v1/artists/21E3waRsmPlU7jZsS13rcj', {
             method: 'GET', headers: {
                 'Accept': 'application/json',
@@ -330,8 +330,9 @@ fetch('https://api.spotify.com/v1/artists/21E3waRsmPlU7jZsS13rcj', {
                             .then((response) => {
                                 console.log(response.json().then(
                                     (data) => {
-                                        res.json(data)
-                                        {console.log(data)}
+                                        res.json(data.tracks[0]['album']['images'][0]['url'])
+        
+                                        {console.log(data.tracks[0]['images'])}
                                     }
                                 ));
                             });
