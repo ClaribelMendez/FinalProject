@@ -304,23 +304,15 @@ app.put('/blogposts/:postId', cors(), async (req, res) =>{
 
 // var client_id = 'CLIENT_ID';
 // var client_secret = 'CLIENT_SECRET';
-const access_token = 'BQAKazbbvf7DFYKXTts2n3YW2Rt4u5CWGf7bRP5yXNHDbmXLCalh_87h3mNJfOADW18H79jgiIrM7ZUl4difjwpEjyiQYbyxglFK2qDbVOx25ULLNMjbPaV2UbUypnfv1rRVpS7Jbqta97AzBjcFL8ZLF_IYz93iN4ms99Xkz5S_kcosbvtL-1Ss4zDLUEq4xA'
+const access_token = 'BQDu4u6SgtFFQ5z-24B_fk9yioY9xmK6U_2j47JV7ByDmmzUTVmWH4UXxMID2YZts19IrT8XehAjHTGY92wuL2n8zDcdYn0MGPb69niRbcVXgi7fr-z36VL1aJlx2bwwyAtJvm5QmvfE6n3A7qdliIK1XGeTVpApT4gkCBmYoUdyhiu7PW4yS459-deLM561UQ'
 let artistid;
 
-let genre;
-app.post("/choose-genre", (req, res) => {
-  genre = req.body.genre;
-
-  console.log('this is line 314 on the backend' + genre)
-  res.redirect("/game");
- 
-});
 
 
 
 app.get('/game', async (req, res) => {
     genre = req.query.genre;
-    console.log(req.query)
+    console.log('this is line 323 backend ' + genre)
     fetch(`https://api.spotify.com/v1/artists/${genre}`, {
                 method: 'GET', headers: {
                     'Accept': 'application/json',

@@ -7,11 +7,12 @@ import Sound from './sound'
 function Game() {
 
  
-    const [posts, setPosts] = useState([]);
+    const [genres, setGenres] = useState([]);
 
     const [editingPostId, setEditingPostId] = useState(null);
 
     const [genre, setGenre] = useState([]);
+    const [currentGenre, setCurrentGenre] = useState('')
     const [currentArtist, setCurrentArtist] = useState();
     const [index, setIndex] = useState(0)
     const [answer, setAnswer] = useState([])
@@ -181,92 +182,110 @@ function Game() {
     
         
 
-
+                    const getGenres =  (e) =>{
+                      e.preventDefault();
+                      let genre = e.target.value;
+                      console.log("Line 13 frontend ", genre);
+                      // add to request body
+                      fetch(`http://localhost:4002/game?genre=${genre}`, {
+                          method: "get",
+                          headers: {"Content-Type": "application/json",
+                      },
+                    })
+                      .then((response) => response.json())
+                      .then((data) => {
+                        console.log(data)
+                          setCurrentGenre(data.response.currentGenre);
+                          console.log("Line 198 front" + data.response.genre);
+                          
+                      })
+                      .catch((err) => console.error(`Error: ${err}`));
+                  }
     
 
 
 
-    const loadPosts = () => {
-        fetch("http://localhost:4002/blogposts")
+    const loadGenres = () => {
+        fetch("http://localhost:4002/genres")
             .then((response) => response.json())
-            .then(posts => {
-                setPosts(posts);
+            .then(genres => {
+                setGenres(genres);
             })
     }
 
-    let access_token = 'BQBXBmF4YblcZG_Kh3EcHCpAIapiZ1ePZ0BIyWKCwYNkDADCyXdjGUujP4xSrYFcx8LSkNMJDFInEcYFWMuOk3cS_52-Z5sVZinFtYgygmMHMeN8A7ovSBQn392E7OBopNEsSnpBmU0D2Uv1WEkIg3h1jBTNtjxEYRAO'
-    let artistid;
-    const loadtrack = () => {
+    // let access_token = 'BQAKazbbvf7DFYKXTts2n3YW2Rt4u5CWGf7bRP5yXNHDbmXLCalh_87h3mNJfOADW18H79jgiIrM7ZUl4difjwpEjyiQYbyxglFK2qDbVOx25ULLNMjbPaV2UbUypnfv1rRVpS7Jbqta97AzBjcFL8ZLF_IYz93iN4ms99Xkz5S_kcosbvtL-1Ss4zDLUEq4xA'
+    // let artistid;
+    // const loadtrack = () => {
       
-      fetch('https://api.spotify.com/v1/artists/21E3waRsmPlU7jZsS13rcj', {
-        method: 'GET', headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + access_token
-        }
-    })
-        .then((response) => {
-            response.json().then(
-                (data) => {
-                    // res.json(data)
-                    artistid = data.id
-                    console.log(artistid)
-                    return fetch(`https://api.spotify.com/v1/artists/${artistid}/top-tracks?market=ES`, {
-                        method: 'GET', headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + access_token
-                        }
-                    })
-                        .then((response) => {
-                           response.json().then(
-                                (data) => {
-                                 response.json(data.tracks[0]['preview_url'])
-                                 let preview = data.tracks[0]['preview_url']
-                                    console.log(data.tracks[0]['preview_url'])
-                                    setTrack(preview)
-                                }
-                            );
-                        });
-                }
-        )})}
+    //   fetch('https://api.spotify.com/v1/artists/21E3waRsmPlU7jZsS13rcj', {
+    //     method: 'GET', headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json',
+    //         'Authorization': 'Bearer ' + access_token
+    //     }
+    // })
+    //     .then((response) => {
+    //         response.json().then(
+    //             (data) => {
+    //                 // res.json(data)
+    //                 artistid = data.id
+    //                 console.log(artistid)
+    //                 return fetch(`https://api.spotify.com/v1/artists/${artistid}/top-tracks?market=ES`, {
+    //                     method: 'GET', headers: {
+    //                         'Accept': 'application/json',
+    //                         'Content-Type': 'application/json',
+    //                         'Authorization': 'Bearer ' + access_token
+    //                     }
+    //                 })
+    //                     .then((response) => {
+    //                        response.json().then(
+    //                             (data) => {
+    //                              response.json(data.tracks[0]['preview_url'])
+    //                              let preview = data.tracks[0]['preview_url']
+    //                                 console.log(data.tracks[0]['preview_url'])
+    //                                 setTrack(preview)
+    //                             }
+    //                         );
+    //                     });
+    //             }
+    //     )})}
 
 
 
     // Use effect hook to render the students in the app. This will change any time that our initial state change
     useEffect(() => {
-        loadPosts()
-        loadtrack()
+        loadGenres()
+        // loadtrack()
     }, [] );
 
     // const onDelete = (post) => {
-    //     return fetch(`http://localhost:4002/blogposts/${items}`, {
+    //     return fetch(`http://localhost:4002/bloggenres/${items}`, {
     //         method: "POST"
     //     }).then((response) =>{
     //         //console.log(response);
     //         if(response.ok){
-    //             loadPosts();
+    //             loadgenres();
     //         }
     //     })
     // }
 
     const addPost = (newPost) => {
         //console.log(newStudent);
-        //postStudent(newStudent);
-        setPosts((posts) => [...posts, newPost]);
+        //genrestudent(newStudent);
+        setGenres((genres) => [...genres, newPost]);
     }
     
     const updatePost = (savedPost) =>{
-      setPosts((posts) => {
-          const newPosts = [];
-          for(let post of posts){
+      setGenres((genres) => {
+          const newgenres = [];
+          for(let post of genres){
               if(post.id === savedPost.id){
-                  newPosts.push(savedPost);
+                  newgenres.push(savedPost);
               } else{
-                  newPosts.push(post);
+                  newgenres.push(post);
               }
           }
-          return newPosts;
+          return newgenres;
       })
 
       // This line is just to close the form! 
@@ -335,7 +354,7 @@ function Game() {
 
       
 
-                {/* {posts.map((post) => {
+                {/* {genres.map((post) => {
                     if(post.id === editingPostId){
                         return <Form initialPost={post} savedPost={updatePost} />
                     } else {
@@ -355,9 +374,9 @@ function Game() {
                   )}
 
 
-                  <select onChange={handleGenreSelection}> 
+                  <select onChange={getGenres}> 
       <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
-      {posts.map((post) => <option key={post.id} value={post.value}>{post.genre}</option>)}
+      {genres.map((post) => <option key={post.id} value={post.value}>{post.genre}</option>)}
     </select> 
   
           
