@@ -1,56 +1,66 @@
 import './App.css';
 // import Blog from './components/blogposts';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Post from './components/post' 
-import Form from './components/form'
-import BlogPosts from './components/blogposts'
-import Home from './components/home'
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Game from './components/game'
+// import GamePlayBackground from './components/gameplaybackground';
+import Sound from './components/sound.js'
 
 
 
 
 
 function App() {
-  return (
-    <><Router>
-      <div className="App">
-        
-        <div className="content">
-  
-          <nav>
+  // const myRef = React.useRef(null);
 
-            <a href="/Contact">Contact</a>  &nbsp;
-              <a href="/form">Form</a>  &nbsp;
-              <a href="/blogposts">Blogposts</a>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
+  // const audioRef = myRef(null);
+  // const play = (url) => {
+  //   audioRef.current.play(); 
+  //  }
+    return (
+      
+  <div>
+    {/* <input type="button" value="play" onClick={() => play()} />
+      <audio
+        src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"
+        ref={audioRef}
+      ></audio> */}
+      <Game />
+      
+      <Sound />
+    </div>
 
-            
-          </nav>
-          <Routes>
-            <Route path='/' element={ <Home />} />
-            </Routes>
-          <Routes>
-            <Route path="/blogposts" element={ <BlogPosts />} />
-          </Routes>
-          <Routes>
-            <Route path="/form" element={<Form />} />
-          </Routes>
-          <Routes>
-      <Route
-        path="/blogposts/:id"
-        element={<Post />}
-      />
-    </Routes>
+//     <><Router>
+//       <div className="App">
+        
+//         <div className="content">
+
+//           {/* <nav> */}
+
+//             <a href="/Contact">Contact</a>  &nbsp;
+// ]              <a href="/blogposts">Blogposts</a>
+//               <br></br>
+//               <br></br>
+//               <br></br>
+//               <br></br>
+
+//             {/* < GamePlayBackground /> */}
+//           {/* </nav> */}
+//           <Routes>
+//             <Route path='/' element={ <Home />} />
+//             </Routes>
+//           <Routes>
+//             <Route path="/blogposts" element={ <BlogPosts />} />
+//           </Routes>
+        
+//           <Routes>
+      
+//     </Routes>
   
         
-        </div>
-      </div>
-    </Router><div>               
-       {/* <Post /> */}
-      </div></>
+//         </div>
+//       </div>
+//     </Router><div>               
+//        {/* <Post /> */}
     
   );
 }

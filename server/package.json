@@ -4,19 +4,35 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "server": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^3.2.3",
+    "body-parser": "^1.20.0",
+    "bootstrap-button": "^1.0.1",
     "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "fet": "^0.0.1",
+    "fetch": "^1.1.0",
+    "global": "^4.4.0",
+    "h": "^1.0.0",
     "moment": "^2.29.2",
+    "node-fetch": "^2.6.7",
     "nodemon": "^2.0.15",
+    "parse": "^3.4.1",
     "pg-promise": "^10.11.1",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "request": "^2.88.2",
+    "spotify-finder": "^2.1.1",
+    "spotify-oauth-refresher": "^1.0.8",
+    "spotify-refresh": "^2.0.3",
+    "spotify-web-api-node": "^5.0.2",
+    "url": "^0.11.0",
+    "vs-spotify-api-wrapper": "^1.2.1"
   }
 }
