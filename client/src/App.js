@@ -1,9 +1,9 @@
 import './App.css';
-// import Blog from './components/blogposts';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Game from './components/game'
-// import GamePlayBackground from './components/gameplaybackground';
-import Sound from './components/sound.js'
+import Music from './components/Music'
+import Sound from './components/sound'
+import Tracks from './components/Tracks'
 
 
 
@@ -18,14 +18,15 @@ function App() {
   //  }
     return (
       
-  <div>
+  <div className='container'>
     {/* <input type="button" value="play" onClick={() => play()} />
       <audio
         src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"
         ref={audioRef}
       ></audio> */}
+      <Tracks />
       <Game />
-      
+      <Music />
       <Sound />
     </div>
 
