@@ -1,82 +1,23 @@
-const request = require("request");
-const fetch = require('node-fetch');
-var express = require('express'),
-  session = require('express-session'),
-  passport = require('passport'),
-  SpotifyStrategy = require('passport-spotify').Strategy,
-  consolidate = require('consolidate');
-  var nunjucks = require('nunjucks');
-
+var express = require('express');
 
 
 
 require('dotenv').config();
 
 var port = 4002;
-var authCallbackPath = '/auth/spotify/callback';
 
-// Passport session setup.
-//   To support persistent login sessions, Passport needs to be able to
-//   serialize users into and deserialize users out of the session. Typically,
-//   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing. However, since this example does not
-//   have a database of user records, the complete spotify profile is serialized
-//   and deserialized.
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
 
-passport.deserializeUser(function (obj, done) {
-  done(null, obj);
-});
 
-// Use the SpotifyStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, expires_in
-//   and spotify profile), and invoke a callback with a user object.
-passport.use(
-  new SpotifyStrategy(
-    {
-      clientID: '5d41a60ef3b04d87bafe4f28b56ee81a',
-      clientSecret: '29972a14b1934a21b8c1a72cb7bcfbce',
-      callbackURL: 'http://localhost:' + port + authCallbackPath,
-    },
-    function (accessToken, refreshToken, expires_in, profile, done) {
-      // asynchronous verification, for effect...
-      process.nextTick(function () {
-        // To keep the example simple, the user's spotify profile is returned to
-        // represent the logged-in user. In a typical application, you would want
-        // to associate the spotify account with a user record in your database,
-        // and return that user instead.
-        console.log('Access Token: ' + accessToken)
-        console.log('Refresh Token ' + refreshToken)
-        return done(null, profile);
-      });
-    }
-  )
-);
-var app = express();
 
-// configure Express
-app.set('views', __dirname + '/views');
-app.set('view engine', 'html');
 
-app.use(
-  session({secret: 'keyboard cat', resave: true, saveUninitialized: true})
-);
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
-app.use(passport.initialize());
-app.use(passport.session());
 
-app.use(express.static(__dirname + '/public'));
 
-app.engine('html', consolidate.nunjucks);
 
-app.get('/', function (req, res) {const express = require("express");
+
+
 const cors = require("cors");
 require("dotenv").config();
-// var bodyparser= require('body-parser')
+
 const db = require("../server/db/db-connection.js");
 const path = require("path");
 var request = require("request");
@@ -93,153 +34,19 @@ app.use(cors());
 app.use(express.json());
 
 var client_id = process.env.CLIENTID;
-var redirect_uri = "http://localhost:4000/callback";
+var redirect_uri = "http://localhost:4002/callback";
 var client_secret = process.env.SECRET;
 
 redirect_uri = process.env.REDIRECT_URI || "http://localhost:4002/callback";
 
 
 
-  session = require('express-session'),
-  passport = require('passport'),
-  SpotifyStrategy = require('passport-spotify').Strategy,
-  consolidate = require('consolidate');
-
-require('dotenv').config();
-var authCallbackPath = '/auth/spotify/callback';
-
-// Passport session setup.
-//   To support persistent login sessions, Passport needs to be able to
-//   serialize users into and deserialize users out of the session. Typically,
-//   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing. However, since this example does not
-//   have a database of user records, the complete spotify profile is serialized
-//   and deserialized.
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-  done(null, obj);
-});
-
-// Use the SpotifyStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, expires_in
-//   and spotify profile), and invoke a callback with a user object.
-passport.use(
-  new SpotifyStrategy(
-    {
-      clientID: process.env.CLIENTID,
-      clientSecret: process.env.SECRET,
-      callbackURL: 'http://localhost:' + 4000 + authCallbackPath,
-    },
-    function (accessToken, refreshToken, expires_in, profile, done) {
-      // asynchronous verification, for effect...
-      process.nextTick(function () {
-        // To keep the example simple, the user's spotify profile is returned to
-        // represent the logged-in user. In a typical application, you would want
-        // to associate the spotify account with a user record in your database,
-        // and return that user instead.
-        return done(null, profile);
-      });
-    }
-  )
-);
 
 
 
-// configure Express
-app.set('views', __dirname + '/views');
-app.set('view engine', 'html');
-
-app.use(
-  session({secret: 'keyboard cat', resave: true, saveUninitialized: true})
-);
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(express.static(__dirname + '/public'));
-
-app.engine('html', consolidate.nunjucks);
-
-app.get('/', function (req, res) {
-  res.render('index.html', {user: req.user});
-});
-
-app.get('/account', ensureAuthenticated, function (req, res) {
-  res.render('account.html', {user: req.user});
-});
-
-app.get('/login', function (req, res) {
-  res.render('login.html', {user: req.user});
-});
-
-// GET /auth/spotify
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request. The first step in spotify authentication will involve redirecting
-//   the user to spotify.com. After authorization, spotify will redirect the user
-//   back to this application at /auth/spotify/callback
-app.get(
-  '/auth/spotify',
-  passport.authenticate('spotify', {
-    scope: ['user-read-email', 'user-read-private'],
-    showDialog: true,
-  })
-);
-
-// GET /auth/spotify/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request. If authentication fails, the user will be redirected back to the
-//   login page. Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-app.get(
-  authCallbackPath,
-  passport.authenticate('spotify', {failureRedirect: '/login'}),
-  function (req, res) {
-    res.redirect('/');
-  }
-);
-
-app.get('/logout', function (req, res) {
-  req.logout();
-  res.redirect('/');
-});
 
 
 
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed. Otherwise, the user will be redirected to the
-//   login page.
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
-
-//ENDS HERE
-
-  //   // home page route (http://localhost:8080)
-  //   router.get('/', function(req, res) {
-  //       res.send('im the home page!');
-  //   });
-
-  //   router.get('/hello/:name', function(req, res) {
-  //     res.send('hello ' + req.params.name + '!');
-  // });
-
-  //   // about page route (http://localhost:8080/about)
-  //   router.get('/about', function(req, res) {
-  //       res.send('im the about page!');
-  //   });
-
-  //   // apply the routes to our application
-  //   app.use('/', router);
 
 // app.get("/login", function (req, res) {
 //   res.redirect(
@@ -247,7 +54,7 @@ function ensureAuthenticated(req, res, next) {
 //       querystring.stringify({
 //         response_type: "code",
 //         client_id: client_id,
-//         scope: "user-read-private user-read-email",
+//         scope: "user-read-private user-read-email ",
 //         redirect_uri,
 //       })
 //   );
@@ -266,12 +73,12 @@ function ensureAuthenticated(req, res, next) {
 // var credentials = {
 //     clientId: client_id,
 //     clientSecret: client_secret,
-//     redirectUri: 'http://localhost:4002/blogposts'
+//     redirectUri: 'http://localhost:4002/callback'
 //   };
 
 //   var spotifyApi = new SpotifyWebApi(credentials);
 
-// app.get('/blogposts', function(req, res) {
+// app.get('/callback', function(req, res) {
 
 //     var code = req.query.code || null;
 //   spotifyApi.authorizationCodeGrant(code).then(
@@ -314,7 +121,6 @@ function ensureAuthenticated(req, res, next) {
 //   });
 // });
 
-// var spotifyApi = new SpotifyWebApi({
 
 //creates an endpoint for the route /api
 app.get("/", (req, res) => {
@@ -526,7 +332,7 @@ app.get("/blogposts/:blogId", cors(), async (req, res) => {
 // var client_id = 'CLIENT_ID';
 // var client_secret = 'CLIENT_SECRET';
 const access_token =
-  "BQBAX_Oc0iuDep6nJg1-iX5JVxzo-dXpXD3OFlOEw928-Df0w-GwlP2NBpX28WiZ_Nim-ObRAqjbnYSnHpo7eysnu0ZgNNUVTnmzu2lZm5TYN7gAsCM-pj2r3w6c8ECxIAb0uaDzYepm-C1MVhAHgkSfLiak8kGJAmjmLMCxvy_ZldcyuXC4asHIykgesRO4NA";
+  "BQDIbLDU1wbQsWFSAMrNUJW_NuNgNptd-AUza62Q9UXq7iJrBPYeytr3jjnahFeQF5-zpByVxGPdILO1TkNniZgZThU8N3KOhukvD5Cg68IRbL8hOdJkVBhg2xYuAwMNWbTwkW2c-z3cv1S6CDl4uYNVmSbJ_XvUvU6LURvizAvrMKyU0QgsswdYHxUtXcWSbQ";
 let artistid;
 
 app.get("/game", async (req, res) => {
@@ -617,63 +423,10 @@ app.get("/artist-search", (req, res) => {
 
 
 
-  res.render('index.html', {user: req.user});
-});
-
-app.get('/account', ensureAuthenticated, function (req, res) {
-  res.render('account.html', {user: req.user});
-});
-
-app.get('/login', function (req, res) {
-  res.render('login.html', {user: req.user});
-});
-
-// GET /auth/spotify
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request. The first step in spotify authentication will involve redirecting
-//   the user to spotify.com. After authorization, spotify will redirect the user
-//   back to this application at /auth/spotify/callback
-app.get(
-  '/auth/spotify',
-  passport.authenticate('spotify', {
-    scope: ['user-read-email', 'user-read-private', 'playlist-modify-public', 'user-follow-read'],
-    showDialog: true,
-  })
-);
-
-// GET /auth/spotify/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request. If authentication fails, the user will be redirected back to the
-//   login page. Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-app.get(
-  authCallbackPath,
-  passport.authenticate('spotify', {failureRedirect: '/login'}),
-  function (req, res) {
-    res.redirect('/');
-  }
-);
-
-app.get('/logout', function (req, res) {
-  req.logout();
-  res.redirect('/');
-  console.log('redirect')
-});
 
 
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed. Otherwise, the user will be redirected to the
-//   login page.
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
 
-let artistid;
+
 
 
 app.get('/game', async  (req, res) => {
@@ -719,6 +472,133 @@ app.get('/game', async  (req, res) => {
     );
   });
 });
+
+var express = require('express'),
+  session = require('express-session'),
+  passport = require('passport'),
+  SpotifyStrategy = require('passport-spotify').Strategy,
+  consolidate = require('consolidate');
+
+require('dotenv').config();
+
+var authCallbackPath = '/auth/spotify/callback';
+
+// Passport session setup.
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session. Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing. However, since this example does not
+//   have a database of user records, the complete spotify profile is serialized
+//   and deserialized.
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (obj, done) {
+  done(null, obj);
+});
+
+// Use the SpotifyStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, expires_in
+//   and spotify profile), and invoke a callback with a user object.
+passport.use(
+  new SpotifyStrategy(
+    {
+      clientID: process.env.CLIENTID,
+      clientSecret: process.env.SECRET,
+      callbackURL: 'http://localhost:' + port + authCallbackPath,
+    },
+    function (accessToken, refreshToken, expires_in, profile, done) {
+      // asynchronous verification, for effect...
+      process.nextTick(function () {
+        // To keep the example simple, the user's spotify profile is returned to
+        // represent the logged-in user. In a typical application, you would want
+        // to associate the spotify account with a user record in your database,
+        // and return that user instead.
+        return done(null, profile);
+      });
+    }
+  )
+);
+
+// var app = express();
+
+// configure Express
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
+
+app.use(
+  session({secret: 'keyboard cat', resave: true, saveUninitialized: true})
+);
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(express.static(__dirname + '/public'));
+
+app.engine('html', consolidate.nunjucks);
+
+app.get('/', function (req, res) {
+  res.render('index.html', {user: req.user});
+});
+
+app.get('/account', ensureAuthenticated, function (req, res) {
+  res.render('account.html', {user: req.user});
+});
+
+app.get('/login', function (req, res) {
+  res.render('login.html', {user: req.user});
+});
+
+// GET /auth/spotify
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request. The first step in spotify authentication will involve redirecting
+//   the user to spotify.com. After authorization, spotify will redirect the user
+//   back to this application at /auth/spotify/callback
+app.get(
+  '/auth/spotify',
+  passport.authenticate('spotify', {
+    scope: ['user-read-email', 'user-read-private'],
+    showDialog: true,
+  })
+);
+
+// GET /auth/spotify/callback
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request. If authentication fails, the user will be redirected back to the
+//   login page. Otherwise, the primary route function function will be called,
+//   which, in this example, will redirect the user to the home page.
+app.get(
+  authCallbackPath,
+  passport.authenticate('spotify', {failureRedirect: '/login'}),
+  function (req, res) {
+    res.redirect('/');
+  }
+);
+
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+// app.listen(port, function () {
+//   console.log('App is listening on port ' + port);
+// });
+
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed. Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
 
 app.listen(port, function () {
   console.log('App is listening on port ' + port);
