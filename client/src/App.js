@@ -6,8 +6,8 @@ import Sound from './components/sound';
 import Tracks from './components/tracks';
 import MediaControlCard from './components/mediacard';
 // import ResponsiveAppBar from './components/Navbar';
-import Login from './components/login';
-import Dashboard from './components/dashboard';
+// import Login from './components/login';
+// import Dashboard from './components/dashboard';
 
 
 
@@ -24,7 +24,7 @@ function App() {
         ref={audioRef}
       ></audio> */}
       {/* <ResponsiveAppBar /> */}
-      {code ? <Dashboard code={code} /> : <Login />}  
+      {/* {code ? <Dashboard code={code} /> : <Login />}   */}
       <MediaControlCard />
       <Tracks />
       <Game />

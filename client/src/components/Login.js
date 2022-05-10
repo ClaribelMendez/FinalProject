@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { loginUrl } from "./spotify";
+// import { loginUrl } from "./spotify";
 
 const useStyles = makeStyles({
     login: {
@@ -29,12 +29,15 @@ const useStyles = makeStyles({
         }
     },
 });
+
+const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=7b215911d14245089d73d78055353cb2&response_type=code&redirect_uri=http://localhost:3000/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
+
 function Login() {
     const classes = useStyles()
     return (
         <div className={classes.login}>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY40JWs9PeIgxj878HvqjMHW-_dmXOVWbKfg&usqp=CAU" alt="Spotify-Logo"/>
-            <a href={loginUrl}>LOGIN WITH SPOTIFY</a>
+            <a href={AUTH_URL}>LOGIN WITH SPOTIFY</a>
         </div>
     )
 }
