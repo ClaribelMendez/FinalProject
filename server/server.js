@@ -1,12 +1,17 @@
-const express = require('express')
-const cors = require('cors')
-const spotifyWebApi = require('spotify-web-api-node')
+require('dotenv').config();
+const express = require('express');
+const spotifyWebApi = require('spotify-web-api-node');
+const cors = require('cors');
+const app = express();
+const mongoose = require("mongoose")
 
-const app = express()
-const port = 4003
 
-app.use(cors()) // To handle cross-origin requests
-app.use(express.json()); // To parse JSON bodies
+//middleware
+app.use(cors());
+app.use(express.json()); //Used to parse JSON bodies
+app.use(express.urlencoded({ extended: true}));
+
+const port = 4003 || 4004;
 
 const credentials = {
   clientId: 'cb79505b7a4e48258da5fc9f2d1672c2',
@@ -14,34 +19,9 @@ const credentials = {
   redirectUri: 'http://localhost:3000',
 };
 
-app.get('/', (req, res) => {
-  console.log('Hello World!')
-})
 
-app.post('/login', (req,res) => {
-//  setup 
-    let spotifyApi = new spotifyWebApi(credentials)
+//authorization routes
+const AuthRoutes = require("./routes/authRoutes.js");
+app.use("/", AuthRoutes)
 
-//  Get the "code" value posted from the client-side and get the user's accessToken from the spotify api     
-    const code = req.body.code
-
-    // Retrieve an access token
-    spotifyApi.authorizationCodeGrant(code).then((data) => {
-
-        // Returning the User's AccessToken in the json formate  
-        res.json({
-            accessToken : data.body.access_token
-        }) 
-    })
-    .catch((err) => {
-        console.log(err);
-        res.sendStatus(400)
-    })
-   
-
-
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+app.listen(port,() => console.log(`Listening at port: ${port}`))

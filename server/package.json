@@ -28,6 +28,7 @@
     "global": "^4.4.0",
     "h": "^1.0.0",
     "moment": "^2.29.2",
+    "mongoose": "^6.3.3",
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.15",
     "nunjucks": "^3.2.3",
