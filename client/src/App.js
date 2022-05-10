@@ -1,24 +1,22 @@
 import './App.css';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Game from './components/game'
-import Music from './components/Music'
-import Sound from './components/sound'
-import Tracks from './components/Tracks'
-import MediaControlCard from './components/MediaCard';
+import Game from './components/game';
+import Music from './components/music';
+import Sound from './components/sound';
+import Tracks from './components/tracks';
+import MediaControlCard from './components/mediacard';
 // import ResponsiveAppBar from './components/Navbar';
-import Login from './components/Login';
+import Login from './components/login';
+import Dashboard from './components/dashboard';
+
 
 
 function App() {
-  // const myRef = React.useRef(null);
-
-  // const audioRef = myRef(null);
-  // const play = (url) => {
-  //   audioRef.current.play(); 
-  //  }
+  const code = new URLSearchParams(window.location.search).get('code')
     return (
       
   <div className='container'>
+   
   
     {/* <input type="button" value="play" onClick={() => play()} />
       <audio
@@ -26,7 +24,7 @@ function App() {
         ref={audioRef}
       ></audio> */}
       {/* <ResponsiveAppBar /> */}
-      <Login />
+      {code ? <Dashboard code={code} /> : <Login />}  
       <MediaControlCard />
       <Tracks />
       <Game />

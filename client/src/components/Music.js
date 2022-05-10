@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Tracks from './Tracks'
-import MediaControlCard from "./MediaCard";
+import Tracks from './tracks'
+import MediaControlCard from "./mediacard";
 
 
 

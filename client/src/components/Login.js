@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import { loginUrl } from "./spotify";
 
 const useStyles = makeStyles({
     login: {
@@ -33,7 +34,7 @@ function Login() {
     return (
         <div className={classes.login}>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY40JWs9PeIgxj878HvqjMHW-_dmXOVWbKfg&usqp=CAU" alt="Spotify-Logo"/>
-            <a href="#">LOGIN WITH SPOTIFY</a>
+            <a href={loginUrl}>LOGIN WITH SPOTIFY</a>
         </div>
     )
 }
