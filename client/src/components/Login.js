@@ -6,11 +6,14 @@ const useStyles = makeStyles({
     login: {
         display: 'grid',
         placeItems: 'center',
-        height: '100vh',
+        height: '70vh',
+        width: '130vh',
         backgroundColor: 'black',
+        marginLeft: "20vh",
+    
 
         '& img':{
-            width: '50%'
+            width: '30%'
         },
 
         '& a':{
@@ -29,12 +32,15 @@ const useStyles = makeStyles({
         }
     },
 });
+
+const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=cb79505b7a4e48258da5fc9f2d1672c2&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
+
 function Login() {
     const classes = useStyles()
     return (
         <div className={classes.login}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY40JWs9PeIgxj878HvqjMHW-_dmXOVWbKfg&usqp=CAU" alt="Spotify-Logo"/>
-            <a href={loginUrl}>LOGIN WITH SPOTIFY</a>
+            <img src="https://images.pexels.com/photos/1389429/pexels-photo-1389429.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="Spotify-Logo"/>
+            <a href={AUTH_URL}>LOGIN WITH SPOTIFY</a>
         </div>
     )
 }
