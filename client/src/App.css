@@ -22,10 +22,37 @@ button {
 }
 
 body {
-  background-image: url("https://images.unsplash.com/photo-1557682233-43e671455dfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=564&q=80");
+  background-image: url("https://www.xmple.com/wallpaper/orange-gradient-linear-red-1920x1080-c2-ff8c00-dc143c-a-150-f-14.svg");
   background-size: cover;
   background-repeat: no-repeat;
-  /* height: 400px; 
-width: 400px; */
+  height: 400px; 
+  width: 400px;
   margin-left: 50%;
+  
 }
+
+/* .container { */
+  /* background-color : #b24e6a;
+  outline:10px;
+  width:fit-content */
+
+/* } */
+/* 
+.card {
+    position: relative;
+    outline: 0px;
+    margin: auto;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 24px;
+    background-color: #b24e6a;
+    border-radius: 10px;
+    height: 100%
+}
+
+.card_content {
+  background-color: #172023;
+  color: #ffff
+} */
+

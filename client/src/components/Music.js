@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import Tracks from './Tracks'
+import MediaControlCard from "./MediaCard";
 
-// INCLUDE?
-/*let handleGenreSelection = (e) => {
-  setGenre(e.target.value)
-}
-*/
+
 
 function Music() {
   const [genres, setGenres] = useState([]);
@@ -14,12 +11,16 @@ function Music() {
 
 
   const loadGenres = () => {
-    fetch("http://localhost:4002/genres")
+    fetch("http://localhost:4003/genres")
       .then((response) => response.json())
       .then((genre) => {
         setGenres(genre);
       });
   };
+
+
+   
+  
 
   useEffect(() => {
     loadGenres();
@@ -30,7 +31,7 @@ function Music() {
     let genre = e.target.value;
     console.log("Line 13 frontend ", genre);
     // add to request body
-    fetch(`http://localhost:4002/game?genre=${genre}`, {
+    fetch(`http://localhost:4003/game?genre=${genre}`, {
       method: "get",
       headers: { "Content-Type": "application/json" },
   })
@@ -48,6 +49,12 @@ function Music() {
          .catch((err) => console.error(`Error: ${err}`))
     )})}
 
+    // INCLUDE?
+// let handleGenreSelection = (e) => {
+//   setGenres(e.target.value)
+// }
+
+
     // const getTracks
 
   return (
@@ -62,8 +69,7 @@ function Music() {
       ))}
     </select>
 
-    <Tracks track={currentTrack}/>
-    <img src={image} alt="album cover art" />
+    <MediaControlCard tracktitle={currentTrack} image = {image} />
     </div>
   );
 }

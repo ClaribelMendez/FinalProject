@@ -4,9 +4,9 @@ import Game from './components/game'
 import Music from './components/Music'
 import Sound from './components/sound'
 import Tracks from './components/Tracks'
-
-
-
+import MediaControlCard from './components/MediaCard';
+// import ResponsiveAppBar from './components/Navbar';
+import Login from './components/Login';
 
 
 function App() {
@@ -19,11 +19,15 @@ function App() {
     return (
       
   <div className='container'>
+  
     {/* <input type="button" value="play" onClick={() => play()} />
       <audio
         src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"
         ref={audioRef}
       ></audio> */}
+      {/* <ResponsiveAppBar /> */}
+      <Login />
+      <MediaControlCard />
       <Tracks />
       <Game />
       <Music />

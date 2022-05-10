@@ -4,7 +4,7 @@ var express = require('express');
 
 require('dotenv').config();
 
-var port = 4002;
+var port = 4003;
 
 
 
@@ -29,15 +29,15 @@ const { URLSearchParams } = require("url");
 
 const app = express();
 
-const PORT = 4002;
+const PORT = 4003;
 app.use(cors());
 app.use(express.json());
 
 var client_id = process.env.CLIENTID;
-var redirect_uri = "http://localhost:4002/callback";
+var redirect_uri = "http://localhost:4003/callback";
 var client_secret = process.env.SECRET;
 
-redirect_uri = process.env.REDIRECT_URI || "http://localhost:4002/callback";
+redirect_uri = process.env.REDIRECT_URI || "http://localhost:4003/callback";
 
 
 
@@ -73,7 +73,7 @@ redirect_uri = process.env.REDIRECT_URI || "http://localhost:4002/callback";
 // var credentials = {
 //     clientId: client_id,
 //     clientSecret: client_secret,
-//     redirectUri: 'http://localhost:4002/callback'
+//     redirectUri: 'http://localhost:4003/callback'
 //   };
 
 //   var spotifyApi = new SpotifyWebApi(credentials);
@@ -603,4 +603,3 @@ function ensureAuthenticated(req, res, next) {
 app.listen(port, function () {
   console.log('App is listening on port ' + port);
 });
-
