@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Tracks from './tracks'
-import MediaControlCard from "./mediacard";
+import Tracks from './Tracks'
+import MediaControlCard from "./MediaCard";
 
 
 
@@ -11,7 +11,7 @@ function Music() {
 
 
   const loadGenres = () => {
-    fetch('http://localhost:4003/genres')
+    fetch("/genres")
       .then((response) => response.json())
       .then((genre) => {
         setGenres(genre);

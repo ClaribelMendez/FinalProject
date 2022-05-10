@@ -1,14 +1,14 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Game from './components/game';
-import Music from './components/music';
+import Music from './components/Music';
 import Sound from './components/sound';
-import Tracks from './components/tracks';
-import MediaControlCard from './components/mediacard';
+import Tracks from './components/Tracks';
+// import MediaControlCard from './components/MediaCard';
 // import ResponsiveAppBar from './components/navbar';
-import Login from './components/login';
-import Dashboard from './components/dashboard';
-
+import Login from './components/Login';
+// import Dashboard from './components/dashboard';
+// 
 
 
 
@@ -42,7 +42,7 @@ function App() {
 {/* < GamePlayBackground /> */}
 {/* </nav> */}
 <Routes>
-<Route path='/genres' element={ <Game />} />
+<Route path='/genres' element={ <Music />} />
 </Routes>
  <Routes>
   
