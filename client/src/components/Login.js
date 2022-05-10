@@ -39,7 +39,8 @@ function Login() {
     const classes = useStyles()
     return (
         <div className={classes.login}>
-            <img src="https://images.pexels.com/photos/1389429/pexels-photo-1389429.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="Spotify-Logo"/>
+            
+      <div className='intune'>INTUNE</div>
             <a href={AUTH_URL}>LOGIN WITH SPOTIFY</a>
         </div>
     )

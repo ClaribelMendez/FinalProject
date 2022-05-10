@@ -5,7 +5,7 @@ import Music from './components/music';
 import Sound from './components/sound';
 import Tracks from './components/tracks';
 import MediaControlCard from './components/mediacard';
-// import ResponsiveAppBar from './components/Navbar';
+// import ResponsiveAppBar from './components/navbar';
 import Login from './components/login';
 import Dashboard from './components/dashboard';
 
@@ -30,9 +30,10 @@ function App() {
 
     <Router>
  
-
-  <a href="/login">Login</a>  &nbsp;
-  <a href="/game">Music</a>
+<div className='navbar'>
+  <a href="/login">Login/Logout</a>  &nbsp;
+  <a href="/genres">Game</a>
+  </div>
 <br></br>
  <br></br>
 <br></br>
@@ -41,9 +42,10 @@ function App() {
 {/* < GamePlayBackground /> */}
 {/* </nav> */}
 <Routes>
-<Route path='/game' element={ <Game />} />
+<Route path='/genres' element={ <Game />} />
 </Routes>
  <Routes>
+  
 <Route path="/login" element={ <Login />} />
 </Routes>
         
@@ -53,12 +55,13 @@ function App() {
   
 
 </Router> 
-{code ? <Dashboard code={code} /> : <Login />}  
+{/* {code ? <Dashboard code={code} /> : <Login />}   */}
       {/* <MediaControlCard /> */}
       {/* <Tracks /> */}
       {/* <Game /> */}
       {/* <Music />
       <Sound /> */}
+      
   
 {/* <Post /> */}
 </div>

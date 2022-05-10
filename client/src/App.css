@@ -28,9 +28,26 @@ body {
   height: 50em; 
   width: 400px;
   margin-left: 50%;
-
-  
 }
+
+.intune {
+  color: white;
+  font-family: 'sans-serif';
+  font-size: 10em;
+}
+
+.navbar {
+  /* background-color: black; */
+  color: black;
+  height: 5em;
+  width: 100%
+}
+
+a  hover {
+  color: black;
+}
+
+
 
 /* .container { */
   /* background-color : #b24e6a;

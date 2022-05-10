@@ -14,9 +14,22 @@ const credentials = {
   redirectUri: 'http://localhost:3000',
 };
 
-app.get('/', (req, res) => {
-  console.log('Hello World!')
-})
+app.get("/", (req, res) => {
+  res.json({ message: "Hello from My ExpressJS" });
+});
+
+app.get('/genres', async (req, res) => {
+   
+  try{
+      const { rows: genres } = await db.query('SELECT * FROM genres');
+      res.json(genres);
+  } catch (e){
+      return res.status(400).json({e});
+  }
+});
+
+
+
 
 app.post('/login', (req,res) => {
 //  setup 
