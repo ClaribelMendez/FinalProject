@@ -11,7 +11,7 @@ function Genres() {
     setGenres(e.target.value)
   }
   const loadGenres = () => {
-    fetch("http://localhost:4003/genres")
+    fetch("http://localhost:8888/genres")
       .then((response) => response.json())
       .then((genre) => {
         setGenres(genre);
