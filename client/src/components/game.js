@@ -2,12 +2,9 @@ import { useState, useEffect } from "react";
 import React from 'react'
 import Sound from './sound'
 
-
-
 function Game() {
 
- 
-    const [genres, setGenres] = useState([]);
+
 
     const [editingPostId, setEditingPostId] = useState(null);
 
@@ -15,9 +12,10 @@ function Game() {
     const [currentGenre, setCurrentGenre] = useState('')
     const [currentArtist, setCurrentArtist] = useState();
     const [index, setIndex] = useState(0)
+    const [trackIndex, setTrackIndex] = ([0])
     const [answer, setAnswer] = useState([])
     const [score, setScore] = useState(0);
-    const [track, setTrack] = useState('')
+    const [track, setTrack] = useState([])
  
     let subgenres =
    [
@@ -182,36 +180,12 @@ function Game() {
     
         
 
-                    const getGenres =  (e) =>{
-                      e.preventDefault();
-                      let genre = e.target.value;
-                      console.log("Line 13 frontend ", genre);
-                      // add to request body
-                      fetch(`http://localhost:4002/game?genre=${genre}`, {
-                          method: "get",
-                          headers: {"Content-Type": "application/json",
-                      },
-                    })
-                      .then((response) => response.json())
-                      .then((data) => {
-                        console.log(data)
-                          setCurrentGenre(data.response.currentGenre);
-                          console.log("Line 198 front" + data.response.genre);
-                          
-                      })
-                      .catch((err) => console.error(`Error: ${err}`));
-                  }
+                    
     
 
 
 
-    const loadGenres = () => {
-        fetch("http://localhost:4002/genres")
-            .then((response) => response.json())
-            .then(genres => {
-                setGenres(genres);
-            })
-    }
+ 
 
     // let access_token = 'BQAKazbbvf7DFYKXTts2n3YW2Rt4u5CWGf7bRP5yXNHDbmXLCalh_87h3mNJfOADW18H79jgiIrM7ZUl4difjwpEjyiQYbyxglFK2qDbVOx25ULLNMjbPaV2UbUypnfv1rRVpS7Jbqta97AzBjcFL8ZLF_IYz93iN4ms99Xkz5S_kcosbvtL-1Ss4zDLUEq4xA'
     // let artistid;
@@ -240,9 +214,9 @@ function Game() {
     //                     .then((response) => {
     //                        response.json().then(
     //                             (data) => {
-    //                              response.json(data.tracks[0]['preview_url'])
-    //                              let preview = data.tracks[0]['preview_url']
-    //                                 console.log(data.tracks[0]['preview_url'])
+    //                              response.json(data.tracks)
+    //                              let preview = [data.tracks[0].name, data.tracks[1].name, data.tracks[2].name]
+    //                                 // console.log(data.tracks[0]['preview_url'])
     //                                 setTrack(preview)
     //                             }
     //                         );
@@ -253,10 +227,9 @@ function Game() {
 
 
     // Use effect hook to render the students in the app. This will change any time that our initial state change
-    useEffect(() => {
-        loadGenres()
-        // loadtrack()
-    }, [] );
+    // useEffect(() => {
+    //     loadtrack()
+    // }, [] );
 
     // const onDelete = (post) => {
     //     return fetch(`http://localhost:4002/bloggenres/${items}`, {
@@ -269,42 +242,12 @@ function Game() {
     //     })
     // }
 
-    const addPost = (newPost) => {
-        //console.log(newStudent);
-        //genrestudent(newStudent);
-        setGenres((genres) => [...genres, newPost]);
-    }
     
-    const updatePost = (savedPost) =>{
-      setGenres((genres) => {
-          const newgenres = [];
-          for(let post of genres){
-              if(post.id === savedPost.id){
-                  newgenres.push(savedPost);
-              } else{
-                  newgenres.push(post);
-              }
-          }
-          return newgenres;
-      })
-
-      // This line is just to close the form! 
-      setEditingPostId(null);
-
-  }
-
-  //A function to grab the student.id of the student that we want to edit
-  const onEdit = (post) =>{
-      const editingId = post.id;
-      setEditingPostId(editingId);
-
-  }
+    
 
 
 
-  let handleGenreSelection = (e) => {
-    setGenre(e.target.value)
-  }
+
 
 
   let handleArtistChosen = () => {
@@ -326,9 +269,14 @@ function Game() {
 
   let handleAnswer = (e) => {
     setAnswer(e.target.value)
+    
     console.log(e.target.value)
    console.log(subgenres[index]['genres'])
     console.log(currentArtist)
+    const trackindex = trackIndex + 1
+    setTrackIndex(trackindex)
+
+    
     if(subgenres[index]['genres'] == e.target.value){
       console.log('correct')
       setScore(score + 1)
@@ -344,7 +292,9 @@ function Game() {
    <h2>{genre}</h2>
    <div>{currentArtist}</div>
    <h2>{score}</h2>
-   <h2>{answer}</h2>
+   {/* <h2>{answer}</h2> */}
+   {/* <h2>song title: {track[trackIndex]}</h2> */}
+
   <Sound preview = {track}/>
 
 
@@ -374,11 +324,8 @@ function Game() {
                   )}
 
 
-                  <select onChange={getGenres}> 
-      <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
-      {genres.map((post) => <option key={post.id} value={post.value}>{post.genre}</option>)}
-    </select> 
   
+
           
             
         </div>
