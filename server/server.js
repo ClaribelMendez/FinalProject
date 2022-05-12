@@ -129,7 +129,7 @@ app.get("/refresh_token", (req, res) => {
       
 
 const accesstoken =
-  "BQAlytUaqTEwmszVuEGIgiImo_XymDhQ_vgcEZFwZuY6W8z18GLsjraJ7yUw4340QdvOHlZaksYPGTEliJnrX2mTvz_sOvxV8JgF92GqLAWGLM1T1oTprFG3dg5z6I2o1-QKzZNY9rW6I3rCJ8TT9XzAZRXzjfng-0A"
+  "BQAe3nw5XIwxHIsLp91TGjPLWrNm8SVKdlScrAL-Qn4Yt4__UxlxtVtnRZkMiDGkv37of1_R0c0o89gVKtUjeOt9BWxwTyFeECdmqiVFuPSc86KGA-NylyU0dHHEhZtK0GVwMWse1pKb36fzZTgXDsM-vT4A55ik8Ks"
 let artistid;
 
 app.get("/game", async (req, res) => {
@@ -155,27 +155,6 @@ app.get("/game", async (req, res) => {
     );
   });
 });
-let artist = '4VMYDCV2IEDYJArk749S6m'
-fetch(`https://api.spotify.com/v1/artists/${artist}/top-tracks?market=ES`, {
-                method: 'GET', headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + accesstoken
-}
-    })
-                .then((response) => {
-                    console.log(response.json().then(
-                        (data) => {
-                          
-                              // setCurrentTrack(data.tracks[0]['preview_url'])
-                              // allTracks.push(data.tracks[0]['preview_url'])
-                              // console.log(allTracks)
-                            // console.log(data.tracks[0]['preview_url'])
-                            // console.log(data.tracks[1]['preview_url'])
-                            // console.log(data.tracks[2]['preview_url'])
-                        }
-                    ));
-                });
 
 currentArtist = 'kanye west'
 let artistName = currentArtist.split(' ').join('+')
