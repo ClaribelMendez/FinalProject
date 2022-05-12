@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Genres from './components/genres'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
+import GenreData from './components/genredata';
 
 
 
@@ -61,10 +62,16 @@ return (
               <Routes>
               <Route path="/" element ={<button onClick={logout}>Log Out</button>}>
               
-                {/* <> */}
-                  {/* <button onClick={logout}>Log Out</button> */}
+               
+              </Route>
+              </Routes>
+          </Router>
+        )}
+    </header>
+    <> 
+                 
 
-                  {/* {profile && (
+                  {profile && ( 
                     <div>
                       <h1>{profile.display_name}</h1>
                       <p>{profile.followers.total} Followers</p>
@@ -72,14 +79,10 @@ return (
                         <img src={profile.images[0].url} alt="Avatar"/>
                       )}
                     </div>
-                  )} */}
-                {/* </> */}
-              </Route>
-              </Routes>
-          </Router>
-        )}
-    </header>
+                  )} 
+                 </>
     <Genres />
+    <GenreData />
   </div>
 );
 }

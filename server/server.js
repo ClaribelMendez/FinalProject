@@ -39,6 +39,16 @@ const generateRandomString = (length) => {
 
 const stateKey = "spotify_auth_state";
 
+app.get('/genres', cors(), async (req, res) => {
+   
+  try{
+      const { rows: genres } = await db.query('SELECT * FROM genres');
+      res.send(genres);
+  } catch (e){
+      return res.status(400).json({e});
+  }
+});
+
 app.get("/login", (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -118,12 +128,13 @@ app.get("/refresh_token", (req, res) => {
 });
       
 
-// const access_token =
-//   "BQATShZxaFGyaOO1MekipXcTbCinLigdbjcOzaBuxxL3B97dISVMEsho219Z5bzjjUHi6Qp86K8E8WyULdEU7YpBSvy-yzBp-3tk1ZA2GlAm9yRt9Ps0vRe_q6Fq6wlEvttVDZxYVC9eRD2iEpprTERS4BjsNGgHFJk";
+const accesstoken =
+  "BQA6Rx-Lru1qh8m4wQ-vMa1Hp5gout8-53YrwAXwqAOMkFNN90D7bl9CO8Wh9eoL29MqOvpStl9qNexx0sH9orux3g4S5bc_WflRQjGFlU9Jrlv1R1_x6o9WOBHehG0Swq41gtSdXUY87O63m1XMOI3SpWccETvurP0";
 let artistid;
 
 app.get("/game", async (req, res) => {
   genre = req.query.genre;
+  token = req.query.access_token
   console.log("backend line 315. Genre: " + genre);
   fetch(
     `https://api.spotify.com/v1/search?q=genre%3A${genre}&type=artist&market=ES&limit=10&offset=5`,
@@ -132,17 +143,14 @@ app.get("/game", async (req, res) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Bearer " + access_token,
+        Authorization: "Bearer " + accesstoken,
       },
     }
   ).then((response) => {
     console.log(
       response.json().then((data) => {
-        artistid = data.artists.items[0]["id"];
-        {
-          console.log("Artist ID:" + artistid);
-        }
-        res.json(data);
+        console.log(data.artists.items[6]['genres'])
+        res.send(data);
       })
     );
   });
