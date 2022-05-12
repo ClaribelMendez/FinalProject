@@ -155,6 +155,27 @@ app.get("/game", async (req, res) => {
     );
   });
 });
+let artist = '4VMYDCV2IEDYJArk749S6m'
+fetch(`https://api.spotify.com/v1/artists/${artist}/top-tracks?market=ES`, {
+                method: 'GET', headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + accesstoken
+}
+    })
+                .then((response) => {
+                    console.log(response.json().then(
+                        (data) => {
+                          
+                              // setCurrentTrack(data.tracks[0]['preview_url'])
+                              // allTracks.push(data.tracks[0]['preview_url'])
+                              // console.log(allTracks)
+                            // console.log(data.tracks[0]['preview_url'])
+                            // console.log(data.tracks[1]['preview_url'])
+                            // console.log(data.tracks[2]['preview_url'])
+                        }
+                    ));
+                });
 
 currentArtist = 'kanye west'
 let artistName = currentArtist.split(' ').join('+')
