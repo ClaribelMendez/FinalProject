@@ -39,12 +39,13 @@ const generateRandomString = (length) => {
 
 const stateKey = "spotify_auth_state";
 
-app.get("/genres", cors(), async (req, res) => {
-  try {
-    const { rows: genres } = await db.query("SELECT * FROM genres");
-    res.send(genres);
-  } catch (e) {
-    return res.status(400).json({ e });
+app.get('/genres', cors(), async (req, res) => {
+   
+  try{
+      const { rows: genres } = await db.query('SELECT * FROM genres');
+      res.send(genres);
+  } catch (e){
+      return res.status(400).json({e});
   }
 });
 
@@ -65,25 +66,23 @@ app.get("/login", (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-app.get("/callback", (req, res) => {
+app.get('/callback', (req, res) => {
   const code = req.query.code || null;
 
   axios({
-    method: "post",
-    url: "https://accounts.spotify.com/api/token",
+    method: 'post',
+    url: 'https://accounts.spotify.com/api/token',
     data: querystring.stringify({
-      grant_type: "authorization_code",
+      grant_type: 'authorization_code',
       code: code,
-      redirect_uri: REDIRECT_URI,
+      redirect_uri: REDIRECT_URI
     }),
     headers: {
-      "content-type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${new Buffer.from(
-        `${CLIENT_ID}:${CLIENT_SECRET}`
-      ).toString("base64")}`,
+      'content-type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
     },
   })
-    .then((response) => {
+    .then(response => {
       if (response.status === 200) {
         const { access_token, refresh_token, expires_in } = response.data;
 
@@ -93,11 +92,12 @@ app.get("/callback", (req, res) => {
         });
 
         res.redirect(`http://localhost:3000/?${queryParams}`);
+
       } else {
-        res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
+        res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
       }
     })
-    .catch((error) => {
+    .catch(error => {
       res.send(error);
     });
 });
@@ -126,14 +126,15 @@ app.get("/refresh_token", (req, res) => {
       res.send(error);
     });
 });
+      
 
 const accesstoken =
-  "BQBMEAp2lSXe3hwEak_ltw09TgvwF0he6wBC2k7eaCBm9-DtD6Nix6ezzoCooMhdU5_z8nhW0fgmsJpA1xwnuYy7bPS8FuIlrNnSN_GeAkhTTBk9BaTIN0qF-9B2MWlp_esJnUy0wYaK9Jfsk29aiuWvK_BLVdOXJuQ";
+  "BQBgZYA1xi-ZvJEuiNqwa4JpKHxKLZ0o6u5ofPIuTQNwwjYV4wrZb48IXbKyySpoO8d5HiMbaYNkbP-tYAmoOtVSCURmoHTjBSu12OS7GMTqdH9gidWj_cvNb9cYdnlGK22wj-YY6hOIIJDNm4NjR58c0unIKNZ73D4"
 let artistid;
 
 app.get("/game", async (req, res) => {
   genre = req.query.genre;
-  token = req.query.access_token;
+  token = req.query.access_token
   console.log("backend line 315. Genre: " + genre);
   fetch(
     `https://api.spotify.com/v1/search?q=genre%3A${genre}&type=artist&market=ES&limit=10&offset=5`,
@@ -148,36 +149,30 @@ app.get("/game", async (req, res) => {
   ).then((response) => {
     console.log(
       response.json().then((data) => {
-        console.log(data.artists.items[6]["genres"]);
+        console.log(data.artists.items[6]['genres'])
         res.send(data);
       })
     );
   });
 });
 
-// app.get("/tracks"),
-//   async (req, res) => { 
-//     fetch("https://itunes.apple.com/search?term=tame+impala").then((response) => {
-//       console.log(
-//         response.json().then((data) => {
-//           console.log(data);
-//           res.send(data);
-//         })
-//         );
-//       });
-//     };
+currentArtist = 'kanye west'
+let artistName = currentArtist.split(' ').join('+')
 
-app.get('/tracks', function (req, res)  {
-  fetch("https://itunes.apple.com/search?term=tame+impala").then((response) => {
-          console.log(
-            response.json().then((data) => {
-              console.log(data);
-              res.send(data);
-            })
-            );
-          });
-        
+
+app.get("/tracks", async (req, res) => {
+fetch(`https://itunes.apple.com/search?term=${artistName}`)
+.then((response) => {
+   response.json().then(
+        (data) => {
+         res.send(data)
+         console.log(data.results[0]['trackName'])
+
+
+        }
+    );
 });
+})
 // console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

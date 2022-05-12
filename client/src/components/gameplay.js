@@ -91,24 +91,44 @@ function Game() {
         // setCurrentGenre(data.response.currentGenre);
         // console.log("Line 198 front" + data.response.artists.items[0]['id']);
       })
-      .then((response) => {
-        response.json().then(
-            (data) => {
-                return fetch(` https://itunes.apple.com/search?term=${currentArtist}`)
-                    .then((response) => {
-                       response.json().then(
-                            (data) => {
-                             response.json(data)
-                             let preview = data
-                                console.log(data)
-                                setCurrentTrack(preview)
-                            }
-                        );
-                    });
-            }
-    )})
       .catch((err) => console.error(`Error: ${err}`));
   };
+
+  let artistid = '0TnOYISbd1XYRBk9myaseg'
+fetch(`https://api.spotify.com/v1/artists/${artistid}/top-tracks?market=ES`, {
+                method: 'GET', headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+                .then((response) => {
+                    console.log(response.json().then(
+                        (data) => {
+                              setCurrentTrack(data.tracks[0]['preview_url'])
+                            console.log(data.tracks[0]['preview_url'])
+                            console.log(data.tracks[1]['preview_url'])
+                            console.log(data.tracks[2]['preview_url'])
+                        }
+                    ));
+                });
+//         })
+// )})})
+
+
+    //   let artistName = currentArtist.split(' ').join('+')
+
+    // fetch(`https://itunes.apple.com/search?term=${artistName}`)
+    // .then((response) => {
+    //    response.json().then(
+    //         (data) => {
+    //          console.log(data)
+
+    
+    //         }
+    //     );
+    // });
+    
 
   // let handleArtistChosen = () => {
   //   let arrayOfNums = [];
@@ -169,6 +189,7 @@ function Game() {
 
       <h2>{currentArtist}</h2>
       {score}
+      {currentTrack}
     </div>
   );
 }
