@@ -12,6 +12,7 @@ function Game() {
   const [artists, setArtists] = useState([]);
   const [currentArtist, setCurrentArtist] = useState(" ");
   const [score, setScore] = useState("Score:");
+  const [currentTrack, setCurrentTrack] = useState('')
 
   let handleGenreSelection = (e) => {
     setGenres(e.target.value);
@@ -90,6 +91,22 @@ function Game() {
         // setCurrentGenre(data.response.currentGenre);
         // console.log("Line 198 front" + data.response.artists.items[0]['id']);
       })
+      .then((response) => {
+        response.json().then(
+            (data) => {
+                return fetch(` https://itunes.apple.com/search?term=${currentArtist}`)
+                    .then((response) => {
+                       response.json().then(
+                            (data) => {
+                             response.json(data)
+                             let preview = data
+                                console.log(data)
+                                setCurrentTrack(preview)
+                            }
+                        );
+                    });
+            }
+    )})
       .catch((err) => console.error(`Error: ${err}`));
   };
 
