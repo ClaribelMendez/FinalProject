@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Genres from './components/genres'
+import Game from './components/gameplay'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
 import GenreData from './components/genredata';
@@ -81,7 +81,7 @@ return (
                     </div>
                   )} 
                  </>
-    <Genres />
+    <Game />
     <GenreData />
   </div>
 );

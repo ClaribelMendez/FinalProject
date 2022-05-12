@@ -1,4 +1,4 @@
-import Genres from './genres';
+import Game from './game';
 import { useState, useEffect } from 'react'
 
 
