@@ -13,6 +13,7 @@ function Game() {
   const [currentArtist, setCurrentArtist] = useState(" ");
   const [score, setScore] = useState("Score:");
   const [currentTrack, setCurrentTrack] = useState('')
+  const [artistId, setArtistId] = useState([])
 
   let handleGenreSelection = (e) => {
     setGenres(e.target.value);
@@ -59,6 +60,20 @@ function Game() {
         setSubgenres(allgenres);
         console.log(allgenres);
 
+        let allArtistsIds = [
+          data.artists.items[0]["id"],
+          data.artists.items[1]["id"],
+          data.artists.items[2]["id"],
+          data.artists.items[3]["id"],
+          data.artists.items[4]["id"],
+          data.artists.items[5]["id"],
+          data.artists.items[6]["id"],
+          data.artists.items[7]["id"],
+          data.artists.items[8]["id"],
+          data.artists.items[9]["id"]     
+        ];
+          setArtistId(allArtistsIds)
+
         let allArtists = [
           data.artists.items[0]["name"],
           data.artists.items[1]["name"],
@@ -74,7 +89,7 @@ function Game() {
         setArtists(allArtists);
         console.log(allArtists);
         let arrayOfNums = [];
-        for (let i = 0; i < allArtists.length; i++) {
+        for (let i = 0; i < allArtistsIds.length; i++) {
           arrayOfNums.push(i); // an array of indices to be randomized later
           console.log(arrayOfNums);
         }
@@ -94,24 +109,31 @@ function Game() {
       .catch((err) => console.error(`Error: ${err}`));
   };
 
-  let artistid = '0TnOYISbd1XYRBk9myaseg'
-fetch(`https://api.spotify.com/v1/artists/${artistid}/top-tracks?market=ES`, {
+  let artistid = artistId[0]
+  let allTracks = []
+  for (let i = 0; i <= artistId.length; i++){
+fetch(`https://api.spotify.com/v1/artists/${artistId[i]}/top-tracks?market=ES`, {
                 method: 'GET', headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token
-                }
-            })
+}
+    })
                 .then((response) => {
                     console.log(response.json().then(
                         (data) => {
-                              setCurrentTrack(data.tracks[0]['preview_url'])
-                            console.log(data.tracks[0]['preview_url'])
-                            console.log(data.tracks[1]['preview_url'])
-                            console.log(data.tracks[2]['preview_url'])
+                              // setCurrentTrack(data.tracks[0]['preview_url'])
+                              let trackPreview = [data.tracks[0]['preview_url'],data.tracks[1]['preview_url'],data.tracks[2]['preview_url']]
+                              allTracks.push(trackPreview)
+                              console.log(allTracks)
+                              // console.log(allTracks)
+                        //  setCurrentTrack(allTracks)
+                        
                         }
                     ));
                 });
+              }
+              
 //         })
 // )})})
 
@@ -189,7 +211,7 @@ fetch(`https://api.spotify.com/v1/artists/${artistid}/top-tracks?market=ES`, {
 
       <h2>{currentArtist}</h2>
       {score}
-      {currentTrack}
+      {/* {currentTrack} */}
     </div>
   );
 }
