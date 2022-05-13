@@ -128,42 +128,22 @@ function Game() {
            ).then((response) => {
             console.log(
              response.json().then((data) => {
-              // setCurrentTrack(data.tracks[0]["name"]);
-              // console.log('line 131 ' + data.tracks[0].artists[0].id)
-              // response.json(data.tracks);
-              // arrayOfNums = arrayOfNums.splice(randomNumber);
-           
                let trackPreview = [
                 data.tracks[0].name,
                 data.tracks[1].name,
                 data.tracks[2].name,
               ];
               trackNames.push(trackPreview)
-              // setCurrentTrack(alltracks)
               console.log(trackNames)
-              
-              
-
             })
-            
           );
         })};
         setAllTracks(trackNames)
       });
       
   };
-  // }
-  //         })
-  // )})})
-  
-    
-
     for (let i = 0; i < 10; i++){
-     
-    // let trackName = currentArtist.split(' ').join('+')
-    // console.log('trackname' + trackName)
-    console.log('this is array ' + allTracks)
-
+    console.log('this is array ',  allTracks)
 
   fetch(`https://itunes.apple.com/search?term=${currentArtist}&entity=musicTrack`)
   .then((response) => {
