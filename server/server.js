@@ -128,13 +128,11 @@ app.get("/refresh_token", (req, res) => {
 });
       
 
-const accesstoken =
-  "BQAe3nw5XIwxHIsLp91TGjPLWrNm8SVKdlScrAL-Qn4Yt4__UxlxtVtnRZkMiDGkv37of1_R0c0o89gVKtUjeOt9BWxwTyFeECdmqiVFuPSc86KGA-NylyU0dHHEhZtK0GVwMWse1pKb36fzZTgXDsM-vT4A55ik8Ks"
 let artistid;
 
 app.get("/game", async (req, res) => {
   genre = req.query.genre;
-  token = req.query.access_token
+  token = req.query.token
   console.log("backend line 315. Genre: " + genre);
   fetch(
     `https://api.spotify.com/v1/search?q=genre%3A${genre}&type=artist&market=ES&limit=10&offset=5`,
@@ -143,7 +141,7 @@ app.get("/game", async (req, res) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Bearer " + accesstoken,
+        Authorization: "Bearer " + token,
       },
     }
   ).then((response) => {

@@ -33,9 +33,10 @@ function Game() {
   const getGenres = (e) => {
     e.preventDefault();
     let genre = e.target.value;
+
     console.log("Line 13 frontend ", genre);
     // add to request body
-    fetch(`http://localhost:8888/game?genre=${genre}`, {
+    fetch(`http://localhost:8888/game?genre=${genre}&token=${token}`, {
       method: "get",
       headers: {
         Accept: "application/json",
@@ -102,7 +103,7 @@ function Game() {
         setCurrentArtist(randomArtist);
         console.log("this is the artist" + randomArtist);
 
-        // arrayOfNums = arrayOfNums.splice(randomNumber)
+        arrayOfNums = arrayOfNums.splice(randomNumber)
 
         // setCurrentGenre(data.response.currentGenre);
         // console.log("Line 198 front" + data.response.artists.items[0]['id']);
@@ -110,11 +111,12 @@ function Game() {
       .catch((err) => console.error(`Error: ${err}`));
   };
 
-  let artistid = artistId[0];
+
   let allTracks = [];
-  // for (let i = 0; i <= artistId.length; i++){
+  for (let i = 0; i < artistId.length; i++){
+    console.log('line 116 ' + artistId[i])
   fetch(
-    `https://api.spotify.com/v1/artists/${artistId[index]}/top-tracks?market=ES`,
+    `https://api.spotify.com/v1/artists/${artistId[i]}/top-tracks?market=ES`,
     {
       method: "GET",
       headers: {
@@ -127,6 +129,8 @@ function Game() {
     console.log(
       response.json().then((data) => {
         // setCurrentTrack(data.tracks[0]['preview_url'])
+        console.log('line 131 ' + data.tracks[0].artists[0].id)
+
         let trackPreview = [
           data.tracks[0].name,
           data.tracks[1].name,
@@ -134,12 +138,13 @@ function Game() {
         ];
         allTracks.push(trackPreview);
         console.log(allTracks);
-        setCurrentTrack(trackPreview[0])
+        // setCurrentTrack(trackPreview[0])
 
         // console.log(allTracks)
       })
     );
   });
+}
 
   //         })
   // )})})
@@ -209,7 +214,7 @@ function Game() {
           </button>
         ))}
       </div>
-      
+
       {score}
       <h2>Artist: {currentArtist}</h2>
       <h3>Track: {currentTrack}</h3>
