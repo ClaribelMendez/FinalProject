@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 // import GenreData from "./genredata";
 import { accessToken } from "./spotify";
-import Sound from './sound'
+import Sound from "./sound";
 
 // INCLUDE?
 
@@ -12,12 +12,12 @@ function Game() {
   const [artists, setArtists] = useState([]);
   const [currentArtist, setCurrentArtist] = useState(" ");
   const [score, setScore] = useState("Score:");
-  const [currentTrack, setCurrentTrack] = useState('');
+  const [allTracks, setAllTracks] = useState([]);
   const [artistId, setArtistId] = useState([]);
   const [index, setIndex] = useState(0);
-  const [trackAudio, setTrackAudio] = useState([])
-  const [info, setInfo] = useState([])
-  
+  const [trackAudio, setTrackAudio] = useState([]);
+  const [info, setInfo] = useState([]);
+  const [currentTrack, setCurrentTrack] = useState('');
 
   let handleGenreSelection = (e) => {
     setGenres(e.target.value);
@@ -33,8 +33,6 @@ function Game() {
   useEffect(() => {
     loadGenres();
     setToken(accessToken);
-    
-    
   }, []);
 
   const getGenres = (e) => {
@@ -81,7 +79,7 @@ function Game() {
           data.artists.items[9]["id"],
         ];
         setArtistId(allArtistsIds);
-        console.log(allArtistsIds)
+        console.log(allArtistsIds);
 
         let allArtists = [
           data.artists.items[0]["name"],
@@ -97,86 +95,90 @@ function Game() {
         ];
         setArtists(allArtists);
         console.log(allArtists);
-        let arrayOfNums = [0,1,2,3,4,5,6,7,8,9];
+        let arrayOfNums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-        
         let randomNumber = Math.floor(Math.random() * arrayOfNums.length); // // random number from array of indices
         setIndex(randomNumber);
-        console.log('this is random number' + index)
+        console.log("this is random number" + index);
         let randomArtist = allArtists[randomNumber]; // random artist
-        console.log('artist ' + randomArtist);
+        console.log("artist " + randomArtist);
         setCurrentArtist(randomArtist);
-
-        
 
         // setCurrentGenre(data.response.currentGenre);
         // console.log("Line 198 front" + data.response.artists.items[0]['id']);
-    
-      // .catch((err) => console.error(`Error: ${err}`));
-  
-      
 
-
- 
-  // for (let i = 0; i < artistId.length; i++){
-    console.log('all tracks index  ' + [index])
-   fetch(
-    `https://api.spotify.com/v1/artists/${allArtistsIds[index]}/top-tracks?market=ES`,
-
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    }  
-  ).then((response) => {
-    console.log(
-      response.json().then((data) => {
-        setCurrentTrack(data.tracks[0]['name'])
-        // console.log('line 131 ' + data.tracks[0].artists[0].id)
-        response.json(data.tracks)
-      
-        // let trackPreview = [
-        //   data.tracks[0].name,
-        //   data.tracks[1].name,
-        //   data.tracks[2].name,
-        // ];
-        // allTracks.push(trackPreview);
-        // setCurrentTrack(allTracks)
-        // console.log(allTracks);
+        // .catch((err) => console.error(`Error: ${err}`));
         
+        let trackNames = []
        
-          
-        // console.log(allTracks)
-      })
-      
-    );
-  })
-})
-}
-  
 
-// }
+        for (let i = 0; i < 10; i++){
+           console.log("all tracks index  " + [index]);
+           fetch(
+           `https://api.spotify.com/v1/artists/${allArtistsIds[i]}/top-tracks?market=ES`,
+
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          }
+           ).then((response) => {
+            console.log(
+             response.json().then((data) => {
+              // setCurrentTrack(data.tracks[0]["name"]);
+              // console.log('line 131 ' + data.tracks[0].artists[0].id)
+              // response.json(data.tracks);
+              // arrayOfNums = arrayOfNums.splice(randomNumber);
+           
+               let trackPreview = [
+                data.tracks[0].name,
+                data.tracks[1].name,
+                data.tracks[2].name,
+              ];
+              trackNames.push(trackPreview)
+              // setCurrentTrack(alltracks)
+              console.log(trackNames)
+              
+              
+
+            })
+            
+          );
+        })};
+        setAllTracks(trackNames)
+      });
+      
+  };
+  // }
   //         })
   // )})})
+  
+    
 
-  //   let trackName = currentArtist.split(' ').join('+')
+    for (let i = 0; i < 10; i++){
+     
+    // let trackName = currentArtist.split(' ').join('+')
+    // console.log('trackname' + trackName)
+    console.log('this is array ' + allTracks)
 
-  // fetch(`https://itunes.apple.com/search?term=${trackName}&entity=musicTrack`)
-  // .then((response) => {
-  //    response.json().then(
-  //         (data) => {
-  //           let trackPreview = data.results[0]['previewUrl']
-  //           // console.log(data.results[0]['previewUrl'])
-  //           setTrackAudio(trackPreview)
-  //           // setInfo(data.results[0]['previewUrl'])
-  //           // console.log(data.results[0].artworkUrl100)
 
-  //         }
-  //     );
-  // });
+  fetch(`https://itunes.apple.com/search?term=${currentArtist}&entity=musicTrack`)
+  .then((response) => {
+     response.json().then(
+          (data) => {
+            let trackPreview = data.results[0]['previewUrl']
+            // console.log(data.results[0]['previewUrl'])
+            setTrackAudio(trackPreview)
+            // setInfo(data.results[0]['previewUrl'])
+            // console.log(data.results[0].artworkUrl100)
+              
+          }
+      );
+  });
+}
 
   // let handleArtistChosen = () => {
   //   let arrayOfNums = [];
@@ -193,13 +195,15 @@ function Game() {
   //   // arrayOfNums = arrayOfNums.splice(randomNumber)
   // };
 
-
   let handleAnswer = (e) => {
     // setAnswer(e.target.value);
+
     console.log(e.target.value);
     if (currentArtist.indexOf() === e.target.value.indexOf()) {
       console.log("correct");
       setScore(score + 1);
+      setCurrentArtist();
+      console.log(currentTrack)
     } else {
       console.log("incorrect");
     }
@@ -217,9 +221,7 @@ function Game() {
           </option>
         ))}
       </select>
-
       <a href="http://localhost:8888/login">LOGIN WITH SPOTIFY</a>
-
       <div className="subgenres-container">
         {subgenres.map((item, index) => (
           <button
@@ -232,12 +234,12 @@ function Game() {
           </button>
         ))}
       </div>
-
       {score}
       <h2>Artist: {currentArtist}</h2>
       <h3>Track: {currentTrack}</h3>
-      <Sound preview = {trackAudio} />
-      <img src={info.artworkUrl100} alt='backgroundimage'></img>    </div>
+      <Sound preview={trackAudio} />
+      <img src={info.artworkUrl100} alt="backgroundimage"></img>{" "}
+    </div>
   );
 }
 
