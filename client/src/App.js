@@ -4,6 +4,7 @@ import Game from './components/gameplay'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
 import GenreData from './components/genredata';
+import Sound from './components/sound'
 
 
 
@@ -83,6 +84,7 @@ return (
                  </>
     <Game />
     <GenreData />
+    <Sound />
   </div>
 );
 }

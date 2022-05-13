@@ -164,7 +164,7 @@ fetch(`https://itunes.apple.com/search?term=${artistName}`)
    response.json().then(
         (data) => {
          res.send(data)
-         console.log(data.results[0]['trackName'])
+         console.log(data.results[0]['previewUrl'])
 
 
         }

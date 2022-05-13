@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import GenreData from "./genredata";
 import { accessToken } from "./spotify";
+import Sound from './sound'
 
 // INCLUDE?
 
@@ -14,6 +15,8 @@ function Game() {
   const [currentTrack, setCurrentTrack] = useState([]);
   const [artistId, setArtistId] = useState([]);
   const [index, setIndex] = useState(0);
+  const [trackAudio, setTrackAudio] = useState('')
+  
 
   let handleGenreSelection = (e) => {
     setGenres(e.target.value);
@@ -113,10 +116,10 @@ function Game() {
 
 
   let allTracks = [];
-  for (let i = 0; i < artistId.length; i++){
-    console.log('line 116 ' + artistId[i])
+  // for (let i = 0; i < artistId.length; i++){
+    // console.log('line 116 ' + artistId[i])
   fetch(
-    `https://api.spotify.com/v1/artists/${artistId[i]}/top-tracks?market=ES`,
+    `https://api.spotify.com/v1/artists/${artistId[index]}/top-tracks?market=ES`,
     {
       method: "GET",
       headers: {
@@ -129,7 +132,7 @@ function Game() {
     console.log(
       response.json().then((data) => {
         // setCurrentTrack(data.tracks[0]['preview_url'])
-        console.log('line 131 ' + data.tracks[0].artists[0].id)
+        // console.log('line 131 ' + data.tracks[0].artists[0].id)
 
         let trackPreview = [
           data.tracks[0].name,
@@ -137,29 +140,30 @@ function Game() {
           data.tracks[2].name,
         ];
         allTracks.push(trackPreview);
-        console.log(allTracks);
-        // setCurrentTrack(trackPreview[0])
-
+        // console.log(allTracks);
+        setCurrentTrack(trackPreview[0])
+          
         // console.log(allTracks)
       })
     );
   });
-}
 
+// }
   //         })
   // )})})
 
-  //   let artistName = currentArtist.split(' ').join('+')
+    let trackName = currentArtist.split(' ').join('+')
 
-  // fetch(`https://itunes.apple.com/search?term=${artistName}`)
-  // .then((response) => {
-  //    response.json().then(
-  //         (data) => {
-  //          console.log(data)
+  fetch(`https://itunes.apple.com/search?term=${trackName}&entity=musicTrack`)
+  .then((response) => {
+     response.json().then(
+          (data) => {
+            console.log(data.results[0]['previewUrl'])
+            setTrackAudio(data.results[0]['previewUrl'])
 
-  //         }
-  //     );
-  // });
+          }
+      );
+  });
 
   // let handleArtistChosen = () => {
   //   let arrayOfNums = [];
@@ -218,6 +222,7 @@ function Game() {
       {score}
       <h2>Artist: {currentArtist}</h2>
       <h3>Track: {currentTrack}</h3>
+      <Sound preview = {trackAudio} />
     </div>
   );
 }
