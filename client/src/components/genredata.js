@@ -1,30 +1,30 @@
-import Game from './game';
-import { useState, useEffect } from 'react'
+// import Game from './game';
+// import { useState, useEffect } from 'react'
 
 
-function GenreData() {
-    // const [token, setToken] = useState(null);
-    const [subgenres, setSubgenres] = useState([null]);
+// function GenreData() {
+//     // const [token, setToken] = useState(null);
+//     const [subgenres, setSubgenres] = useState([null]);
   
-    useEffect(() => {
-    //   setSubgenres(genres);
-      const fetchData = async () => {
-        try {
-          const { data } = await GenreData();
-          setSubgenres(data.artists.items[0]['id']);
-          console.log(data)
-        } catch(e) {
-          console.error(e);
-        }
-      };
+//     useEffect(() => {
+//     //   setSubgenres(genres);
+//       const fetchData = async () => {
+//         try {
+//           const { data } = await GenreData();
+//           setSubgenres(data.artists.items[0]['id']);
+//           console.log(data)
+//         } catch(e) {
+//           console.error(e);
+//         }
+//       };
   
-      fetchData();
-    }, []);
+//       fetchData();
+//     }, []);
 
-        return(
-            <h1>
-                {subgenres}
-            </h1>
-        )
-}
-    export default GenreData
+//         return(
+//             <h1>
+//                 {subgenres}
+//             </h1>
+//         )
+// }
+//     export default GenreData

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Game from './components/gameplay'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
-import GenreData from './components/genredata';
+// import GenreData from './components/genredata';
 import Sound from './components/sound'
 
 
@@ -49,7 +49,7 @@ return (
         ) : (
           <Router>
             <Routes>
-              <Route path="/top-artists" element={'Top Artists'}>
+              <Route path="/gameplay" element={'Game'}>
                 </Route>
               </Routes>
               <Routes>
@@ -83,7 +83,7 @@ return (
                   )} 
                  </>
     <Game />
-    <GenreData />
+    {/* <GenreData /> */}
     <Sound />
   </div>
 );

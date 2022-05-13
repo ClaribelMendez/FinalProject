@@ -135,7 +135,7 @@ app.get("/game", async (req, res) => {
   token = req.query.token
   console.log("backend line 315. Genre: " + genre);
   fetch(
-    `https://api.spotify.com/v1/search?q=genre%3A${genre}&type=artist&market=ES&limit=10&offset=5`,
+    `https://api.spotify.com/v1/search?q=genre%3A${genre}&type=artist&market=ES&limit=10&offset=45`,
     {
       method: "get",
       headers: {
@@ -147,8 +147,8 @@ app.get("/game", async (req, res) => {
   ).then((response) => {
     console.log(
       response.json().then((data) => {
-        console.log(data.artists.items[6]['genres'])
-        res.send(data);
+        res.json(data);
+        console.log(data.artists.items[0]['name'])
       })
     );
   });
@@ -164,7 +164,7 @@ fetch(`https://itunes.apple.com/search?term=${artistName}`)
    response.json().then(
         (data) => {
          res.send(data)
-         console.log(data.results[0]['previewUrl'])
+         console.log(data.results[0].artworkUrl100)
 
 
         }
