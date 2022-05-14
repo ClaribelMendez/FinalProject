@@ -1,14 +1,26 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, useLocation,
+} from 'react-router-dom'
 import Game from './components/gameplay'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
 // import GenreData from './components/genredata';
 import Sound from './components/sound'
+import Login from './components/loginpage'
+// import Tracks from './components/Tracks'
 
 
 
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 
 function App() {
@@ -42,22 +54,34 @@ function App() {
 return (
   <div className="App">
     <header className="App-header">
+  
+    <nav>
+
+<a href="/game">Play/Discover</a>  &nbsp;
+  <a href="/form">Form</a>  &nbsp;
+  <a href="/blogposts">Blogposts</a>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+
+
+</nav>
     {!token ? (
-          <a className="App-link" href="http://localhost:8888/login">
-            Log in to Spotify
-          </a>
+         <Login />
         ) : (
           <Router>
+            <ScrollToTop />
             <Routes>
-              <Route path="/gameplay" element={'Game'}>
+              <Route path="/game" element={<Game />}>
                 </Route>
               </Routes>
               <Routes>
-              <Route path="/top-tracks" element={'Top Tracks'}>
+              <Route path="/login" element={'Login'}>
               </Route>
               </Routes>
               <Routes>
-              <Route path="/playlists/:id" element={'Playlists'}>
+              <Route path="/About" element={'About this project'}>
               </Route>
               </Routes>
               <Routes>
@@ -69,7 +93,7 @@ return (
           </Router>
         )}
     </header>
-    <> 
+    {/* <> 
                  
 
                   {profile && ( 
@@ -81,10 +105,11 @@ return (
                       )}
                     </div>
                   )} 
-                 </>
-    <Game />
+                 </> */}
+    {/* <Game /> */}
     {/* <GenreData /> */}
-    <Sound />
+    {/* <Sound /> */}
+    {/* <Tracks /> */}
   </div>
 );
 }
