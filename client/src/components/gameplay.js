@@ -11,14 +11,16 @@ function Game() {
   const [genres, setGenres] = useState([]);
   const [token, setToken] = useState(null);
   const [subgenres, setSubgenres] = useState([]);
-  const [score, setScore] = useState("Score:");
+  const [score, setScore] = useState(0);
   const [info, setInfo] = useState([]);
   const [index, setIndex] = useState(0);
-  // const [currentArtist,setCurrentArtist] = useState('')
-  // const [image, setImage] = useState('')
+  const [currentArtist,setCurrentArtist] = useState('')
+  const [image, setImage] = useState([])
   const [music, setMusic] = useState([])
-  // const [artistId, setArtistId] = useState('')
+  const [artistId, setArtistId] = useState([])
   const [tracks, setTracks] = useState('')
+  const [artists, setArtists] = useState([])
+  
 
   const loadGenres = () => {
     fetch("http://localhost:8888/genres")
@@ -33,13 +35,13 @@ function Game() {
     setToken(accessToken);
   }, []);
 
-  const getGenres = (e) => {
+  async function getGenres (e) {
     e.preventDefault();
     let genre = e.target.value;
 
     console.log("Line 13 frontend ", genre);
     // add to request body
-    fetch(`http://localhost:8888/game?genre=${genre}&token=${token}`, {
+    await fetch(`http://localhost:8888/game?genre=${genre}&token=${token}`, {
       method: "get",
       headers: {
         Accept: "application/json",
@@ -63,43 +65,59 @@ function Game() {
         ];
         setSubgenres(allgenres);
         // console.log(allgenres);
-             setInfo(data.artists.items[0]['id'])
-        console.log(data.artists)
+         setInfo(data)
+        // console.log(data)
+        let allArtists = [
+          data.artists.items[0]["name"],
+          data.artists.items[1]["name"],
+          data.artists.items[2]["name"],
+          data.artists.items[3]["name"],
+          data.artists.items[4]["name"],
+          data.artists.items[5]["name"],
+          data.artists.items[6]["name"],
+          data.artists.items[7]["name"],
+          data.artists.items[8]["name"],
+          data.artists.items[9]["name"],
+        ];
+        setArtists(allArtists);
         // setCurrentArtist(data.artists.items[index]['name'])
-        // setImage(data.artists.items[index]['images'][0]['url'])
+        let allArtistImages = [
+          data.artists.items[0]["images"][1]['url'],
+          data.artists.items[1]["images"][1]['url'],
+          data.artists.items[2]["images"][1]['url'],
+          data.artists.items[3]["images"][1]['url'],
+          data.artists.items[4]["images"][1]['url'],
+          data.artists.items[5]["images"][1]['url'],
+          data.artists.items[6]["images"][1]['url'],
+          data.artists.items[7]["images"][1]['url'],
+          data.artists.items[8]["images"][1]['url'],
+          data.artists.items[9]["images"][1]['url']
+
+        ];
+        setImage(allArtistImages)
         // setArtistId(data.artists.items[index]['id'])
-        // console.log(id)
+        console.log('image', image)
+           
+        let allArtistsIds = [
+          data.artists.items[0]["id"],
+          data.artists.items[1]["id"],
+          data.artists.items[2]["id"],
+          data.artists.items[3]["id"],
+          data.artists.items[4]["id"],
+          data.artists.items[5]["id"],
+          data.artists.items[6]["id"],
+          data.artists.items[7]["id"],
+          data.artists.items[8]["id"],
+          data.artists.items[9]["id"],
+        ];
+        setArtistId(allArtistsIds);
+        console.log(allArtistsIds);
       })
       }
-    
-        // let allArtistsIds = [
-        //   data.artists.items[0]["id"],
-        //   data.artists.items[1]["id"],
-        //   data.artists.items[2]["id"],
-        //   data.artists.items[3]["id"],
-        //   data.artists.items[4]["id"],
-        //   data.artists.items[5]["id"],
-        //   data.artists.items[6]["id"],
-        //   data.artists.items[7]["id"],
-        //   data.artists.items[8]["id"],
-        //   data.artists.items[9]["id"],
-        // ];
-        // setArtistId(allArtistsIds);
-        // console.log(allArtistsIds);
+ 
 
-        // let allArtists = [
-        //   data.artists.items[0]["name"],
-        //   data.artists.items[1]["name"],
-        //   data.artists.items[2]["name"],
-        //   data.artists.items[3]["name"],
-        //   data.artists.items[4]["name"],
-        //   data.artists.items[5]["name"],
-        //   data.artists.items[6]["name"],
-        //   data.artists.items[7]["name"],
-        //   data.artists.items[8]["name"],
-        //   data.artists.items[9]["name"],
-        // ];
-        // setArtists(allArtists);
+     
+   
         // console.log(allArtists);
         // let arrayOfNums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -177,17 +195,17 @@ function Game() {
   // };
 
   let handleAnswer = (e) => {
-    // setAnswer(e.target.value);
-
-    console.log(e.target.value);
-    // if (.indexOf() === e.target.value.indexOf()) {
-    //   console.log("correct");
-    //   setScore(score + 1);
-    //   setCurrentArtist();
-    //   // console.log(currentTrack)
-    // } else {
-    //   console.log("incorrect");
-    // }
+      
+      if (subgenres[index].toString() ===  e.target.value) {
+      console.log("correct");
+      setScore(score + 1);
+      if(index < 10){
+      setIndex(index + 1)
+      }
+    } else {
+      console.log('end of game')
+      setIndex(index + 1)
+    }
   };
 
   //onClick={handleArtistChosen}
@@ -214,13 +232,13 @@ function Game() {
         ))}
       </div>
       {score}
-      {/* <h2>Artist: {currentArtist}</h2> */}
+      <h2>Artist: {artists[index]}</h2>
       {/* <h3>Track: {allTracks[index]}</h3> */}
       {/* <Sound preview={trackAudio} /> */}
-      {/* <img src={image} alt="backgroundimage"></img> */}
+      <img src={image[index]} alt="backgroundimage"></img>
       {/* <Tracks artistId={artistId} /> */}
       <Tracks index = {index} 
-        info = {info}
+        info = {artistId}
         />
     </div>
   );

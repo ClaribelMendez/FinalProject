@@ -1,24 +1,45 @@
 import { useState, useEffect} from 'react'
 import { accessToken } from "./spotify";
+import Audio from './audio'
 
 function Tracks(props) {
-  const [tracks, setTracks] = useState();
+  const [tracks, setTracks] = useState([]);
+  const [ids, setIds] = useState('')
   
-  // let index = props.index
+  let index = props.index
  
-  let id = props.info
+  let info = props.info
+
   
-  console.log(id)
+
+  let artistId = info[index]
+  console.log(artistId, index)
+
+  // setIds(artistIds)
+  
+  // console.log(artistIds)
+
+
+
+  // let artistIds = ids.artists
+
+
+  // let artistId = artistIds.items[0]['id']
+  // console.log(artistId)
+
+  // let artistId = ids.artists.items[0]['id']
+  
+  // console.log('line 13 ', artistId)
   // let id = info.items[0]['id']
   // console.log(id)
   // let id = '0TnOYISbd1XYRBk9myaseg'
   useEffect(() => {
     getTrack()
-  }, []);
+  }, );
 
-const getTrack = () => {
-  fetch(
-     `https://api.spotify.com/v1/artists/${id}/top-tracks?market=ES`,
+async function getTrack() {
+  await fetch(
+     `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=ES`,
 
     {
       method: "GET",
@@ -31,7 +52,9 @@ const getTrack = () => {
   ).then((response) => {
     console.log(
       response.json().then((data) => {
-       setTracks(data.tracks[0]['name'])
+        // response.json(data)
+        setTracks([data.tracks[0]['name'],data.tracks[1]['name'],data.tracks[2]['name']])
+       console.log(tracks)
             })
     );
     
@@ -41,9 +64,11 @@ const getTrack = () => {
 
   return (
     <div>
-      Track 1: {tracks}
-      {/* Track 2: {tracks[1]}
-      Track 3: {tracks[2]} */}
+      Track 1: {tracks[0]}
+      Track 2: {tracks[1]}
+      Track 3: {tracks[2]} 
+
+      <Audio  trackTitles = {tracks} />
     </div>
   );
 }
