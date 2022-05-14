@@ -148,7 +148,7 @@ app.get("/game", async (req, res) => {
     console.log(
       response.json().then((data) => {
         res.json(data);
-        console.log(data.artists.items[0]['name'])
+        // console.log(data.artists.items[0]['name'])
       })
     );
   });
