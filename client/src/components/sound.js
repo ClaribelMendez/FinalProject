@@ -31,9 +31,17 @@ function Sound(props) {
     return (
         
         <div>
-        <input type="button" value="play" onClick={()=> play(track1)} />
+        <input type="button" value="play" onClick={()=> play(track1)}  />
        <audio src={track1} id="audio"></audio>
-       <ReactPlayer url= {track1} />
+       <ReactPlayer url= {'https://video-ssl.itunes.apple.com/itunes-assets/Video123/v4/1f/ec/43/1fec4387-98b7-5467-ae93-6af495c55da6/mzvf_16922034866386966595.640x480.h264lc.U.p.m4v'} />
+
+       <input type="button" value="pause" onClick={()=> play(track2)} />
+       <audio src={track2} id="audio"></audio>
+       <ReactPlayer url= {track2} />
+
+       <input type="button" value="play" onClick={()=> play(track3)} />
+       <audio src={track3} id="audio"></audio>
+       <ReactPlayer url= {track3} />
     </div>
     )
 

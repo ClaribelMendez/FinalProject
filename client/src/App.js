@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Route, Routes, useLocation,
 import Game from './components/gameplay'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
-// import GenreData from './components/genredata';
-import Sound from './components/sound'
 import Login from './components/loginpage'
 // import Tracks from './components/Tracks'
 
@@ -110,6 +108,7 @@ return (
     {/* <GenreData /> */}
     {/* <Sound /> */}
     {/* <Tracks /> */}
+
   </div>
 );
 }

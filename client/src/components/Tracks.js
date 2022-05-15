@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { accessToken } from "./spotify";
 import Audio from './audio'
+import Video from './video'
 
 
 function Tracks(props) {
@@ -46,6 +47,12 @@ function Tracks(props) {
       Track 2: {track2}
       Track 3: {track3}
       <Audio  
+      trackTitle1 = {track1} 
+      trackTitle2 = {track2} 
+      trackTitle3 = {track3} 
+      artistName = {artist}
+      />
+        <Video  
       trackTitle1 = {track1} 
       trackTitle2 = {track2} 
       trackTitle3 = {track3} 
