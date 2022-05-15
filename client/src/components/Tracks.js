@@ -1,31 +1,19 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
-// import Audio from './audio'
+import Audio from './audio'
+
 
 function Tracks(props) {
-  const [tracks, setTracks] = useState('');
-  const [artistId, setArtistId] = useState('')
-  
-  let index = props.index
- 
-  let id = props.info
-  // console.log(artistIds)
-  // console.log(artistId)
-  // console.log(info + ' ds')
-  // setArtistId(artistIds)
-  
+  const [track1, setTrack1] = useState("");
+  const [track2, setTrack2] = useState("");
+  const [track3, setTrack3] = useState("");
+  const [artist, setArtist] = useState('')
 
-// let info = '2lolQgalUvZDfp5vvVtTYV'
-  // let artistIds = info
-  // console.log( artistIds)
+  let id = props.info;
 
-
- 
   
-      // setArtistId(id)
-      console.log(id)
-     fetch(
-     `https://api.spotify.com/v1/artists/${id}/top-tracks?market=ES`,
+  fetch(
+    `https://api.spotify.com/v1/artists/${id}/top-tracks?market=ES`,
 
     {
       method: "GET",
@@ -38,28 +26,31 @@ function Tracks(props) {
   ).then((response) => {
     console.log(
       response.json().then((data) => {
-    // let trackNames =  data.tracks['name']
-        setTracks(data.tracks[index]['name'])
-       console.log('line 35 ', data.tracks[0]['name'])
-            })
-    );
-    
+        setTrack1(data.tracks[0]["name"]);
+        setTrack2(data.tracks[1]["name"]);
+        setTrack3(data.tracks[2]["name"]);
 
+        setArtist(data.tracks[0]['artists'][0]['name'])
+
+       
+      })
+    );
   });
 
 
-// useEffect(() => {
-//   Tracks()
-// });
 
 
   return (
     <div>
-      Track 1: {tracks}
-      {/* Track 2: {tracks}
-      Track 3: {tracks}  */}
-
-      {/* <Audio  trackTitles = {tracks} /> */}
+      Track 1: {track1}
+      Track 2: {track2}
+      Track 3: {track3}
+      <Audio  
+      trackTitle1 = {track1} 
+      trackTitle2 = {track2} 
+      trackTitle3 = {track3} 
+      artistName = {artist}
+      />
     </div>
   );
 }

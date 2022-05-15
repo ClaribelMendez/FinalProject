@@ -6,7 +6,10 @@ import ReactPlayer from 'react-player'
 
 function Sound(props) {
     const[isPlaying, setPlaying] = useState(false)
-    let url = props.preview
+    let track1 = props.preview1
+    let track2 = props.preview2
+    let track3 = props.preview3
+
     const play = (url) => {
         let song = new Audio(url)
         if(!isPlaying){
@@ -28,9 +31,9 @@ function Sound(props) {
     return (
         
         <div>
-        <input type="button" value="play" onClick={()=> play(url)} />
-       <audio src={url} id="audio"></audio>
-       <ReactPlayer url= {url} />
+        <input type="button" value="play" onClick={()=> play(track1)} />
+       <audio src={track1} id="audio"></audio>
+       <ReactPlayer url= {track1} />
     </div>
     )
 

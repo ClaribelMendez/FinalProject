@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
-// import GenreData from "./genredata";
 import { accessToken } from "./spotify";
-import Sound from "./sound";
+// import Sound from "./sound";
 import Tracks from './Tracks';
-
-
-// INCLUDE?
 
 function Game() {
   const [genres, setGenres] = useState([]);
@@ -80,6 +76,7 @@ function Game() {
           data.artists.items[9]["name"],
         ];
         setArtists(allArtists);
+     
         // setCurrentArtist(data.artists.items[index]['name'])
         let allArtistImages = [
           data.artists.items[0]["images"][1]['url'],
@@ -231,7 +228,7 @@ function Game() {
         ))}
       </div>
       {score}
-      <h2>Artist: {artists[index]}</h2>
+      {/* <h2>Artist: {artists[index]}</h2> */}
       {/* <h3>Track: {allTracks[index]}</h3> */}
       {/* <Sound preview={trackAudio} /> */}
       <img src={image[index]} alt="backgroundimage"></img>
@@ -239,7 +236,6 @@ function Game() {
       <Tracks index = {index} 
         info = {artistId[index]}
         />
-        
     </div>
   );
 }
