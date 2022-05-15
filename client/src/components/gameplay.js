@@ -35,13 +35,13 @@ function Game() {
     setToken(accessToken);
   }, []);
 
-  async function getGenres (e) {
+   const getGenres = (e) => {
     e.preventDefault();
     let genre = e.target.value;
 
     console.log("Line 13 frontend ", genre);
     // add to request body
-    await fetch(`http://localhost:8888/game?genre=${genre}&token=${token}`, {
+     fetch(`http://localhost:8888/game?genre=${genre}&token=${token}`, {
       method: "get",
       headers: {
         Accept: "application/json",
@@ -207,7 +207,6 @@ function Game() {
       setIndex(index + 1)
     }
   };
-
   //onClick={handleArtistChosen}
   return (
     <div>
@@ -238,8 +237,9 @@ function Game() {
       <img src={image[index]} alt="backgroundimage"></img>
       {/* <Tracks artistId={artistId} /> */}
       <Tracks index = {index} 
-        info = {artistId}
+        info = {artistId[index]}
         />
+        
     </div>
   );
 }

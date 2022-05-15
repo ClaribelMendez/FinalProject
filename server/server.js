@@ -159,17 +159,27 @@ let artistName = currentArtist.split(' ').join('+')
 
 
 app.get("/tracks", async (req, res) => {
-fetch(`https://itunes.apple.com/search?term=${artistName}`)
-.then((response) => {
-   response.json().then(
-        (data) => {
-         res.send(data)
-         console.log(data.results[0].artworkUrl00)
+  fetch(
+    'https://api.spotify.com/v1/artists/2lolQgalUvZDfp5vvVtTYV/top-tracks?market=ES',
 
+   {
+     method: "GET",
+     headers: {
+       Accept: "application/json",
+       "Content-Type": "application/json",
+       Authorization: "Bearer " + 'BQBZAA0-sXQhVHesHD2aEaY9S8NqQb7tHIAqfR7d1jkJWCH0bwejkY93j3cbbx6hv9eTbW3cMcyyz69KUM5TGQk_vWkaTMHv-6J38Bk_EgCP0FjTF_YYY44ZHrlgkBhtqHwVwaDm4dmiyGdvcIQ8ieD1SbtuOdrn2Qw',
+     },
+   }
+ ).then((response) => {
+   console.log(
+     response.json().then((data) => {
+   // let trackNames = [data.tracks[0]['name'], data.tracks[1]['name'], data.tracks[2]['name']]
+      res.send(data.tracks[0]['name'])
+           })
+   );
+   
 
-        }
-    );
-});
+ });
 })
 // console.log that your server is up and running
 app.listen(PORT, () => {

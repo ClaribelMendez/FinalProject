@@ -1,45 +1,31 @@
 import { useState, useEffect} from 'react'
 import { accessToken } from "./spotify";
-import Audio from './audio'
+// import Audio from './audio'
 
 function Tracks(props) {
-  const [tracks, setTracks] = useState([]);
-  const [ids, setIds] = useState('')
+  const [tracks, setTracks] = useState('');
+  const [artistId, setArtistId] = useState('')
   
   let index = props.index
  
-  let info = props.info
-
-  
-
-  let artistId = info[index]
-  console.log(artistId, index)
-
-  // setIds(artistIds)
-  
+  let id = props.info
   // console.log(artistIds)
-
-
-
-  // let artistIds = ids.artists
-
-
-  // let artistId = artistIds.items[0]['id']
   // console.log(artistId)
-
-  // let artistId = ids.artists.items[0]['id']
+  // console.log(info + ' ds')
+  // setArtistId(artistIds)
   
-  // console.log('line 13 ', artistId)
-  // let id = info.items[0]['id']
-  // console.log(id)
-  // let id = '0TnOYISbd1XYRBk9myaseg'
-  useEffect(() => {
-    getTrack()
-  }, );
 
-async function getTrack() {
-  await fetch(
-     `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=ES`,
+// let info = '2lolQgalUvZDfp5vvVtTYV'
+  // let artistIds = info
+  // console.log( artistIds)
+
+
+ 
+  
+      // setArtistId(id)
+      console.log(id)
+     fetch(
+     `https://api.spotify.com/v1/artists/${id}/top-tracks?market=ES`,
 
     {
       method: "GET",
@@ -52,23 +38,28 @@ async function getTrack() {
   ).then((response) => {
     console.log(
       response.json().then((data) => {
-        // response.json(data)
-        setTracks([data.tracks[0]['name'],data.tracks[1]['name'],data.tracks[2]['name']])
-       console.log(tracks)
+    // let trackNames =  data.tracks['name']
+        setTracks(data.tracks[index]['name'])
+       console.log('line 35 ', data.tracks[0]['name'])
             })
     );
     
 
   });
-}
+
+
+// useEffect(() => {
+//   Tracks()
+// });
+
 
   return (
     <div>
-      Track 1: {tracks[0]}
-      Track 2: {tracks[1]}
-      Track 3: {tracks[2]} 
+      Track 1: {tracks}
+      {/* Track 2: {tracks}
+      Track 3: {tracks}  */}
 
-      <Audio  trackTitles = {tracks} />
+      {/* <Audio  trackTitles = {tracks} /> */}
     </div>
   );
 }
