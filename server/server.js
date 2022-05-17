@@ -6,6 +6,7 @@ require("dotenv").config();
 const db = require("../server/db/db-connection.js");
 const path = require("path");
 const fetch = require("node-fetch");
+const { response } = require("express");
 const app = express();
 const PORT = 8888;
 
@@ -92,7 +93,6 @@ app.get('/callback', (req, res) => {
         });
 
         res.redirect(`http://localhost:3000/?${queryParams}`);
-
       } else {
         res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
       }
@@ -135,7 +135,7 @@ app.get("/game", async (req, res) => {
   token = req.query.token
   console.log("backend line 315. Genre: " + genre);
   fetch(
-    `https://api.spotify.com/v1/search?q=genre%3A${genre}&type=artist&market=ES&limit=10&offset=45`,
+    `https://api.spotify.com/v1/search?q=genre%3A%20${genre}&type=artist&limit=10&offset=0`,
     {
       method: "get",
       headers: {
@@ -148,39 +148,28 @@ app.get("/game", async (req, res) => {
     console.log(
       response.json().then((data) => {
         res.json(data);
+        console.log(data.artists
+          )
         // console.log(data.artists.items[0]['name'])
       })
     );
   });
 });
 
-currentArtist = 'kanye west'
-let artistName = currentArtist.split(' ').join('+')
-
-
-app.get("/tracks", async (req, res) => {
-  fetch(
-    'https://api.spotify.com/v1/artists/2lolQgalUvZDfp5vvVtTYV/top-tracks?market=ES',
-
-   {
-     method: "GET",
-     headers: {
-       Accept: "application/json",
-       "Content-Type": "application/json",
-       Authorization: "Bearer " + 'BQBZAA0-sXQhVHesHD2aEaY9S8NqQb7tHIAqfR7d1jkJWCH0bwejkY93j3cbbx6hv9eTbW3cMcyyz69KUM5TGQk_vWkaTMHv-6J38Bk_EgCP0FjTF_YYY44ZHrlgkBhtqHwVwaDm4dmiyGdvcIQ8ieD1SbtuOdrn2Qw',
-     },
-   }
- ).then((response) => {
-   console.log(
-     response.json().then((data) => {
-   // let trackNames = [data.tracks[0]['name'], data.tracks[1]['name'], data.tracks[2]['name']]
-      res.send(data.tracks[0]['name'])
-           })
-   );
-   
-
- });
-})
+// app.get("/tracks",  (req, res) => {
+//   fetch('https://itunes.apple.com/search?term=Epiphanias (Epiphany/Epiphanie)&term=Gregorian Chant&entity=musicTrack&allArtist&attribute=songTerm&attribute=allArtistTerm').then(
+//   (response) => {
+//     response.json().then((data) => {
+//       response.json(data)
+//       // let results = data.results;
+//       // let indexAudio = results.map((c) => c.trackName).indexOf(trackTitle1);
+//       // let previewAudio = results[indexAudio]["previewUrl"];
+//       // setTrackPreview1(previewAudio);
+//       console.log(data)
+//       res.send(data)
+//     });
+//   }
+// )})
 // console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
