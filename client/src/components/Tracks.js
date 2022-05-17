@@ -5,6 +5,7 @@ import Video from './video'
 import Sound from './sound'
 import GamePlay from "../game";
 import TrackAnalysis from "./trackAnalysis";
+import MediaControlCard from "./mediaCard";
 
 
 function Tracks(props) {
@@ -84,6 +85,11 @@ function Tracks(props) {
         track3 = {trackId3}
       />
 
+      <MediaControlCard
+      trackTitle = {track1}
+      artistName = {artist}
+      image = {image}
+      />
    
     </div>
   );

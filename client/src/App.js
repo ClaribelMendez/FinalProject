@@ -5,11 +5,12 @@ import Game from './components/gameplay'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
 import Login from './components/loginpage'
-// import MediaControlCard from './components/MediaCard';s
+// import MediaControlCard from './components/mediaCard'
 import Tracks from './components/Tracks'
 import GamePlay from './game';
 import Dropdown from './components/dropdown'
 import Profile from './components/profile'
+// import AudioPlayer from './components/audioplayer'
 
 
 
@@ -56,21 +57,26 @@ return (
   <div className="App">
     <header className="App-header">
   
-    <nav>
+ 
+
+{/* <MediaControlCard /> */}
+    {!token ? (
+         <Login />
+        ) : (
+          
+          <Router>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/login" element={'Login'}>
+              </Route>
+              </Routes>
+              <nav>
 
 <a href="/game">Play/Discover</a>  &nbsp;
   <a href="/form">Playlists</a>  &nbsp;
   <a href="/blogposts">About</a>
   <br></br>
-
-
-
 </nav>
-    {!token ? (
-         <Login />
-        ) : (
-          <Router>
-            <ScrollToTop />
             <Routes>
               <Route path="/genres" element ={<Dropdown />}>
               </Route>
@@ -79,10 +85,7 @@ return (
               <Route path="/game" element={<Game/>}>
                 </Route>
               </Routes>
-              <Routes>
-              <Route path="/login" element={'Login'}>
-              </Route>
-              </Routes>
+            
               <Routes>
               <Route path="/About" element={'About this project'}>
               </Route>
@@ -91,10 +94,7 @@ return (
               <Route path="/" element ={<button onClick={logout}>Log Out</button>}>
               </Route>
               </Routes>
-              {/* <Routes>
-              <Route path="/" element ={<button onClick={logout}>Log Out</button>}>
-              </Route>
-              </Routes> */}
+           
              
           </Router>
         )}
@@ -118,6 +118,9 @@ return (
     {/* <Sound /> */}
     {/* <Tracks /> */}
     <Profile />
+    {/* <AudioPlayer /> */}
+
+
 
   </div>
 );

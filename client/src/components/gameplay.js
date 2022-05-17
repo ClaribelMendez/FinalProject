@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import MediaControlCard from "./mediaCard";
 import { accessToken } from "./spotify";
 // import Sound from "./sound";
 import Tracks from './Tracks';
@@ -237,22 +238,24 @@ function Game() {
           >
             {"\n" + item}
           </button>
-        ))) : ('HI')}
-      {/* </div> */}
-      {score}
+        ))) : ('')}
+      {show ? (score) : ('')}
       <h2>Artist: {artists[index]}</h2>
       {/* <h3>Track: {allTracks[index]}</h3> */}
       {/* <Sound preview={trackAudio} /> */}
-      <img src={image[index]} alt="backgroundimage"></img>
+      {/* <img src={image[index]} alt="backgroundimage"></img> */}
       {/* <Tracks artistId={artistId} /> */}
       <Tracks 
       index = {index} 
       info = {artistId[index]}
+      image = {image[index]}
         />
 
     {/* <Playlist
     genre = {genre}
      /> */}
+
+    
     </div>
   );
 }

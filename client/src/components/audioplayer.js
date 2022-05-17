@@ -1,43 +1,38 @@
-// // import "./styles.css";
+// import { Audio, useCurrentFrame, useVideoConfig } from "remotion";
+// import { useAudioData, visualizeAudio } from "@remotion/media-utils";
+// import music from "./music.mp3";
+//  
+//  function AudioPlayer (){
 
-// import SpotifyPlayer from "react-spotify-player";
-
-// function AudioPlayer(){
-// const bud = require("basic-instagram-user-details");
-
-// const size = {
-//   width: "100%",
-//   height: 300
-// };
-// const view = "list"; // or 'coverart'
-// const theme = "black"; // or 'white'
-// export default function App() {
-//   async function clickIG() {
-//     const user = "marcellloki";
-
-//     await bud(user, "fullname").then((id) => {
-//       console.log(id);
-//       // => { data: '259220806' }
-//     });
+//   const frame = useCurrentFrame();
+//   const { width, height, fps } = useVideoConfig();
+//   const audioData = useAudioData('https://p.scdn.co/mp3-preview/585736d2d4dba1eef13b6d63c54dd4c16a3275fb?cid=cb79505b7a4e48258da5fc9f2d1672c2');
+//  
+//   if (!audioData) {
+//     return null;
 //   }
-
+//  
+//   const visualization = visualizeAudio({
+//     fps,
+//     frame,
+//     audioData,
+//     numberOfSamples: 16,
+//   }); // [0.22, 0.1, 0.01, 0.01, 0.01, 0.02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//  
+//   // Render a bar chart for each frequency, the higher the amplitude,
+//   // the longer the bar
 //   return (
-//     <div className="App">
-//       <h1 onClick={clickIG}>Hello CodeSandbox</h1>
-//       <h2>Start editing to see some magic happen!</h2>
-//       <SpotifyPlayer
-//         uri="spotify:show:2RXY5kEKWQobky1Y2dSUyF"
-//         size={size}
-//         view={view}
-//         theme={theme}
-//       />
-//       <SpotifyPlayer
-//         uri="spotify:show:2RXY5kEKWQobky1Y2dSUyF"
-//         size={size}
-//         view={view}
-//         theme={theme}
-//       />
+//     <div>
+//       <Audio src={'https://p.scdn.co/mp3-preview/585736d2d4dba1eef13b6d63c54dd4c16a3275fb?cid=cb79505b7a4e48258da5fc9f2d1672c2'} />
+//       {visualization.map((v) => {
+//         return (
+//           <div
+//             style={{ width: 1000 * v, height: 15, backgroundColor: "blue" }}
+//           />
+//         );
+//       })}
 //     </div>
 //   );
-// }
+// };
 
+// export default AudioPlayer
