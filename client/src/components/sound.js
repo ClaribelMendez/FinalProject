@@ -1,23 +1,56 @@
-import {Howl} from 'howler';
-import { useState } from 'react';
+// import {Howl} from 'howler';
+import { useState, useRef } from 'react';
 import ReactPlayer from 'react-player'
+import SpotifyPlayer from 'react-spotify-web-playback';
 
 
 
 function Sound(props) {
-    const[isPlaying, setPlaying] = useState(false)
-    // let url = props.preview
-    let url = 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/ce/48/5b/ce485b59-13b7-9859-0431-e602d6347479/mzaf_7168871676263777717.plus.aac.p.m4a'
-    const play = (url) => {
-        let song = new Audio(url)
-        if(!isPlaying){
-        song.play()
-        setPlaying(true)
-        }if(isPlaying){
-            song.pause()
-            setPlaying(false)
+    // const[isPlaying, setPlaying] = useState(false)
+    let track1 = props.trackPreview1
+    let track2 = props.trackPreview2
+    let track3 = props.trackPreview3
+
+    // const play = (url) => {
+    //     let song = new Audio(url)
+    //     if(!isPlaying){
+    //     song.play()
+    //     setPlaying(false)
+    //     }if(isPlaying){
+    //         song.pause()
+    //         setPlaying(true)
+    //     }
+    // }
+    const [audioStatus, changeAudioStatus] = useState(false);
+    const myRef = useRef();
+  
+    const startAudio = () => {
+      myRef.current.play();
+  
+      changeAudioStatus(true);
+    };
+  
+    const pauseAudio = () => {
+      console.log("here");
+      myRef.current.pause();
+      changeAudioStatus(false);
+    };
+  
+    return (
+      <>
+        <audio
+          ref={myRef}
+          src= {track1}
+        />
+        {audioStatus ? (
+          <button onClick={pauseAudio}>pause</button>
+        ) : (
+          <button onClick={startAudio}>start</button>
+        )}
+      </>
+    );
         }
-    }
+    
 
   
 
@@ -26,17 +59,31 @@ function Sound(props) {
 
    
 
-    return (
+    // return (
         
-        <div>
-        <input type="button" value="play" onClick={()=> play(url)} />
-       <audio src={url} id="audio"></audio>
-       <ReactPlayer url='https://music.apple.com/us/music-video/adrift-live-from-the-solar-powered-plastic-plant/1445828315?uo=4' />
-    </div>
+    //     <div>
+        {/* <input type="button" value="play" onClick={()=> play(track1)}  />
+       <audio src={track1} id="audio"></audio>
+       <ReactPlayer url= {track1} />
+
+       <input type="button" value="pause" onClick={()=> play(track2)} />
+       <audio src={track2} id="audio"></audio>
+       <ReactPlayer url= {track2} />
+
+       <input type="button" value="play" onClick={()=> play(track3)} />
+       <audio src={track3} id="audio"></audio>
+       <ReactPlayer url= {track3} /> */}
+
+       {/* <Visualizer audioPreviewUrl='example.com/audio-url' /> */}
+      
+    {/* </div>
     )
 
-}
+} */}
 
 
 
 export default Sound
+
+
+

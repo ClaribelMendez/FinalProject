@@ -6,6 +6,7 @@ require("dotenv").config();
 const db = require("../server/db/db-connection.js");
 const path = require("path");
 const fetch = require("node-fetch");
+const { response } = require("express");
 const app = express();
 const PORT = 8888;
 
@@ -20,6 +21,10 @@ REDIRECT_URI = "http://localhost:8888/callback";
 //creates an endpoint for the route /api
 app.get("/", (req, res) => {
   res.json({ message: "Hello from My ExpressJS" });
+});
+
+app.get("/profile", (req, res) => {
+  res.json({ message: "This is the profile page" });
 });
 
 /**
@@ -38,6 +43,16 @@ const generateRandomString = (length) => {
 };
 
 const stateKey = "spotify_auth_state";
+
+app.get('/genres', cors(), async (req, res) => {
+   
+  try{
+      const { rows: genres } = await db.query('SELECT * FROM genres');
+      res.send(genres);
+  } catch (e){
+      return res.status(400).json({e});
+  }
+});
 
 app.get("/login", (req, res) => {
   const state = generateRandomString(16);
@@ -82,7 +97,6 @@ app.get('/callback', (req, res) => {
         });
 
         res.redirect(`http://localhost:3000/?${queryParams}`);
-
       } else {
         res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
       }
@@ -118,36 +132,59 @@ app.get("/refresh_token", (req, res) => {
 });
       
 
-// const access_token =
-//   "BQATShZxaFGyaOO1MekipXcTbCinLigdbjcOzaBuxxL3B97dISVMEsho219Z5bzjjUHi6Qp86K8E8WyULdEU7YpBSvy-yzBp-3tk1ZA2GlAm9yRt9Ps0vRe_q6Fq6wlEvttVDZxYVC9eRD2iEpprTERS4BjsNGgHFJk";
 let artistid;
 
 app.get("/game", async (req, res) => {
   genre = req.query.genre;
+  token = req.query.token
   console.log("backend line 315. Genre: " + genre);
   fetch(
-    `https://api.spotify.com/v1/search?q=genre%3A${genre}&type=artist&market=ES&limit=10&offset=5`,
+    `https://api.spotify.com/v1/search?q=genre%3A%20${genre}&type=artist&limit=10&offset=0`,
     {
       method: "get",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Bearer " + access_token,
+        Authorization: "Bearer " + token,
       },
     }
   ).then((response) => {
     console.log(
       response.json().then((data) => {
-        artistid = data.artists.items[0]["id"];
-        {
-          console.log("Artist ID:" + artistid);
-        }
         res.json(data);
+        console.log(data.artists
+          )
+        // console.log(data.artists.items[0]['name'])
       })
     );
   });
 });
 
+app.post('/profile', cors(), async (req, res) => {
+  const newUser = { name: req.body.name }
+  console.log(newUser.name);
+  const result = await db.query(
+      'INSERT INTO users(firstname) VALUES($1) RETURNING *',
+      [newUser.name]
+  );
+  console.log(result.rows[0]);
+  res.json(result.rows[0]);
+});
+
+// app.get("/tracks",  (req, res) => {
+//   fetch('https://itunes.apple.com/search?term=Epiphanias (Epiphany/Epiphanie)&term=Gregorian Chant&entity=musicTrack&allArtist&attribute=songTerm&attribute=allArtistTerm').then(
+//   (response) => {
+//     response.json().then((data) => {
+//       response.json(data)
+//       // let results = data.results;
+//       // let indexAudio = results.map((c) => c.trackName).indexOf(trackTitle1);
+//       // let previewAudio = results[indexAudio]["previewUrl"];
+//       // setTrackPreview1(previewAudio);
+//       console.log(data)
+//       res.send(data)
+//     });
+//   }
+// )})
 // console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

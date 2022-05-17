@@ -1,12 +1,28 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Genres from './components/genres'
+import { BrowserRouter as Router, Route, Routes, useLocation,
+} from 'react-router-dom'
+import Game from './components/gameplay'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
+import Login from './components/loginpage'
+// import MediaControlCard from './components/mediaCard'
+import Tracks from './components/Tracks'
+import GamePlay from './game';
+import Dropdown from './components/dropdown'
+import Profile from './components/profile'
+// import AudioPlayer from './components/audioplayer'
 
 
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 
 function App() {
@@ -40,31 +56,54 @@ function App() {
 return (
   <div className="App">
     <header className="App-header">
+  
+ 
+
+{/* <MediaControlCard /> */}
     {!token ? (
-          <a className="App-link" href="http://localhost:8888/login">
-            Log in to Spotify
-          </a>
+         <Login />
         ) : (
+          
           <Router>
+            <ScrollToTop />
             <Routes>
-              <Route path="/top-artists" element={'Top Artists'}>
-                </Route>
-              </Routes>
-              <Routes>
-              <Route path="/top-tracks" element={'Top Tracks'}>
+              <Route path="/login" element={'Login'}>
               </Route>
               </Routes>
+              <nav>
+
+<a href="/game">Play/Discover</a>  &nbsp;
+  <a href="/form">Playlists</a>  &nbsp;
+  <a href="/blogposts">About</a>
+  <br></br>
+</nav>
+            <Routes>
+              <Route path="/genres" element ={<Dropdown />}>
+              </Route>
+              </Routes>
+            <Routes>
+              <Route path="/game" element={<Game/>}>
+                </Route>
+              </Routes>
+            
               <Routes>
-              <Route path="/playlists/:id" element={'Playlists'}>
+              <Route path="/About" element={'About this project'}>
               </Route>
               </Routes>
               <Routes>
               <Route path="/" element ={<button onClick={logout}>Log Out</button>}>
-              
-                {/* <> */}
-                  {/* <button onClick={logout}>Log Out</button> */}
+              </Route>
+              </Routes>
+           
+             
+          </Router>
+        )}
+    </header>
 
-                  {/* {profile && (
+    {/* <> 
+                 
+
+                  {profile && ( 
                     <div>
                       <h1>{profile.display_name}</h1>
                       <p>{profile.followers.total} Followers</p>
@@ -72,14 +111,17 @@ return (
                         <img src={profile.images[0].url} alt="Avatar"/>
                       )}
                     </div>
-                  )} */}
-                {/* </> */}
-              </Route>
-              </Routes>
-          </Router>
-        )}
-    </header>
-    <Genres />
+                  )} 
+                 </> */}
+    {/* <Game /> */}
+    {/* <GenreData /> */}
+    {/* <Sound /> */}
+    {/* <Tracks /> */}
+    <Profile />
+    {/* <AudioPlayer /> */}
+
+
+
   </div>
 );
 }

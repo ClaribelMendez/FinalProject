@@ -10,19 +10,31 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mui/core": "^5.0.0-alpha.54",
+    "@mui/material": "^5.7.0",
     "axios": "^0.27.2",
+    "box": "^0.0.4",
+    "components": "^0.1.0",
     "concurrently": "^7.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.17.3",
     "fetch": "^1.1.0",
     "moment": "^2.29.2",
+    "mui": "^0.0.1",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.16",
     "pg-promise": "^10.11.1",
     "querystring": "^0.2.1",
+    "react-player": "^2.10.1",
     "react-router-dom": "^6.3.0",
     "react-use-location": "^0.0.1",
-    "Router": "^2.1.0"
+    "Router": "^2.1.0",
+    "styled": "^1.0.0",
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "babel-plugin-macros": "^3.1.0",
+    "babel-plugin-styled-components": "^2.0.7"
   }
 }
