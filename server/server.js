@@ -23,6 +23,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello from My ExpressJS" });
 });
 
+app.get("/profile", (req, res) => {
+  res.json({ message: "This is the profile page" });
+});
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -154,6 +158,17 @@ app.get("/game", async (req, res) => {
       })
     );
   });
+});
+
+app.post('/profile', cors(), async (req, res) => {
+  const newUser = { name: req.body.name }
+  console.log(newUser.name);
+  const result = await db.query(
+      'INSERT INTO users(firstname) VALUES($1) RETURNING *',
+      [newUser.name]
+  );
+  console.log(result.rows[0]);
+  res.json(result.rows[0]);
 });
 
 // app.get("/tracks",  (req, res) => {
