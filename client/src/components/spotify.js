@@ -7,7 +7,6 @@ import axios from 'axios'
  * @returns {Promise}
  */
  export const getCurrentUserProfile = () => axios.get('/me');
- export const getGenreData = () => axios.get('/https://api.spotify.com/v1/search?q=genre%3A%20techno&type=artist')
 
 
 // Map for localStorage keys

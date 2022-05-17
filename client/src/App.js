@@ -5,8 +5,11 @@ import Game from './components/gameplay'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
 import Login from './components/loginpage'
-// import Tracks from './components/Tracks'
-
+// import MediaControlCard from './components/MediaCard';s
+import Tracks from './components/Tracks'
+import GamePlay from './game';
+import Dropdown from './components/dropdown'
+import Profile from './components/profile'
 
 
 
@@ -56,12 +59,10 @@ return (
     <nav>
 
 <a href="/game">Play/Discover</a>  &nbsp;
-  <a href="/form">Form</a>  &nbsp;
-  <a href="/blogposts">Blogposts</a>
+  <a href="/form">Playlists</a>  &nbsp;
+  <a href="/blogposts">About</a>
   <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
+
 
 
 </nav>
@@ -71,7 +72,11 @@ return (
           <Router>
             <ScrollToTop />
             <Routes>
-              <Route path="/game" element={<Game />}>
+              <Route path="/genres" element ={<Dropdown />}>
+              </Route>
+              </Routes>
+            <Routes>
+              <Route path="/game" element={<Game/>}>
                 </Route>
               </Routes>
               <Routes>
@@ -84,13 +89,17 @@ return (
               </Routes>
               <Routes>
               <Route path="/" element ={<button onClick={logout}>Log Out</button>}>
-              
-               
               </Route>
               </Routes>
+              {/* <Routes>
+              <Route path="/" element ={<button onClick={logout}>Log Out</button>}>
+              </Route>
+              </Routes> */}
+             
           </Router>
         )}
     </header>
+
     {/* <> 
                  
 
@@ -108,6 +117,7 @@ return (
     {/* <GenreData /> */}
     {/* <Sound /> */}
     {/* <Tracks /> */}
+    <Profile />
 
   </div>
 );

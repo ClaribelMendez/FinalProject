@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 // import Sound from "./sound";
 import Tracks from './Tracks';
+// import Playlist from "./playlist";
+
 
 function Game() {
   const [genres, setGenres] = useState([]);
+  const [genre, setGenre] = useState('')
   const [token, setToken] = useState(null);
   const [subgenres, setSubgenres] = useState([]);
   const [score, setScore] = useState(0);
@@ -16,6 +19,8 @@ function Game() {
   const [artistId, setArtistId] = useState([])
   const [tracks, setTracks] = useState('')
   const [artists, setArtists] = useState([])
+  const [show, setShow] = useState(false)
+  
   
 
   const loadGenres = () => {
@@ -34,6 +39,9 @@ function Game() {
    const getGenres = (e) => {
     e.preventDefault();
     let genre = e.target.value;
+    setGenre(genre)
+    setShow(true)
+    
 
     console.log("Line 13 frontend ", genre);
     // add to request body
@@ -109,6 +117,7 @@ function Game() {
         ];
         setArtistId(allArtistsIds);
         console.log(allArtistsIds);
+        
       })
       }
  
@@ -204,38 +213,46 @@ function Game() {
       setIndex(index + 1)
     }
   };
-  //onClick={handleArtistChosen}
+
+
+ 
   return (
     <div>
-      <select onChange={getGenres}>
+      
+      {!show ? (<select onChange={getGenres} >
         <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
         {genres.map((genre) => (
           <option key={genre.id} value={genre.value}>
             {genre.genre}
           </option>
         ))}
-      </select>
-      <div className="subgenres-container">
-        {subgenres.map((item, index) => (
+      </select>) : ("")}
+      {/* <div className="subgenres-container"> */}
+       {show ? (subgenres.map((item, index) => (
           <button
-            type="radio"
+            type="radio"  
             key={item.index}
             value={item}
             onClick={handleAnswer}
           >
             {"\n" + item}
           </button>
-        ))}
-      </div>
+        ))) : ('HI')}
+      {/* </div> */}
       {score}
-      {/* <h2>Artist: {artists[index]}</h2> */}
+      <h2>Artist: {artists[index]}</h2>
       {/* <h3>Track: {allTracks[index]}</h3> */}
       {/* <Sound preview={trackAudio} /> */}
       <img src={image[index]} alt="backgroundimage"></img>
       {/* <Tracks artistId={artistId} /> */}
-      <Tracks index = {index} 
-        info = {artistId[index]}
+      <Tracks 
+      index = {index} 
+      info = {artistId[index]}
         />
+
+    {/* <Playlist
+    genre = {genre}
+     /> */}
     </div>
   );
 }
