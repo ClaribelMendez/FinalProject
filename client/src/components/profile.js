@@ -45,6 +45,7 @@ const [name, setName] = useState('')
         },
         body: JSON.stringify({name})
       })
+      window.location.href="http://localhost:3000/game"
     }
 
 
