@@ -10,7 +10,7 @@ function Music(props) {
 
   return (
     <div>
-            <h3>Track: {props.artist}</h3>
+            {/* <h3>Track: {props.artist}</h3> */}
 
     </div>
   )

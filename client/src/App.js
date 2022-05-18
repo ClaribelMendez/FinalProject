@@ -1,6 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, useLocation,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, useLocation,} from 'react-router-dom'
 import Game from './components/gameplay'
 import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
@@ -11,6 +10,7 @@ import GamePlay from './game';
 import Dropdown from './components/dropdown'
 import Profile from './components/profile'
 // import AudioPlayer from './components/audioplayer'
+// import VideoPlayer from './components/videoplayer'
 
 
 
@@ -54,33 +54,32 @@ function App() {
 //   }
 // }, []);
 return (
+  
   <div className="App">
     <header className="App-header">
   
  
-
+    
 {/* <MediaControlCard /> */}
     {!token ? (
          <Login />
         ) : (
-          
-          <Router>
+            <Router>
+        
             <ScrollToTop />
             <Routes>
-              <Route path="/login" element={'Login'}>
+              <Route path="/login" element={<Login />}>
               </Route>
               </Routes>
               <nav>
-
-<a href="/game">Play/Discover</a>  &nbsp;
+ <a href="/game">Play/Discover</a>  &nbsp;
   <a href="/form">Playlists</a>  &nbsp;
-  <a href="/blogposts">About</a>
-  <br></br>
-</nav>
-            <Routes>
-              <Route path="/genres" element ={<Dropdown />}>
-              </Route>
-              </Routes>
+ <a href="/blogposts">About</a>
+ <br></br>
+ </nav>  
+
+
+
             <Routes>
               <Route path="/game" element={<Game/>}>
                 </Route>
@@ -91,7 +90,7 @@ return (
               </Route>
               </Routes>
               <Routes>
-              <Route path="/" element ={<button onClick={logout}>Log Out</button>}>
+              <Route path="/game" element ={<button onClick={logout}>Log Out</button>}>
               </Route>
               </Routes>
            
@@ -117,7 +116,8 @@ return (
     {/* <GenreData /> */}
     {/* <Sound /> */}
     {/* <Tracks /> */}
-    <Profile />
+    {/* <Profile /> */}
+    {/* <VideoPlayer /> */}
     {/* <AudioPlayer /> */}
 
 

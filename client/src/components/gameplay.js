@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import MediaControlCard from "./mediaCard";
 import { accessToken } from "./spotify";
 // import Sound from "./sound";
 import Tracks from './Tracks';
@@ -218,7 +217,7 @@ function Game() {
 
  
   return (
-    <div>
+    <div className='container'>
       
       {!show ? (<select onChange={getGenres} >
         <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
@@ -240,7 +239,7 @@ function Game() {
           </button>
         ))) : ('')}
       {show ? (score) : ('')}
-      <h2>Artist: {artists[index]}</h2>
+      {show ? (<h2 className='artistInfo'>Artist: {artists[index]}</h2> ) : ("")}
       {/* <h3>Track: {allTracks[index]}</h3> */}
       {/* <Sound preview={trackAudio} /> */}
       {/* <img src={image[index]} alt="backgroundimage"></img> */}

@@ -54,32 +54,6 @@ function Sound(props) {
 
   
 
-    // const[play, setPlay] = useState(true)
-
-
-   
-
-    // return (
-        
-    //     <div>
-        {/* <input type="button" value="play" onClick={()=> play(track1)}  />
-       <audio src={track1} id="audio"></audio>
-       <ReactPlayer url= {track1} />
-
-       <input type="button" value="pause" onClick={()=> play(track2)} />
-       <audio src={track2} id="audio"></audio>
-       <ReactPlayer url= {track2} />
-
-       <input type="button" value="play" onClick={()=> play(track3)} />
-       <audio src={track3} id="audio"></audio>
-       <ReactPlayer url= {track3} /> */}
-
-       {/* <Visualizer audioPreviewUrl='example.com/audio-url' /> */}
-      
-    {/* </div>
-    )
-
-} */}
 
 
 
