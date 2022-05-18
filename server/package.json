@@ -27,6 +27,7 @@
     "pg-promise": "^10.11.1",
     "querystring": "^0.2.1",
     "react-player": "^2.10.1",
+    "react-redirect": "^1.0.0",
     "react-router-dom": "^6.3.0",
     "react-use-location": "^0.0.1",
     "Router": "^2.1.0",

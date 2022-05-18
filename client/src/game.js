@@ -9,8 +9,8 @@ function GamePlay(props){
 
     return (
         <div>
-            Title: {trackTitle1}
-            {/* {trackTitle1} */}
+            {/* Title: {trackTitle1}
+            {trackTitle1} */}
         
         </div>
     )

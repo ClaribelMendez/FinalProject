@@ -70,12 +70,12 @@ const LOCALSTORAGE_VALUES = {
     }
 
       // If there's an error OR the token in localStorage has expired, refresh the token
-  if (hasError || hasTokenExpired() || LOCALSTORAGE_VALUES.accessToken === 'undefined') {
-    refreshToken();
-  }
+    if (hasError || hasTokenExpired() || LOCALSTORAGE_VALUES.accessToken === 'undefined') {
+      refreshToken();
+    }
 
     // Use `/refresh_token` endpoint from our Node app
-    const { data } = await axios.get(`/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`);
+      const { data } = await axios.get(`/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`);
 
     // Update localStorage values
     window.localStorage.setItem(LOCALSTORAGE_KEYS.accessToken, data.access_token);

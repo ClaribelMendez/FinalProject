@@ -1,4 +1,4 @@
-.genres {
+/* .genres {
   white-space: pre-wrap;
   width: 100%;
   padding-bottom: 1em;
@@ -7,43 +7,31 @@
   display: inline-block;
   margin-top: 55%;
 
-}
-
+} */
+/* 
 .genre-button {
   float: right;
   margin-left: 50%;
   margin-bottom: 20%;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-}
+} */
 
-button {
+/* button {
   background-color: peachpuff
   
-}
+} */
 
-body {
+/* body {
   background-image: url(Background.png);
   background-size: cover;
   background-repeat: no-repeat;
   /* height: 400px; 
 width: 400px; */
-  margin-left: 20%;
-  margin-right: 20%;
-  /* overflow: hidden */
-}
-
-.subgenres-container {
-  background-color: black;
-  border-radius: 5em;
-  width: 100%;
-  height: 100%;
-  float: right;
-  margin-right: 50%;
-  padding: 5%;
-justify-items: center;
-font-size: 10%;
-}
-
+/* margin-left: 20%;
+  margin-right: 20%; */
+/* overflow: hidden */
+/* margin: 10px; */
+/* } */
 
 .login_button {
   background-color: rgb(243, 159, 4);
@@ -70,40 +58,206 @@ font-size: 10%;
 
 #login_container {
   background-color: black;
-  /* width: 100%;
-  height: 100%;  */
+  width: 90%;
+  height: 60%;
   position: aboslute;
-  /* margin-right: 100% */
-   
+  margin-right: 0;
 }
 #logo {
- font-family: sans-serif;
- color: white;
- font-size: 5em;
- background-color: black;
- height: 90vh;
- width: 110%;
- /* float: right; */
- /* margin-right: 100%; */
+  font-family: sans-serif;
+  color: white;
+  font-size: 5em;
+  background-color: black;
+  height: 50%;
+  /* width: 110%; */
+  /* float: right; */
+  /* margin-right: 100%; */
 }
 
 nav {
-  background-color: #1b4661;
-  color: white;
-  display: flex;
-  height: 85px;
+  background-color: #0a2137;
   justify-content: end;
+  opacity: 0.9;
+  color: white;
+  /* display: flex; */
+  height: 35px;
+  width: 100%;
+  margin: 0px;
+  border: 2px solid black;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
+  color: #888;
+  display: block;
+  margin: 8px 22px 8px 22px;
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 nav a {
   text-decoration: none;
   color: white;
-  font-family:  sans-serif  
+  font-family: sans-serif;
+
   /* font-weight: bold; */
-
 }
 
-app {
-  background-color: black;
+.container {
+  background-color: rgb(7, 0, 0, 0.4);
+  /* opacity: .40; */
+  /* position: absolute;  */
+  /* left: 50%; */
+  /* top: 30%; 
+  margin-bottom: 50%;
+  padding: 50%;
+  height: 80vh;
+  margin-top: -100px; /* half of you height */
+  /* width: 150%;  */
+  /* margin-left: -500px; half of you width */
+  /* margin-left: 20%; */
+  margin: auto;
+  width: 85%;
+  height: 85vh;
+  border: 3px solid black;
+  padding: 10px;
+  margin-top: 20px;
 }
 
+.artistInfo {
+  color: white;
+}
+
+.App {
+  background-image: url(Background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100em;
+  height: 100vh;
+  /* height: 400px; 
+width: 400px; */
+  /* margin-left: 20%;
+  margin-right: 20%; */
+  /* overflow: hidden */
+  /* margin: 10px; */
+}
+
+/* 
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+} */
+
+.subgenres-container {
+  background-color: #134f5c;
+  /* background-color: black ; */
+  border-color: yellowgreen;
+  border-style: outset;
+  width: fit-content;
+  height: 75%;
+  display: block;
+  margin-top:15px;
+  margin-right: 50%;
+  padding: 5%;
+  justify-items: center;
+  font-size: 10%;
+  margin-left: 60%;
+  position: relative;
+}
+
+.glow-on-hover {
+  width: fit-content;
+  height: fit-content;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  margin-top: -400px;
+  flex-direction: column;
+  font-size:medium;  
+  font-family: sans-serif;
+  /* padding: 8px 12px; */
+}
+
+.glow-on-hover:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+#artistInfo {
+  margin-bottom: 100vh;
+  margin-top: -550px;
+  margin-left: 50px;
+  
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}

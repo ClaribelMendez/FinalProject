@@ -23,9 +23,20 @@ const [name, setName] = useState('')
            
           })
         );
-      });
-
+      })
+      .then(result => {
+        // Make post request
+        fetch('http://localhost:8888/profile', {
+           method: "POST",
+           body: JSON.stringify(result)
+        })
+       .then(data => {
+        // do what you need with the data from the post request
+    });
+});
+      // const navigate = useNavigate()
     const postUser = () => {
+      
       fetch('http://localhost:8888/profile', {
         method: 'POST',
         headers: {
@@ -33,14 +44,15 @@ const [name, setName] = useState('')
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({name})
-      });
+      })
+      window.location.href="http://localhost:3000/game"
     }
-
 
 
     return (
         <div>
-            {name}
+              <h1>  Hello:
+              {name}</h1>
             <button type="button" onClick={postUser}>Click Me!</button>
                         </div>
     )

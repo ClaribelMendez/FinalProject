@@ -1,18 +1,24 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Routes, useLocation,
-} from 'react-router-dom'
-import Game from './components/gameplay'
-import { useState, useEffect } from 'react';
-import { accessToken, logout, getCurrentUserProfile } from './components/spotify';
-import Login from './components/loginpage'
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import Game from "./components/gameplay";
+import { useState, useEffect } from "react";
+import {
+  accessToken,
+  logout,
+  getCurrentUserProfile,
+} from "./components/spotify";
+import Login from "./components/loginpage";
 // import MediaControlCard from './components/mediaCard'
-import Tracks from './components/Tracks'
-import GamePlay from './game';
-import Dropdown from './components/dropdown'
-import Profile from './components/profile'
-// import AudioPlayer from './components/audioplayer'
-
-
+import Tracks from "./components/Tracks";
+import GamePlay from "./game";
+import Dropdown from "./components/dropdown";
+import Profile from "./components/profile";
+import Redirect from "./components/redirect";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -24,7 +30,6 @@ function ScrollToTop() {
   return null;
 }
 
-
 function App() {
   const [token, setToken] = useState(null);
   const [profile, setProfile] = useState(null);
@@ -35,7 +40,7 @@ function App() {
       try {
         const { data } = await getCurrentUserProfile();
         setProfile(data);
-      } catch(e) {
+      } catch (e) {
         console.error(e);
       }
     };
@@ -43,64 +48,52 @@ function App() {
     fetchData();
   }, []);
 
-
- 
-
-//   if (refreshToken) {
-//     fetch(`/refresh_token?refresh_token=${refreshToken}`)
-//       .then(res => res.json())
-//       .then(data => console.log(data))
-//       .catch(err => console.error(err));
-//   }
-// }, []);
-return (
-  <div className="App">
-    <header className="App-header">
-  
- 
-
-{/* <MediaControlCard /> */}
-    {!token ? (
-         <Login />
+  //   if (refreshToken) {
+  //     fetch(`/refresh_token?refresh_token=${refreshToken}`)
+  //       .then(res => res.json())
+  //       .then(data => console.log(data))
+  //       .catch(err => console.error(err));
+  //   }
+  // }, []);
+  return (
+    <div className="App">
+      <header className="App-header">
+        {/* <MediaControlCard /> */}
+        {!token ? (
+          <Login />
         ) : (
-          
           <Router>
             <ScrollToTop />
             <Routes>
-              <Route path="/login" element={'Login'}>
-              </Route>
-              </Routes>
-              <nav>
+              <Route path="/login" element={<Login />}></Route>
+            </Routes>
+            <nav>
+              <a href="/game">Play/Discover</a> &nbsp;
+              <a href="/form">Playlists</a> &nbsp;
+              <a href="/blogposts">About</a>
+              <br></br>
+            </nav>
 
-<a href="/game">Play/Discover</a>  &nbsp;
-  <a href="/form">Playlists</a>  &nbsp;
-  <a href="/blogposts">About</a>
-  <br></br>
-</nav>
             <Routes>
-              <Route path="/genres" element ={<Dropdown />}>
-              </Route>
-              </Routes>
+              <Route path="/game" element={<Game />}></Route>
+            </Routes>
             <Routes>
-              <Route path="/game" element={<Game/>}>
-                </Route>
-              </Routes>
-            
-              <Routes>
-              <Route path="/About" element={'About this project'}>
-              </Route>
-              </Routes>
-              <Routes>
-              <Route path="/" element ={<button onClick={logout}>Log Out</button>}>
-              </Route>
-              </Routes>
-           
-             
+              <Route path="/" element={<Profile />}></Route>
+            </Routes>
+            <Routes>
+              <Route path="/About" element={"About this project"}></Route>
+            </Routes>
+            <Routes>
+              <Route
+                path="/game"
+                element={<button onClick={logout}>Log Out</button>}
+              ></Route>
+            </Routes>
           </Router>
         )}
-    </header>
+      </header>
 
-    {/* <> 
+      {/* <> 
                  
 
                   {profile && ( 
@@ -113,19 +106,15 @@ return (
                     </div>
                   )} 
                  </> */}
-    {/* <Game /> */}
-    {/* <GenreData /> */}
-    {/* <Sound /> */}
-    {/* <Tracks /> */}
-    <Profile />
-    {/* <AudioPlayer /> */}
-
-
-
-  </div>
-);
+      {/* <Game /> */}
+      {/* <GenreData /> */}
+      {/* <Sound /> */}
+      {/* <Tracks /> */}
+      {/* <Profile /> */}
+      {/* <VideoPlayer /> */}
+      {/* <AudioPlayer /> */}
+    </div>
+  );
 }
 
 export default App;
-
-
