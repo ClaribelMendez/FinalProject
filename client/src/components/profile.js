@@ -24,16 +24,16 @@ const [name, setName] = useState('')
           })
         );
       })
-      .then(result => {
-        // Make post request
-        fetch('http://localhost:8888/profile', {
-           method: "POST",
-           body: JSON.stringify(result)
-        })
-       .then(data => {
-        // do what you need with the data from the post request
-    });
-});
+//       .then(result => {
+//         // Make post request
+//         fetch('http://localhost:8888/profile', {
+//            method: "POST",
+//            body: JSON.stringify(result)
+//         })
+//        .then(data => {
+//         // do what you need with the data from the post request
+//     });
+// });
       // const navigate = useNavigate()
     const postUser = () => {
       

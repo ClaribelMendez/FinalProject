@@ -14,9 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-CLIENT_ID = "cb79505b7a4e48258da5fc9f2d1672c2";
-CLIENT_SECRET = "2b6b049411844eed80b871d782262f9c";
-REDIRECT_URI = "http://localhost:8888/callback";
+const config = {
+CLIENT_ID: process.env.CLIENTID,
+CLIENT_SECRET: process.env.SECRET,
+REDIRECT_URI: process.env.REDIRECTURI,
+}
 
 //creates an endpoint for the route /api
 app.get("/", (req, res) => {
@@ -61,9 +63,9 @@ app.get("/login", (req, res) => {
   const scope = "user-read-private user-read-email";
 
   const queryParams = querystring.stringify({
-    client_id: CLIENT_ID,
+    client_id: process.env.CLIENTID,
     response_type: "code",
-    redirect_uri: REDIRECT_URI,
+    redirect_uri: process.env.REDIRECTURI,
     state: state,
     scope: scope,
   });
@@ -80,11 +82,11 @@ app.get('/callback', (req, res) => {
     data: querystring.stringify({
       grant_type: 'authorization_code',
       code: code,
-      redirect_uri: REDIRECT_URI
+      redirect_uri: process.env.REDIRECTURI
     }),
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
-      Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+      Authorization: `Basic ${new Buffer.from(`${process.env.CLIENTID}:${process.env.SECRET}`).toString('base64')}`,
     },
   })
     .then(response => {
