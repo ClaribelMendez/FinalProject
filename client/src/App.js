@@ -13,12 +13,10 @@ import {
   getCurrentUserProfile,
 } from "./components/spotify";
 import Login from "./components/loginpage";
-// import MediaControlCard from './components/mediaCard'
-import Tracks from "./components/Tracks";
 import GamePlay from "./game";
 import Dropdown from "./components/dropdown";
 import Profile from "./components/profile";
-import Redirect from "./components/redirect";
+import Overlay from './components/overlay'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -58,7 +56,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <MediaControlCard /> */}
         {!token ? (
           <Login />
         ) : (
@@ -77,9 +74,9 @@ function App() {
             <Routes>
               <Route path="/game" element={<Game />}></Route>
             </Routes>
-            <Routes>
-              <Route path="/" element={<Profile />}></Route>
-            </Routes>
+            {/* <Routes>
+              <Route path="/" element={< />}></Route>
+            </Routes> */}
             <Routes>
               <Route path="/About" element={"About this project"}></Route>
             </Routes>
@@ -92,7 +89,8 @@ function App() {
           </Router>
         )}
       </header>
-
+      <Overlay />
+      
       {/* <> 
                  
 

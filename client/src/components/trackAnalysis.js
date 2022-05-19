@@ -1,6 +1,6 @@
-import { useState} from 'react'
+import { useState, useEffect } from 'react'
 import { accessToken } from './spotify'
-
+import Game from './gameplay'
 
 function TrackAnalysis (props){
 
@@ -8,6 +8,10 @@ let track1 = props.track1
 let track2 = props.track2
 let track3 = props.track3
 const [analysis, setAnalysis] = useState('')
+const [analysis2, setAnalysis2] = useState('')
+const [analysis3, setAnalysis3] = useState('')
+
+
 
 
 fetch(
@@ -24,17 +28,21 @@ fetch(
 ).then((response) => {
   console.log(
     response.json().then((data) => {
-      setAnalysis(data['audio_features'][0]['danceability'])
+      response.json(data)
+      setAnalysis(data.audio_features[0]['energy'])
+     
     })
   );
 });
 
 
-return (
-  <div>
 
-  {analysis}
- 
+return (
+  <div className='audio_features'>
+
+    <Game
+    analysis = {analysis}
+    />
   </div>
 );
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
 
-function Game() {
+function Game(props) {
   const [genres, setGenres] = useState([]);
   const [genre, setGenre] = useState("");
   const [token, setToken] = useState(null);
@@ -18,6 +18,8 @@ function Game() {
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
 
+
+  let analysis1 = props.analysis1
 
   const loadGenres = () => {
     fetch("http://localhost:8888/genres")
@@ -217,7 +219,7 @@ function Game() {
               value={item}
               onClick={handleAnswer}
             className="glow-on-hover">
-              {"\n" + item}
+           {"\n" + item}
             </button>
           ))
         : ""}
@@ -226,10 +228,23 @@ function Game() {
 
         <div id="artistInfo">
       {show ? (<h2 className="artistInfo">Artist: {artists[index]}</h2> ): ""}
-      {show ? (<img src={image[index]} alt="backgroundimage"></img>) : ('')}
+
+  {show ?    
+  <div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <img src={image[index]} alt="Artist" style={{width:"300px", height:"300px"}}/>
+    </div>
+    <div class="flip-card-back">
+      <h1>John Doe</h1>
+      <p>Architect & Engineer</p>
+      <p>We love that guy</p>
+    </div>
+  </div>
+</div> : "" }
+
       </div>
       <Tracks index={index} info={artistId[index]} image={image[index]} />
-
       {/* <Playlist
     genre = {genre}
      /> */}
