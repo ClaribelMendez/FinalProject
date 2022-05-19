@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Video from "./video";
 import Sound from "./sound";
 import TrackAnalysis from "./trackAnalysis";
-import Gameplay from "./game";
-// import Card from './card'
 
 function Tracks(props) {
   const [track1, setTrack1] = useState("");
@@ -20,9 +18,8 @@ function Tracks(props) {
 
   let id = props.info;
   let image = props.image;
-  let analysis = props.analysis
-  // let analysis = props.analysis
 
+  const callTracks = () => {
   fetch(
     `https://api.spotify.com/v1/artists/${id}/top-tracks?market=ES`,
 
@@ -51,6 +48,12 @@ function Tracks(props) {
       })
     );
   });
+  }
+
+  useEffect(() => { 
+    callTracks();
+   }, [id]);
+  
 
   // let trackTitles = [track1, track2, track3];
 
@@ -70,17 +73,16 @@ function Tracks(props) {
         trackPreview3={trackPreview3}
         artistName={artist}
       />
-      <Video
+      {/* <Video
         trackTitle1={track1}
         trackTitle2={track2}
         trackTitle3={track3}
         artistName={artist}
-      />
+      /> */}
 
       <TrackAnalysis track1={trackId1} track2={trackId2} track3={trackId3}  image = {image}/>
 
 
-     {analysis}
       {/* <Card
       image = {image}
       /> */}
