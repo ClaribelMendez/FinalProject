@@ -21,9 +21,9 @@ REDIRECT_URI: process.env.REDIRECTURI,
 }
 
 //creates an endpoint for the route /api
-// app.get("/", (req, res) => {
-//   res.json({ message: "Hello from My ExpressJS" });
-// });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+});
 
 app.get("/profile", (req, res) => {
   res.json({ message: "This is the profile page" });
