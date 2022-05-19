@@ -10,4 +10,4 @@ RUN npm run build
 WORKDIR /server
 ADD server ./
 RUN npm install
-CMD concurrently \"npm run server\" \"cd ../client && npm start\"
+CMD node server.js
