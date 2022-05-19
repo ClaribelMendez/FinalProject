@@ -176,15 +176,6 @@ nav a {
   border-radius: 10px;
 }
 
-#artistInfo {
-  margin-bottom: 100vh;
-  margin-top: -600px;
-  margin-left: 50px;
-  font-family:  'Courier New', Courier, monospace;
-  color: black
-  
-  
-}
 
 @keyframes glowing {
   0% {
@@ -198,6 +189,16 @@ nav a {
   }
 }
 
+#artistInfo {
+  margin-bottom: 100vh;
+  margin-top: -600px;
+  margin-left: 50px;
+  font-family:  'Courier New', Courier, monospace;
+  color: black
+  
+  
+}
+
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
@@ -205,7 +206,7 @@ nav a {
   width: 300px;
   height: 200px;
   /* border: 1px solid #f1f1f1; */
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  /* perspective: 1000px; Remove this if you don't want the 3D effect */
 }
 
 /* This container is needed to position the front and back side */
@@ -240,7 +241,7 @@ nav a {
 
 /* Style the back side */
 .flip-card-back {
-  background-color: dodgerblue;
+  background-color: black;
   color: white;
   transform: rotateY(180deg);
 }

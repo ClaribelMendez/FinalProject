@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
 
-function Game(props) {
+function Game() {
   const [genres, setGenres] = useState([]);
   const [genre, setGenre] = useState("");
   const [token, setToken] = useState(null);
@@ -17,9 +17,9 @@ function Game(props) {
   const [tracks, setTracks] = useState("");
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
+    
 
 
-  let analysis1 = props.analysis1
 
   const loadGenres = () => {
     fetch("http://localhost:8888/genres")
@@ -226,25 +226,24 @@ function Game(props) {
         </div>
       {show ? score : ""}
 
+
+         
         <div id="artistInfo">
       {show ? (<h2 className="artistInfo">Artist: {artists[index]}</h2> ): ""}
 
-  {show ?    
-  <div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-front">
+  {/* {show ?    
+
       <img src={image[index]} alt="Artist" style={{width:"300px", height:"300px"}}/>
-    </div>
-    <div class="flip-card-back">
-      <h1>John Doe</h1>
-      <p>Architect & Engineer</p>
-      <p>We love that guy</p>
-    </div>
-  </div>
-</div> : "" }
+
+</div> : "" } */}
 
       </div>
-      <Tracks index={index} info={artistId[index]} image={image[index]} />
+      <Tracks index={index} info={artistId[index]}  image={image[index]}/>
+
+    
+      
+
+   
       {/* <Playlist
     genre = {genre}
      /> */}
