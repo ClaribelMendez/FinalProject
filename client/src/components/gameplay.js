@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
+import Gameplay from "./game";
 
 function Game() {
   const [genres, setGenres] = useState([]);
@@ -17,9 +18,8 @@ function Game() {
   const [tracks, setTracks] = useState("");
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
-    
-
-
+  const [word, setWord] = useState("");
+  const [showButton, setShowButton] = useState(false);
 
   const loadGenres = () => {
     fetch("http://localhost:8888/genres")
@@ -114,92 +114,40 @@ function Game() {
         setArtistId(allArtistsIds);
         console.log(allArtistsIds);
       });
+      setShowButton(true)
   };
 
-  // console.log(allArtists);
-  // let arrayOfNums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-  // let randomNumber = Math.floor(Math.random() * arrayOfNums.length); // // random number from array of indices
-  // setIndex(randomNumber);
-  // console.log("this is random number" + index);
-  // let randomArtist = allArtists[randomNumber]; // random artist
-  // console.log("artist " + randomArtist);
-  // setCurrentArtist(randomArtist);
-
-  // setCurrentGenre(data.response.currentGenre);
-  // console.log("Line 198 front" + data.response.artists.items[0]['id']);
-
-  // .catch((err) => console.error(`Error: ${err}`));
-
-  //       let trackNames = []
-
-  // let trackPreview = allTracks[0]
-  // console.log('track preview line 147' , trackPreview)
-
-  // console.log('this is array ',  allTracks)
-  // let trackPreview = allTracks[index][0].split(' ').join('+')
-  // console.log(trackPreview)
-  // fetch(`https://itunes.apple.com/search?term=${allTracks[index]}&entity=musicTrack`)
-  // .then((response) => {
-  //    response.json().then(
-  //         (data) => {
-  //           let trackPreview = data.results[0]['previewUrl']
-  //           console.log('track preview', trackPreview)
-  //           console.log(data.results[0]['name'])
-
-  //           // console.log(data.results[0]['previewUrl'])
-  //           setTrackAudio(trackPreview)
-  //           // setInfo(data.results[0]['previewUrl'])
-  //           // console.log(data.results[0].artworkUrl100)
-
-  //         }
-  //     );
-  // })
-
-  // let artistName = currentArtist.split(' ').join('+')
-  // fetch(`https://itunes.apple.com/search?term=${artistName}`)
-  // .then((response) => {
-  //    response.json().then(
-  //         (data) => {
-  //           // console.log(data)
-  //           setMusic(data.results[0])
-
-  //         }
-  //     );
-  // });
-
-  // let chooseIndex = () => {
-  //   let arrayOfNums = [];
-  //   for (let i = 0; i < 10; i++) {
-  //     arrayOfNums.push(i);
-  //   }
-  //   console.log(arrayOfNums);
-  //   let randomNumber = Math.floor(Math.random() * arrayOfNums.length);
-  //   console.log(randomNumber);
-  // let randomArtist = artists[randomNumber];
-  // setCurrentArtist(randomArtist);
-  // console.log("this is the artist" + randomArtist);
-
-  // arrayOfNums = arrayOfNums.splice(randomNumber)
-  // };
+  let handleButton = (e) => {
+    setShow(false);
+    window.location.href="http://localhost:3000/gameplay"
+  };
 
   let handleAnswer = (e) => {
     if (subgenres[index].toString() === e.target.value) {
-      console.log("correct");
+      setWord("YOU GOT IT!");
       setScore(score + 1);
       if (index < 10) {
         setIndex(index + 1);
       }
+      if (index === 10) {
+        showButton(true);
+      }
     } else {
-      console.log("end of game");
+      setWord("NOT QUITE...");
       setIndex(index + 1);
+    }
+    if (index === 10) {
+      showButton(true);
     }
   };
 
   return (
-    <div className="container">
+    <div className="game_bg">
+      <div className="container">
+        <div className="word">{word}</div>
+        <div className='dropdown'>
       {!show ? (
-        <select onChange={getGenres}>
+        <select onChange={getGenres} >
           <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
           {genres.map((genre) => (
             <option key={genre.id} value={genre.value}>
@@ -210,44 +158,38 @@ function Game() {
       ) : (
         ""
       )}
-      <div className="subgenres-container">
-      {show
-        ? subgenres.map((item, index) => (
-            <button
-              type="radio"
-              key={item.index}
-              value={item}
-              onClick={handleAnswer}
-            className="glow-on-hover">
-           {"\n" + item}
-            </button>
-          ))
-        : ""}
-        </div>
-      {show ? score : ""}
-
-
-         
-        <div id="artistInfo">
-      {show ? (<h2 className="artistInfo">Artist: {artists[index]}</h2> ): ""}
-
-  {/* {show ?    
-
-      <img src={image[index]} alt="Artist" style={{width:"300px", height:"300px"}}/>
-
-</div> : "" } */}
-
       </div>
-      <Tracks index={index} info={artistId[index]}  image={image[index]}/>
+        <div className="subgenres-container">
+          {show
+            ? subgenres.map((item, index) => (
+                <button
+                  type="radio"
+                  key={item.index}
+                  value={item}
+                  onClick={handleAnswer}
+                  className="glow-on-hover"
+                >
+                  {"\n" + item}
+                </button>
+              ))
+            : ""}
+        </div>
+        {show ? score : ""}
 
-    
-      
+        {/* <div id="artistInfo">
+          {show ? <h2 className="artistInfo">Artist: {artists[index]}</h2> : ""} */}
+         <Gameplay 
+         image = {image[index]}
+         />
+          <button onClick={handleButton}>Play</button>
+        </div>
+        <Tracks index={index} info={artistId[index]} image={image[index]} />
 
-   
-      {/* <Playlist
+        {/* <Playlist
     genre = {genre}
      /> */}
-    </div>
+      </div>
+    
   );
 }
 

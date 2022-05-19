@@ -13,9 +13,8 @@ import {
   getCurrentUserProfile,
 } from "./components/spotify";
 import Login from "./components/loginpage";
-import Dropdown from "./components/dropdown";
-import Profile from "./components/profile";
-// import Overlay from './components/overlay'
+import Mainpage from './components/mainpage'
+import Gameplay from './components/game'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -69,15 +68,20 @@ function App() {
               <a href="/blogposts">About</a>
               <br></br>
             </nav>
-
             <Routes>
-              <Route path="/game" element={<Game />}></Route>
-            </Routes>
+              <Route path="/" element={<Mainpage />}></Route>
+            </Routes>  
+            <Routes>
+              <Route path="/dropdown" element={<Game />}></Route>
+            </Routes>   
             {/* <Routes>
               <Route path="/" element={< />}></Route>
             </Routes> */}
-            <Routes>
+            {/* <Routes>
               <Route path="/About" element={"About this project"}></Route>
+            </Routes> */}
+            <Routes>
+              <Route path="/gameplay" element={<Gameplay />}></Route>
             </Routes>
             <Routes>
               <Route
@@ -89,7 +93,6 @@ function App() {
         )}
       </header>
       {/* <Overlay /> */}
-      
       {/* <> 
                  
 

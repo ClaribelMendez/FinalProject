@@ -11,7 +11,7 @@ let track3 = props.track3
 let image = props.image
 // console.log(image)
 
-const [analysis1, setAnalysis1] = useState('')
+const [analysis1, setAnalysis1] = useState([])
 const [analysis2, setAnalysis2] = useState([])
 const [analysis3, setAnalysis3] = useState([])
 const [index, setIndex] = useState(0)
@@ -35,7 +35,7 @@ fetch(
     response.json().then((data) => {
       // setAnalysis1([ 'Danceability: ', data.audio_features[0].danceability, <br></br>, 'Energy : ', data.audio_features[0].energy,<br></br> ,'Key : ', data.audio_features[0].key, <br></br> ,'Loudness : ', data.audio_features[0].loudness, <br></br>,'Speechiness : ', data.audio_features[0].speechiness, <br></br> ,'Acousticness : ', data.audio_features[0].acousticness, <br></br> ,'Instrumentalness : ', data.audio_features[0].instrumentalness, <br></br> ,'Liveness : ', data.audio_features[0].liveness, <br></br> ,'Valence : ', data.audio_features[0].valence, <br></br>, 'Tempo : ', data.audio_features[0].tempo])
       // setAnalysis1((state)  =>  data.audio_features[0].danceability)
-      setAnalysis1(data.audio_features[0].energy)
+      setAnalysis1([data.audio_features[0].energy,data.audio_features[0].danceability])
       console.log('analysis ', analysis1)
       console.log(data)
     })
@@ -52,38 +52,10 @@ useEffect(() => {
 
 
 return (
-
-  <div id='artistInfo'>
-  <div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-front">
-      <img src={image} alt="Avatar" />
-    </div>
-    <div class="flip-card-back">
-      {analysis1}
-    {/* <br></br>
-    Energy : 
-    <br></br>
-      Key :
-      <br></br>
-      Loudness
-      <br></br>
-      Speechiness :
-      <br></br>
-      Acousticness :
-      <br></br>
-      Instrumentalness : 
-      <br></br>
-      Liveness :
-      <br></br>
-      Valence :
-      <br></br>
-      Tempo : */}
-         </div>
-  </div>
+<div>
+{analysis1}
 </div>
 
-</div>
 );
 }
 

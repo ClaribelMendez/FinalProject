@@ -3,6 +3,7 @@ import { accessToken } from "./spotify";
 import Video from "./video";
 import Sound from "./sound";
 import TrackAnalysis from "./trackAnalysis";
+import Gameplay from './game'
 
 function Tracks(props) {
   const [track1, setTrack1] = useState("");
@@ -80,9 +81,11 @@ function Tracks(props) {
         artistName={artist}
       /> */}
 
-      <TrackAnalysis track1={trackId1} track2={trackId2} track3={trackId3}  image = {image}/>
+      <TrackAnalysis track1={trackId1} track2={trackId2} track3={trackId3}/>
 
-
+{/* <Gameplay 
+image = {image}
+/> */}
       {/* <Card
       image = {image}
       /> */}
