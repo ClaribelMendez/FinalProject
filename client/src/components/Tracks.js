@@ -18,7 +18,7 @@ function Tracks(props) {
   const [artist, setArtist] = useState("");
 
   let id = props.info;
-  let image = props.image;
+  let artistImage = props.image;
 
   const callTracks = () => {
   fetch(
@@ -60,7 +60,6 @@ function Tracks(props) {
 
   return (
     <div>
-    
       {/* <GamePlay
         trackTitle1={track1}
         trackTitle2={track2}
@@ -83,9 +82,7 @@ function Tracks(props) {
 
       <TrackAnalysis track1={trackId1} track2={trackId2} track3={trackId3}/>
 
-{/* <Gameplay 
-image = {image}
-/> */}
+
       {/* <Card
       image = {image}
       /> */}

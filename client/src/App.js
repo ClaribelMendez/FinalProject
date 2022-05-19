@@ -71,18 +71,11 @@ function App() {
             <Routes>
               <Route path="/" element={<Mainpage />}></Route>
             </Routes>  
+          
             <Routes>
-              <Route path="/dropdown" element={<Game />}></Route>
-            </Routes>   
-            {/* <Routes>
-              <Route path="/" element={< />}></Route>
-            </Routes> */}
-            {/* <Routes>
-              <Route path="/About" element={"About this project"}></Route>
-            </Routes> */}
-            <Routes>
-              <Route path="/gameplay" element={<Gameplay />}></Route>
-            </Routes>
+              <Route path="/game" element={<Game />}></Route>
+            </Routes>  
+           
             <Routes>
               <Route
                 path="/game"

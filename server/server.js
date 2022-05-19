@@ -8,6 +8,7 @@ const path = require("path");
 const fetch = require("node-fetch");
 const { response } = require("express");
 const app = express();
+const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 const PORT = 8888;
 
 app.use(express.json());

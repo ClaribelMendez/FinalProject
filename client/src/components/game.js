@@ -1,32 +1,34 @@
-import React from 'react'
+// import React from 'react'
+// im
 
 
-const Gameplay = (props) => {
-    const analysis = props.analysis
-    const image = props.image
+// const Gameplay = (props) => {
+//   const [image,setImage] = useState('')
+//     let analysis = props.analysis
+//     let artistImage = props.artistImage
+
   
-    console.log(image)
-    // const trackTitle = trackTitle
-  return (
-    <div>
+//     // const trackTitle = trackTitle
+//   return (
+//     <div>
           
 
- <div id='artistInfo'>
-   <div class="flip-card">
- <div class="flip-card-inner">
-    <div class="flip-card-front">
-      <img src={image} alt="Avatar" />
-    </div>
-    <div class="flip-card-back">
+//  <div id='artistInfo'>
+//    <div class="flip-card">
+//  <div class="flip-card-inner">
+//     <div class="flip-card-front">
+//       <img src={artistImage} alt="Avatar" />
+//     </div>
+//     <div class="flip-card-back">
       
 
-          </div>
-  </div>
-</div> 
-</div>
+//           </div>
+//   </div>
+// </div> 
+// </div>
 
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
-export default Gameplay
+// export default Gameplay
