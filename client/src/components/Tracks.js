@@ -3,7 +3,6 @@ import { accessToken } from "./spotify";
 import Video from "./video";
 import Sound from "./sound";
 import TrackAnalysis from "./trackAnalysis";
-import Gameplay from './game'
 
 function Tracks(props) {
   const [track1, setTrack1] = useState("");
@@ -16,9 +15,11 @@ function Tracks(props) {
   const [trackPreview2, setTrackPreview2] = useState("");
   const [trackPreview3, setTrackPreview3] = useState("");
   const [artist, setArtist] = useState("");
+  const [show, setShow] = useState(false)
 
   let id = props.info;
   let artistImage = props.image;
+  
 
   const callTracks = () => {
   fetch(
@@ -46,6 +47,7 @@ function Tracks(props) {
         setTrackPreview2(data.tracks[1]["preview_url"]);
         setTrackPreview3(data.tracks[2]["preview_url"]);
         setArtist(data.tracks[0]["artists"][0]["name"]);
+        setShow(true)
       })
     );
   });
@@ -60,12 +62,15 @@ function Tracks(props) {
 
   return (
     <div>
-      {/* <GamePlay
-        trackTitle1={track1}
-        trackTitle2={track2}
-        trackTitle3={track3}
-        trackNames={trackTitles}
-      /> */}
+      <div className='trackTitles' >
+      {track1}
+      <br></br>
+      {track2}
+      <br></br>
+
+      {track3}
+      </div>
+      
 
       <Sound
         trackPreview1={trackPreview1}
@@ -82,10 +87,6 @@ function Tracks(props) {
 
       <TrackAnalysis track1={trackId1} track2={trackId2} track3={trackId3}/>
 
-
-      {/* <Card
-      image = {image}
-      /> */}
     </div>
   );
 }

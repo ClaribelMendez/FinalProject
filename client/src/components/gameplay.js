@@ -205,7 +205,8 @@ function Game(props) {
   return (
 
     <div className="container">
-      <div className='dropdown_container'>
+      <div className={!show ? "dropdownContainer" : ''}>
+       
     {!show ? (
         <select onChange={getGenres} className='dropdown'>
           <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
@@ -238,7 +239,7 @@ function Game(props) {
       {show ? score : ""}
 
         <div id="artistInfo">
-      {show ? (<h2 className="artistInfo">Artist: {artists[index]}</h2> ): ""}
+      {show ? (<h2 className="artistInfo">{artists[index]}</h2> ): ""}
 
   {show ?
   <div class="flip-card">
