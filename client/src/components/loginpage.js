@@ -1,6 +1,6 @@
 const Login = () => {
 
-  
+
   // <StyledLoginContainer>
 return (
   // <div className='login_container'>
@@ -9,15 +9,15 @@ return (
     <h1> INTUNE </h1>
     </div>
   <div className='login_button'>
-    <a href="http://localhost:8888/login">
+    <a href="/login">
       Log in to Spotify
       </a>
       </div>
       </div>
-       
-      
+
+
 )
 }
-  
+
 
 export default Login;
