@@ -1,14 +1,11 @@
-// import {Howl} from 'howler';
 import { useState, useRef } from "react";
-import ReactPlayer from "react-player";
-import SpotifyPlayer from "react-spotify-web-playback";
 
 function Sound(props) {
-  // const[isPlaying, setPlaying] = useState(false)
   let track1 = props.trackPreview1;
   let track2 = props.trackPreview2;
   let track3 = props.trackPreview3;
 
+  const [show, setShow] = useState(false)
   const [audioStatus1, changeAudioStatus1] = useState(false);
   const [audioStatus2, changeAudioStatus2] = useState(false);
   const [audioStatus3, changeAudioStatus3] = useState(false);
@@ -59,13 +56,15 @@ function Sound(props) {
 
   return (
     <div className="audioButtons">
+     
       <audio ref={myRef1} src={track1} />
+      
       {audioStatus1 ? (
         <button onClick={pauseAudio1}>pause</button>
       ) : (
         <button onClick={startAudio1}>play</button>
       )}
-
+      : ''}
       <audio ref={myRef2} src={track2} />
       {audioStatus2 ? (
         <button onClick={pauseAudio2}>pause</button>
@@ -79,6 +78,7 @@ function Sound(props) {
       ) : (
         <button onClick={startAudio3}>play</button>
       )}
+
     </div>
   );
 }

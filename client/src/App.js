@@ -15,6 +15,7 @@ import {
 import Login from "./components/loginpage";
 import Mainpage from './components/mainpage'
 import Gameplay from './components/game'
+import Profile from './components/profile'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -61,17 +62,18 @@ function App() {
             <ScrollToTop />
              <Routes>
               <Route path="/login" element={<Login />}></Route>
-            </Routes> */
+            </Routes>
+            <Routes>
+              <Route path="/" element={<Profile />}
+              ></Route>
+            </Routes>  
             <nav>
               <a href="/game">Play/Discover</a> &nbsp;
               <a href="/form">Playlists</a> &nbsp;
               <a href="/blogposts">About</a>
               <br></br>
             </nav>
-             <Routes>
-              <Route path="/" element={<Mainpage />}
-              ></Route>
-            </Routes>    
+             
           
             <Routes>
               <Route path="/game" element={<Game />}></Route>

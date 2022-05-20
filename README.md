@@ -14,6 +14,10 @@ Ability to choose genres
 Earn a playlist if you score 8 out of 10
 Playlist is added to users Spotify account
 
+### Built With
+
+Intune is a (PERN) stack built using PostgreSQL, Express, React, and Node
+
 
 2. To restore the DB dump file that the project already contain, just run the command `psql -U postgres -f db.sql`. Make sure that you have your Postgres password on hand. The psql console will ask you for your password. 
 3. To clean your folder from the owner git, run the command `rm -rf .git`

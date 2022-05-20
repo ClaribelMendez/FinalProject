@@ -1,10 +1,16 @@
 
-
+.loginbackground {
+  background-image: url(Main_bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100em;
+  height: 100vh;
+}
 .login_button {
   background-color: rgb(243, 159, 4);
   border: none;
   color: black;
-  padding: 10px 20px;
+  padding: 20px 30px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -13,10 +19,13 @@
   border-radius: 16px;
   margin: 0;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 70%;
+  left: 75%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  font-size: large;
+  
+  
 }
 
 .login_button:hover {
@@ -40,11 +49,12 @@
 }
 
 .mainpage {
-  background-image: url(Red-Orange_BG.png);
+  background-image: url(username.png);
   background-size: cover;
   background-repeat: no-repeat;
   width: 100em;
   height: 100vh;
+  margin-top: -1.5%;
 }
 
 .instructions {
@@ -363,6 +373,6 @@ nav a {
 .audioButtons {
   position: absolute;
   margin-top: -44%;
-  width: 2%;
-  height:2%
+  
 }
+

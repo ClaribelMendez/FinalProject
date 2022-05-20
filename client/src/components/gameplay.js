@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
 import { Modal, Button} from "react-bootstrap";
-
+import Playlist from './playlist'
 
 function Game(props) {
   const [genres, setGenres] = useState([]);
@@ -256,9 +256,12 @@ function Game(props) {
 </div> : "" }
 
       </div>
+
       <Tracks index={index} info={artistId[index]} image={image[index]} />
 
-
+      {/* <Playlist  
+      genre = {genre}
+      />   */}
 
     </div>
   );
