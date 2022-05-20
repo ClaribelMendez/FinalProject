@@ -29,10 +29,14 @@ const Mainpage = () => {
 
 
      If you score 8/10 you earn a playlist from this category!
+
+
      </div>
 
 
      <button className='start_button' onClick={handleStartButton}>START</button>
+
+     
     </div>
   )
 }

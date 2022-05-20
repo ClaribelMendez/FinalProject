@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
+import { Modal, Button} from "react-bootstrap";
+
 
 function Game(props) {
   const [genres, setGenres] = useState([]);
@@ -17,6 +19,10 @@ function Game(props) {
   const [tracks, setTracks] = useState("");
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
+  const [modal, setModal] = useState(false);
+  
+  const handleClose = () => setModal(false);
+  const handleShow = () => setModal(true);
 
 
   let analysis1 = props.analysis1
@@ -197,8 +203,9 @@ function Game(props) {
   };
 
   return (
+    
     <div className="container">
-      {!show ? (
+    {!show ? (
         <select onChange={getGenres}>
           <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
           {genres.map((genre) => (
@@ -245,9 +252,9 @@ function Game(props) {
 
       </div>
       <Tracks index={index} info={artistId[index]} image={image[index]} />
-      {/* <Playlist
-    genre = {genre}
-     /> */}
+     
+      
+     
     </div>
   );
 }
