@@ -20,7 +20,7 @@ function Game(props) {
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState(false);
-  
+
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
 
@@ -203,7 +203,7 @@ function Game(props) {
   };
 
   return (
-    
+
     <div className="container">
     {!show ? (
         <select onChange={getGenres}>
@@ -236,7 +236,7 @@ function Game(props) {
         <div id="artistInfo">
       {show ? (<h2 className="artistInfo">Artist: {artists[index]}</h2> ): ""}
 
-  {show ?    
+  {show ?
   <div class="flip-card">
   <div class="flip-card-inner">
     <div class="flip-card-front">
@@ -252,9 +252,9 @@ function Game(props) {
 
       </div>
       <Tracks index={index} info={artistId[index]} image={image[index]} />
-     
-      
-     
+
+
+
     </div>
   );
 }

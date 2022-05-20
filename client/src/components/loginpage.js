@@ -1,6 +1,6 @@
 const Login = () => {
 
-  
+
   // <StyledLoginContainer>
 return (
   // <div className='login_container'>
@@ -14,10 +14,10 @@ return (
       </a>
       </div>
       </div>
-       
-      
+
+
 )
 }
-  
+
 
 export default Login;
