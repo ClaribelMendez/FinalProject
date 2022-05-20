@@ -1,3 +1,5 @@
+
+
 .login_button {
   background-color: rgb(243, 159, 4);
   border: none;
@@ -37,6 +39,19 @@
   height: 50%;
 }
 
+.mainpage {
+  background-image: url(Red-Orange_BG.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100em;
+  height: 100vh;
+}
+
+.instructions {
+  background-color: black;
+  color: white
+}
+
 nav {
   background-color: #0a2137;
   justify-content: end;
@@ -62,7 +77,9 @@ nav a {
   font-family: sans-serif;
 }
 
-.container {
+
+
+ .container {
   background-color: rgb(7, 0, 0, 0.4);
   margin: auto;
   width: 85%;
@@ -71,8 +88,8 @@ nav a {
   padding: 10px;
   margin-top: 20px;
   /* overflow: hidden */
-
 }
+
 
 .App {
   background-image: url(Background.png);
@@ -80,6 +97,10 @@ nav a {
   background-repeat: no-repeat;
   width: 100em;
   height: 100vh;
+} 
+
+.dropdown {
+ margin-bottom: 400vh
 }
 
 .subgenres-container {
@@ -305,4 +326,9 @@ nav a {
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity:1 ;}
+}
+
+.modal {
+  overflow:inherit;
+  margin-bottom: 50vh;
 }

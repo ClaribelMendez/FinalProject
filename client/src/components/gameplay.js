@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
+import { Modal, Button} from "react-bootstrap";
 
-function Game() {
+
+function Game(props) {
   const [genres, setGenres] = useState([]);
   const [genre, setGenre] = useState("");
   const [token, setToken] = useState(null);
@@ -17,9 +19,13 @@ function Game() {
   const [tracks, setTracks] = useState("");
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
-    
+  const [modal, setModal] = useState(false);
+  
+  const handleClose = () => setModal(false);
+  const handleShow = () => setModal(true);
 
 
+  let analysis1 = props.analysis1
 
   const loadGenres = () => {
     fetch("http://localhost:8888/genres")
@@ -197,8 +203,9 @@ function Game() {
   };
 
   return (
+    
     <div className="container">
-      {!show ? (
+    {!show ? (
         <select onChange={getGenres}>
           <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
           {genres.map((genre) => (
@@ -226,27 +233,28 @@ function Game() {
         </div>
       {show ? score : ""}
 
-
-         
         <div id="artistInfo">
       {show ? (<h2 className="artistInfo">Artist: {artists[index]}</h2> ): ""}
 
-  {/* {show ?    
-
+  {show ?    
+  <div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
       <img src={image[index]} alt="Artist" style={{width:"300px", height:"300px"}}/>
-
-</div> : "" } */}
+    </div>
+    <div class="flip-card-back">
+      <h1>John Doe</h1>
+      <p>Architect & Engineer</p>
+      <p>We love that guy</p>
+    </div>
+  </div>
+</div> : "" }
 
       </div>
-      <Tracks index={index} info={artistId[index]}  image={image[index]}/>
-
-    
+      <Tracks index={index} info={artistId[index]} image={image[index]} />
+     
       
-
-   
-      {/* <Playlist
-    genre = {genre}
-     /> */}
+     
     </div>
   );
 }
