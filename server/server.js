@@ -14,15 +14,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+
 const config = {
   CLIENT_ID: process.env.CLIENTID,
   CLIENT_SECRET: process.env.SECRET,
   REDIRECT_URI: process.env.REDIRECTURI
 };
-
+app.use(express.static(REACT_BUILD_DIR));
 //creates an endpoint for the route /api
 app.get("/", (req, res) => {
-  res.json({ message: "This is the home page" });
+  res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
 
 app.get("/profile", (req, res) => {
