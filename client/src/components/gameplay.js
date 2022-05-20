@@ -205,8 +205,9 @@ function Game(props) {
   return (
 
     <div className="container">
+      <div className='dropdown_container'>
     {!show ? (
-        <select onChange={getGenres}>
+        <select onChange={getGenres} className='dropdown'>
           <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
           {genres.map((genre) => (
             <option key={genre.id} value={genre.value}>
@@ -217,9 +218,11 @@ function Game(props) {
       ) : (
         ""
       )}
-      <div className="subgenres-container">
+      </div>
+      
+      <div className={show ? "subgenres-container" : ''}>
       {show
-        ? subgenres.map((item, index) => (
+        ? (subgenres.map((item, index) => (
             <button
               type="radio"
               key={item.index}
@@ -228,9 +231,10 @@ function Game(props) {
             className="glow-on-hover">
            {"\n" + item}
             </button>
-          ))
-        : ""}
+          )))
+        : ("")}
         </div>
+        
       {show ? score : ""}
 
         <div id="artistInfo">

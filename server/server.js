@@ -101,7 +101,7 @@ app.get("/callback", (req, res) => {
           refresh_token,
         });
 
-        res.redirect(`/?${queryParams}`);
+        res.redirect(`http://localhost:3000/?${queryParams}`);
       } else {
         res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }

@@ -9,7 +9,7 @@ return (
     <h1> INTUNE </h1>
     </div>
   <div className='login_button'>
-    <a href="/login">
+    <a href="http://localhost:8888/login">
       Log in to Spotify
       </a>
       </div>
