@@ -59,18 +59,19 @@ function App() {
         ) : (
           <Router>
             <ScrollToTop />
-            <Routes>
+             <Routes>
               <Route path="/login" element={<Login />}></Route>
-            </Routes>
+            </Routes> */
             <nav>
               <a href="/game">Play/Discover</a> &nbsp;
               <a href="/form">Playlists</a> &nbsp;
               <a href="/blogposts">About</a>
               <br></br>
             </nav>
-            <Routes>
-              <Route path="/" element={<Mainpage />}></Route>
-            </Routes>  
+             <Routes>
+              <Route path="/" element={<Mainpage />}
+              ></Route>
+            </Routes>    
           
             <Routes>
               <Route path="/game" element={<Game />}></Route>

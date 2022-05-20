@@ -3,7 +3,7 @@ import React from 'react'
 const Mainpage = () => {
 
     let handleStartButton = (e) => {
-        window.location.href="http://localhost:3000/game"
+        window.location.href="/game"
     }
   return (
     <div className='mainpage'>

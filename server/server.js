@@ -22,6 +22,7 @@ const config = {
 };
 app.use(express.static(REACT_BUILD_DIR));
 //creates an endpoint for the route /api
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 });
@@ -100,7 +101,7 @@ app.get("/callback", (req, res) => {
           refresh_token,
         });
 
-        res.redirect(`http://localhost:3000/?${queryParams}`);
+        res.redirect(`/?${queryParams}`);
       } else {
         res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }

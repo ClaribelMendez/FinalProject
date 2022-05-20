@@ -28,7 +28,7 @@ function Game(props) {
   let analysis1 = props.analysis1
 
   const loadGenres = () => {
-    fetch("http://localhost:8888/genres")
+    fetch("/genres")
       .then((response) => response.json())
       .then((genre) => {
         setGenres(genre);
@@ -48,7 +48,7 @@ function Game(props) {
 
     console.log("Line 13 frontend ", genre);
     // add to request body
-    fetch(`http://localhost:8888/game?genre=${genre}&token=${token}`, {
+    fetch(`/game?genre=${genre}&token=${token}`, {
       method: "get",
       headers: {
         Accept: "application/json",
