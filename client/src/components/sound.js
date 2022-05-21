@@ -64,7 +64,7 @@ function Sound(props) {
       ) : (
         <button onClick={startAudio1}>play</button>
       )}
-      : ''}
+      
       <audio ref={myRef2} src={track2} />
       {audioStatus2 ? (
         <button onClick={pauseAudio2}>pause</button>

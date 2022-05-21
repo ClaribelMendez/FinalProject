@@ -24,7 +24,7 @@ const [ID, setID] = useState('')
                 console.log(data['display_name'])
                 setName(data['display_name'])
                 setID(data['id'])
-           
+                console.log(ID)           
           })
         );
       })
@@ -58,15 +58,16 @@ const [ID, setID] = useState('')
 
 
     return (
-        <div className='mainpage'>
-              <h1>  Hello:
-              {name}</h1>
-            <button type="button" onClick={handleStart} className='startButton'>START</button>
-                        </div>
+        <><div className='mainpage'>
+            
 
-        // <Playlist
-        // id = {id}
-        // />
+              <h1>  Hello:
+                {name}</h1>
+            <button type="button" onClick={handleStart} className='user'>START</button>
+        </div><Playlist
+                id={ID} />
+                
+                </>
 
     )
 }

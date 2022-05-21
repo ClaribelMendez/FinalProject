@@ -143,7 +143,7 @@ app.get("/game", async (req, res) => {
   token = req.query.token;
   console.log("backend line 315. Genre: " + genre);
   fetch(
-    `https://api.spotify.com/v1/search?q=genre%3A%20${genre}&type=artist&limit=10&offset=35`,
+    `https://api.spotify.com/v1/search?q=genre%3A%20${genre}&type=artist&limit=10&offset=11`,
     {
       method: "get",
       headers: {

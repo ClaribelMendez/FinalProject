@@ -16,6 +16,7 @@ import Login from "./components/loginpage";
 import Mainpage from './components/mainpage'
 import Gameplay from './components/game'
 import Profile from './components/profile'
+import Playlist from './components/playlist' 
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -45,13 +46,7 @@ function App() {
     fetchData();
   }, []);
 
-  //   if (refreshToken) {
-  //     fetch(`/refresh_token?refresh_token=${refreshToken}`)
-  //       .then(res => res.json())
-  //       .then(data => console.log(data))
-  //       .catch(err => console.error(err));
-  //   }
-  // }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -69,22 +64,26 @@ function App() {
             </Routes>  
             <nav>
               <a href="/game">Play/Discover</a> &nbsp;
-              <a href="/form">Playlists</a> &nbsp;
+              <a href="/playlists">Playlists</a> &nbsp;
               <a href="/blogposts">About</a>
               <br></br>
             </nav>
-             
-          
-            <Routes>
-              <Route path="/game" element={<Game />}></Route>
-            </Routes>  
-           
             <Routes>
               <Route
                 path="/game"
                 element={<button onClick={logout}>Log Out</button>}
               ></Route>
             </Routes>
+             
+          
+            <Routes>
+              <Route path="/game" element={<Game />}></Route>
+            </Routes>  
+           <Routes> */}
+              <Route path="/playlist" element={<Playlist />}></Route>
+            </Routes>  
+            
+          
           </Router>
         )}
       </header>

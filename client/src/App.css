@@ -59,7 +59,9 @@
 
 .instructions {
   background-color: black;
-  color: white
+  color: white;
+  font-family: sans-serif;
+  display:block
 }
 
 nav {
@@ -85,6 +87,9 @@ nav a {
   text-decoration: none;
   color: white;
   font-family: sans-serif;
+  margin-left: 5%;
+  justify-content: end;
+
 }
 
 
@@ -376,3 +381,34 @@ nav a {
   
 }
 
+.score {
+  size: medium;
+  margin-left: 50%;
+  font-weight: bold;
+  margin-top: 1%
+}
+
+.user{
+  margin-top:5%;
+}
+
+.playlists {
+  background-color: black;
+  color: white;
+  width: 90%;
+  height: 90vh;
+  margin-left: 5%;
+
+}
+
+.playlistinfo {
+  margin-left: 5%;
+  font-family: sans-serif;
+}
+
+.addplaylist {
+  margin-top: 5%;
+  margin-left: 5%;
+  height: 30px;
+  width: 100px
+}

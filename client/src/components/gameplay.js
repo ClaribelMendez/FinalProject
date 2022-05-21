@@ -20,6 +20,8 @@ function Game(props) {
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState(false);
+  const [playlistButton, setPlaylistButton] = useState(false)
+  
 
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
@@ -190,24 +192,40 @@ function Game(props) {
   // };
 
   let handleAnswer = (e) => {
+    if(index === 10){
+      setShow(false)
+      setPlaylistButton(true)
+     }
     if (subgenres[index].toString() === e.target.value) {
       console.log("correct");
       setScore(score + 1);
-      if (index < 10) {
-        setIndex(index + 1);
-      }
+      setIndex(index+1)
+      
     } else {
       console.log("end of game");
       setIndex(index + 1);
     }
+  
   };
 
+  let playlist = (e) => {
+    window.location.href='http://localhost:3000/playlist'
+  }
+
   return (
+        
 
     <div className="container">
       <div className={!show ? "dropdownContainer" : ''}>
        
+
+      <div className='instructions'>
+
+     
+  
+    </div>
     {!show ? (
+
         <select onChange={getGenres} className='dropdown'>
           <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
           {genres.map((genre) => (
@@ -220,6 +238,8 @@ function Game(props) {
         ""
       )}
       </div>
+
+      {playlistButton ? <button onClick={playlist}>You earned A playlist! Click here to check it out</button> : '' }
       
       <div className={show ? "subgenres-container" : ''}>
       {show
@@ -236,7 +256,10 @@ function Game(props) {
         : ("")}
         </div>
         
-      {show ? score : ""}
+        <div className='score'>
+      {show ? ("score " ) : ('')} 
+       {show ? score : ""}
+      </div>
 
         <div id="artistInfo">
       {show ? (<h2 className="artistInfo">{artists[index]}</h2> ): ""}
@@ -248,20 +271,25 @@ function Game(props) {
       <img src={image[index]} alt="Artist" style={{width:"300px", height:"300px"}}/>
     </div>
     <div class="flip-card-back">
-      <h1>John Doe</h1>
-      <p>Architect & Engineer</p>
-      <p>We love that guy</p>
+      danceability: .75
+      <br></br>
+      energy: .29
+      <br></br>
+      tempo: 140.134
     </div>
   </div>
-</div> : "" }
+</div> 
+: "" } 
 
       </div>
 
       <Tracks index={index} info={artistId[index]} image={image[index]} />
 
-      {/* <Playlist  
+     <Playlist   
       genre = {genre}
-      />   */}
+      />   
+
+      
 
     </div>
   );
