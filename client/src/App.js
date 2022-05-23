@@ -31,29 +31,27 @@ import About from "./components/about";
 
 function App() {
   const [token, setToken] = useState(null);
-  const [profile, setProfile] = useState(null);
+  // const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     setToken(accessToken);
-    const fetchData = async () => {
-      try {
-        const { data } = await getCurrentUserProfile();
-        setProfile(data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
+    // const fetchData = async () => {
+    //   try {
+    //     const { data } = await getCurrentUserProfile();
+    //     setProfile(data);
+    //   } catch (e) {
+    //     console.error(e);
+    //   }
+    // };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
         {!token ? (
-          [<Login />, <Router> <Routes>
-            <Route path="/about" element={<About />}></Route>
-          </Routes></Router>]
+          <Login /> 
         ) : (
           <Router>
             {/* <ScrollToTop /> */}
@@ -81,6 +79,16 @@ function App() {
             <Routes>
               <Route
                 path="/game"
+                element={<a href className='logout_button'onClick={logout}>Log Out</a>}
+              ></Route>
+            </Routes>
+            
+            <Routes>
+            <Route path="/about" element={<About />}></Route>
+          </Routes>
+          <Routes>
+              <Route
+                path="/about"
                 element={<a href className='logout_button'onClick={logout}>Log Out</a>}
               ></Route>
             </Routes>

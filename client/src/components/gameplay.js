@@ -49,7 +49,7 @@ function Game(props) {
     console.log("Line 13 frontend ", genre);
     // add to request body
     fetch(`/game?genre=${genre}&token=${token}`, {
-      method: "get",
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -310,6 +310,7 @@ function Game(props) {
               ""
             )}
           </div>
+          
 
           <Tracks index={index} info={artistId[index]} image={image[index]} />
           {/* 
