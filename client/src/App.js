@@ -51,7 +51,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         {!token ? (
-          [<Login />, <About />]
+          [<Login />, <Router> <Routes>
+            <Route path="/about" element={<About />}></Route>
+          </Routes></Router>]
         ) : (
           <Router>
             {/* <ScrollToTop /> */}
@@ -70,14 +72,17 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={<a href className='logout_button'onClick={logout}>Log Out</a>}
+                element={<a href className='logout_button1'onClick={logout}>Log Out</a>}
               ></Route>
             </Routes>
             <Routes>
               <Route path="/game" element={<Game />}></Route>
             </Routes>
             <Routes>
-              <Route path="/about" element={<About />}></Route>
+              <Route
+                path="/game"
+                element={<a href className='logout_button'onClick={logout}>Log Out</a>}
+              ></Route>
             </Routes>
           </Router>
         )}

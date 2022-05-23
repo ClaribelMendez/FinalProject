@@ -9,22 +9,21 @@ const fetch = require("node-fetch");
 const { response } = require("express");
 const app = express();
 const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "build");
-const PORT = process.env.PORT || 8888
+const PORT = process.env.PORT || 8888;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-
 const config = {
   CLIENT_ID: process.env.CLIENTID,
   CLIENT_SECRET: process.env.SECRET,
-  REDIRECT_URI: process.env.REDIRECTURI
+  REDIRECT_URI: process.env.REDIRECTURI,
 };
 app.use(express.static(REACT_BUILD_DIR));
 //creates an endpoint for the route /api
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+  res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
 app.get("/profile", (req, res) => {
@@ -61,7 +60,8 @@ app.get("/login", (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
 
-  const scope = "user-read-private user-read-email playlist-modify-public playlist-modify-private";
+  const scope =
+    "user-read-private user-read-email playlist-modify-public playlist-modify-private";
 
   const queryParams = querystring.stringify({
     client_id: process.env.CLIENTID,
@@ -141,7 +141,6 @@ let artistid;
 app.get("/game", async (req, res) => {
   genre = req.query.genre;
   token = req.query.token;
-  console.log("backend line 315. Genre: " + genre);
   fetch(
     `https://api.spotify.com/v1/search?q=genre%3A%20${genre}&type=artist&limit=10&offset=11`,
     {
@@ -157,7 +156,6 @@ app.get("/game", async (req, res) => {
       response.json().then((data) => {
         res.json(data);
         console.log(data.artists);
-        // console.log(data.artists.items[0]['name'])
       })
     );
   });

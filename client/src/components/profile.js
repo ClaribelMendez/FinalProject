@@ -1,10 +1,14 @@
 import { accessToken } from "./spotify";
 import Playlist from "./playlist";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Dropdown } from "semantic-ui-react";
+import SelectSearch from "react-select-search";
 
 function Profile() {
   const [name, setName] = useState("");
   const [ID, setID] = useState("");
+  const [genres, setGenres] = useState([]);
+  const [genreSelection, setGenreSelection] = useState("");
 
   fetch(
     "https://api.spotify.com/v1/me",
@@ -29,39 +33,50 @@ function Profile() {
   });
 
   const handleStart = (e) => {
-    window.location.href = "http://localhost:3000/game";
+    window.location.href = "/game";
   };
 
+
+
+
+
+
   return (
-    <>
+    
       <div className="mainpage">
-        <div id='logo'>
-        <h1>InTune </h1>
+        <div id="logo">
+          <h1>InTune </h1>
         </div>
-        <span className='tag'>CONNECTING YOU TO THE 
-        <br></br>
-         SOUNDS YOU LOVE AND 
-         <br></br>
-         SOON TO DISCOVER. 
-         <br></br>
-         A MUSIC TRIVIA GAME 
-         <br></br>
-         TO LEARN SUBGENRES</span>
-        <span className='profileInfo'>
-        
-          {" "}
-          Hello:
-          {name} / 
-        
+        <span className="tag">
+          CONNECTING YOU TO THE
+          <br></br>
+          SOUNDS YOU LOVE AND
+          <br></br>
+          SOON TO DISCOVER.
+          <br></br>A MUSIC TRIVIA GAME
+          <br></br>
+          TO LEARN SUBGENRES.
         </span>
-        <div id='start_button'>
+        <span className="profileInfo">
+          {" "}
+          Not {name} ? /
+        </span>
+         <div id='start_button'>
         <button type="button" onClick={handleStart} className="start_button">
           START
         </button>
+        <div> 
+     
+
+
+          
         </div>
-      </div>
-      {/* <Playlist id={ID} /> */}
-    </>
+
+        </div> 
+         </div>
+    
+    /* <Playlist id={ID} /> */
+    
   );
 }
 

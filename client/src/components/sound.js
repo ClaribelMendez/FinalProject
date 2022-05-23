@@ -56,7 +56,7 @@ function Sound(props) {
 
   return (
     <div className="audioButtons">
-     
+     {show ? (<div>
       <audio ref={myRef1} src={track1} />
       
       {audioStatus1 ? (
@@ -78,7 +78,7 @@ function Sound(props) {
       ) : (
         <button onClick={startAudio3}>play</button>
       )}
-
+    </div>) : ('')}
     </div>
   );
 }

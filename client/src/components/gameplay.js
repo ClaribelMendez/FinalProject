@@ -1,33 +1,31 @@
 import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
-import { Modal, Button} from "react-bootstrap";
-import Playlist from './playlist'
+import { Modal, Button } from "react-bootstrap";
+import Playlist from "./playlist";
 
 function Game(props) {
   const [genres, setGenres] = useState([]);
-  const [genre, setGenre] = useState("");
+  const [genre, setGenre] = useState(" ");
   const [token, setToken] = useState(null);
   const [subgenres, setSubgenres] = useState([]);
   const [score, setScore] = useState(0);
   const [info, setInfo] = useState([]);
   const [index, setIndex] = useState(0);
-  const [currentArtist, setCurrentArtist] = useState("");
+  const [currentArtist, setCurrentArtist] = useState(" ");
   const [image, setImage] = useState([]);
   const [music, setMusic] = useState([]);
   const [artistId, setArtistId] = useState([]);
-  const [tracks, setTracks] = useState("");
+  const [tracks, setTracks] = useState(" ");
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState(false);
-  const [playlistButton, setPlaylistButton] = useState(false)
-  
+  const [playlistButton, setPlaylistButton] = useState(false);
 
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
 
-
-  let analysis1 = props.analysis1
+  let analysis1 = props.analysis1;
 
   const loadGenres = () => {
     fetch("/genres")
@@ -192,102 +190,134 @@ function Game(props) {
   // };
 
   let handleAnswer = (e) => {
-    if(index === 10){
-      setShow(false)
-      setPlaylistButton(true)
-     }
+    if (index === 10) {
+      setShow(false);
+      setPlaylistButton(true);
+    }
     if (subgenres[index].toString() === e.target.value) {
       console.log("correct");
       setScore(score + 1);
-      setIndex(index+1)
-      
+      setIndex(index + 1);
     } else {
       console.log("end of game");
       setIndex(index + 1);
     }
-  
   };
 
   let playlist = (e) => {
-    window.location.href='http://localhost:3000/playlist'
-  }
+    window.location.href = "/playlist";
+  };
 
   return (
-        
-    <div id='gamePage'>
-    <div className="container">
-      <div className={!show ? "dropdownContainer" : ''}>
-       
+    <div id="gamePage">
+      <div className="container">
+        <div className={!show ? "dropdownContainer" : ""}>
+          <div className="instructions">
+            {!show ? (
+              <select onChange={getGenres} className="dropdown">
+                <option value="⬇️ Select a genre ⬇️">
+                  {" "}
+                  -- Select a genre --{" "}
+                </option>
+                {genres.map((genre) => (
+                  <option key={genre.id} value={genre.value}>
+                    {genre.genre}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              ""
+            )}
+          </div>
+          {!show ? (
+          <div className='instructions'>
+          Begin by choosing a genre to see:
+       <ul>
+           <li>
+               Image of the current Artist.
+           </li>
+           <li>
+               An audio analysis such as danceability/energy/tempo of playing track by hovering over the image
+           </li>
+          <li>
+              Clickable bottom arrow to listen to three 30s sample tracks.
+          </li>
+          <li>
+             Clickable right arrow to view artist biography.
+          </li>
+      </ul>
 
-      <div className='instructions'>
+        There are 10 artists to match to the subgenres category the artist is labelled as according to Spotify.
+        <br></br>
+        Score 8/10 correct to earn a playlist made from these tracks.
+        <br></br>
+        You get two guesses for each. Have fun, hope you find some new tunes you enjoy!
+          </div>
+          ) : (' ') }
 
-    </div>
-    {!show ? (
-
-        <select onChange={getGenres} className='dropdown'>
-          <option value="⬇️ Select a genre ⬇️"> -- Select a genre -- </option>
-          {genres.map((genre) => (
-            <option key={genre.id} value={genre.value}>
-              {genre.genre}
-            </option>
-          ))}
-        </select>
-      ) : (
-        ""
-      )}
-      </div>
-
-      {playlistButton ? <button onClick={playlist}>You earned A playlist! Click here to check it out</button> : '' }
-      
-      <div className={show ? "subgenres-container" : ''}>
-      {show
-        ? (subgenres.map((item, index) => (
-            <button
-              type="radio"
-              key={item.index}
-              value={item}
-              onClick={handleAnswer}
-            className="glow-on-hover">
-           {"\n" + item}
+          {playlistButton ? (
+            <button onClick={playlist}>
+              You earned A playlist! Click here to check it out
             </button>
-          )))
-        : ("")}
-        </div>
-        
-        <div className='score'>
-      {show ? ("score " ) : ('')} 
-       {show ? score : ""}
-      </div>
+          ) : (
+            ""
+          )}
 
-        <div id="artistInfo">
-      {show ? (<h2 className="artistInfo">{artists[index]}</h2> ): ""}
+          <div className={show ? "subgenres-container" : ""}>
+            {show
+              ? subgenres.map((item, index) => (
+                  <button
+                    type="radio"
+                    key={item.index}
+                    value={item}
+                    onClick={handleAnswer}
+                    className="glow-on-hover"
+                  >
+                    {"\n" + item}
+                  </button>
+                ))
+              : ""}
+          </div>
 
-  {show ?
-  <div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-front">
-      <img src={image[index]} alt="Artist" style={{width:"300px", height:"300px"}}/>
-    </div>
-    <div class="flip-card-back">
-      danceability: .75
-      <br></br>
-      energy: .29
-      <br></br>
-      tempo: 140.134
-    </div>
-  </div>
-</div> 
-: "" } 
+          <div className="score">
+            {show ? "score " : ""}
+            {show ? score : ""}
+          </div>
 
-      </div>
+          <div id="artistInfo">
+            {show ? <h2 className="artistInfo">{artists[index]}</h2> : ""}
 
-      <Tracks index={index} info={artistId[index]} image={image[index]} />
-{/* 
+            {show ? (
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img
+                      src={image[index]}
+                      alt="Artist"
+                      style={{ width: "300px", height: "300px" }}
+                    />
+                  </div>
+                  <div class="flip-card-back">
+                    danceability: .75
+                    <br></br>
+                    energy: .29
+                    <br></br>
+                    tempo: 140.134
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+
+          <Tracks index={index} info={artistId[index]} image={image[index]} />
+          {/* 
      <Playlist   
       genre = {genre}
       />    */}
-
-    </div>
+        </div>
+      </div>
     </div>
   );
 }

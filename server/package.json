@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "nodemon server.js --ignore client",
     "start": "concurrently \"npm run server\" \"cd ../client && npm start\""
   },
   "author": "",
@@ -29,6 +29,7 @@
     "react-player": "^2.10.1",
     "react-redirect": "^1.0.0",
     "react-router-dom": "^6.3.0",
+    "react-select-search": "^3.0.9",
     "react-use-location": "^0.0.1",
     "Router": "^2.1.0",
     "styled": "^1.0.0",
