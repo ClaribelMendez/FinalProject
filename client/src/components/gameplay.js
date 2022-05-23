@@ -214,15 +214,13 @@ function Game(props) {
 
   return (
         
-
+    <div id='gamePage'>
     <div className="container">
       <div className={!show ? "dropdownContainer" : ''}>
        
 
       <div className='instructions'>
 
-     
-  
     </div>
     {!show ? (
 
@@ -284,13 +282,12 @@ function Game(props) {
       </div>
 
       <Tracks index={index} info={artistId[index]} image={image[index]} />
-
+{/* 
      <Playlist   
       genre = {genre}
-      />   
+      />    */}
 
-      
-
+    </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import {React, useEffect } from 'react'
 
 const Redirect = () => {
     useEffect(() => {
-       window.location.href="http://localhost:3000/game"
+       window.location.href="/game"
         },[]);
 
   return (

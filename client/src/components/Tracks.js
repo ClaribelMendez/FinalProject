@@ -65,10 +65,17 @@ function Tracks(props) {
       <div className='trackTitles' >
       {track1}
       <br></br>
-      {track2}
       <br></br>
 
+      {track2}
+      <br></br>
+      <br></br>
+
+
       {track3}
+      <br></br>
+      <br></br>
+
       </div>
       
 
@@ -78,12 +85,6 @@ function Tracks(props) {
         trackPreview3={trackPreview3}
         artistName={artist}
       />
-      {/* <Video
-        trackTitle1={track1}
-        trackTitle2={track2}
-        trackTitle3={track3}
-        artistName={artist}
-      /> */}
 
       <TrackAnalysis track1={trackId1} track2={trackId2} track3={trackId3}/>
 

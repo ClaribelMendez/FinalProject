@@ -13,20 +13,21 @@ import {
   getCurrentUserProfile,
 } from "./components/spotify";
 import Login from "./components/loginpage";
-import Mainpage from './components/mainpage'
-import Gameplay from './components/game'
-import Profile from './components/profile'
-import Playlist from './components/playlist' 
+import Mainpage from "./components/mainpage";
+import Gameplay from "./components/game";
+import Profile from "./components/profile";
+import Playlist from "./components/playlist";
+import About from "./components/about";
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+// function ScrollToTop() {
+//   const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+//   useEffect(() => {
+//     window.scrollTo(0, 0);
+//   }, [pathname]);
 
-  return null;
-}
+//   return null;
+// }
 
 function App() {
   const [token, setToken] = useState(null);
@@ -46,70 +47,43 @@ function App() {
     fetchData();
   }, []);
 
-
   return (
     <div className="App">
       <header className="App-header">
         {!token ? (
-          <Login />
+          [<Login />, <About />]
         ) : (
           <Router>
-            <ScrollToTop />
-             <Routes>
+            {/* <ScrollToTop /> */}
+            <Routes>
               <Route path="/login" element={<Login />}></Route>
             </Routes>
             <Routes>
-              <Route path="/" element={<Profile />}
-              ></Route>
-            </Routes>  
+              <Route path="/" element={<Profile />}></Route>
+            </Routes>
             <nav>
               <a href="/game">Play/Discover</a> &nbsp;
               <a href="/playlists">Playlists</a> &nbsp;
-              <a href="/blogposts">About</a>
+              <a href="/about">About</a>
               <br></br>
             </nav>
             <Routes>
               <Route
-                path="/game"
-                element={<button onClick={logout}>Log Out</button>}
+                path="/"
+                element={<a href className='logout_button'onClick={logout}>Log Out</a>}
               ></Route>
             </Routes>
-             
-          
             <Routes>
               <Route path="/game" element={<Game />}></Route>
-            </Routes>  
-           <Routes> */}
-              <Route path="/playlist" element={<Playlist />}></Route>
-            </Routes>  
-            
-          
+            </Routes>
+            <Routes>
+              <Route path="/about" element={<About />}></Route>
+            </Routes>
           </Router>
         )}
       </header>
-      {/* <Overlay /> */}
-      {/* <> 
-                 
-
-                  {profile && ( 
-                    <div>
-                      <h1>{profile.display_name}</h1>
-                      <p>{profile.followers.total} Followers</p>
-                      {profile.images.length && profile.images[0].url && (
-                        <img src={profile.images[0].url} alt="Avatar"/>
-                      )}
-                    </div>
-                  )} 
-                 </> */}
-      {/* <Game /> */}
-      {/* <GenreData /> */}
-      {/* <Sound /> */}
-      {/* <Tracks /> */}
-      {/* <Profile /> */}
-      {/* <VideoPlayer /> */}
-      {/* <AudioPlayer /> */}
     </div>
   );
 }
 
-export default App;
+export default App; 
