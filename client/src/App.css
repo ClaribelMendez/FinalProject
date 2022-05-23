@@ -1,35 +1,50 @@
 
 .loginbackground {
-  background-image: url(Main_bg.png);
+  background-image: url(Mainpage.png);
   background-size: cover;
   background-repeat: no-repeat;
-  width: 100em;
-  height: 100vh;
+  width: 100%;
+  height: 101vh;
 }
+
+.loginpagebuttons {
+float: left
+}
+
 .login_button {
-  background-color: rgb(243, 159, 4);
+  /* background-color: rgb(243, 159, 4); */
+  background-color: orange;
   border: none;
+  border-style: groove;
+  border-color: black;
   color: black;
   padding: 20px 30px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 16px;
   margin: 0;
+
   position: absolute;
   top: 70%;
-  left: 75%;
+  left: 65%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   font-size: large;
-  
-  
 }
 
-.login_button:hover {
-  background-color: white;
+.login_button:hover  {
+  background-color: black;
+  border-style: inset;
+  border-radius: 16px;
+  border-color: white;
+  text-decoration: none;
+}
+
+.login_button:hover a {
+  color: white;
+  text-decoration: none;
 }
 
 #login_container {
@@ -40,21 +55,72 @@
   margin-right: 0;
 }
 
-#logo {
-  font-family: sans-serif;
-  color: white;
-  font-size: 5em;
-  background-color: black;
-  height: 50%;
+.login_button a {
+ color: black;
+ text-decoration: none;
+
+}
+.findOut_button {
+  /* background-color: rgb(243, 159, 4); */
+  background-color: orange;
+  border: none;
+  border-style: groove;
+  border-color: black;
+  color: black;
+  padding: 20px 30px;
+  text-align: center;
+  text-decoration: none;
+  /* display: inline-block; */
+  float: left;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  margin: 0;
+  margin-left: 5rem;
+  position: absolute;
+  top: 70%;
+  left: 75%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: large;
+
 }
 
-.mainpage {
-  background-image: url(username.png);
+
+.findOut_button:hover  {
+  background-color: black;
+  border-style: inset;
+  border-radius: 16px;
+  border-color: white;
+  text-decoration: none;
+}
+
+.findOut_button:hover a {
+  color: white;
+  text-decoration: none;
+}
+
+#findOut_container {
+  background-color: black;
+  width: 90%;
+  height: 60%;
+  position: aboslute;
+  margin-right: 0;
+}
+
+.findOut_button a {
+ color: black;
+ text-decoration: none;
+
+}
+
+
+.about {
+  background-image: url(Red-Orange_BG.png);
   background-size: cover;
   background-repeat: no-repeat;
-  width: 100em;
+  width: 80%;
   height: 100vh;
-  margin-top: -1.5%;
 }
 
 .instructions {
@@ -64,12 +130,79 @@
   display:block
 }
 
+.mainpage {
+  background-image: url(Mainpage.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 80em;
+  height: 100vh;
+}
+
+#logo {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin-top: 10%;
+  margin-left: 7.5%;
+  position: absolute;
+  color: #ffe6cd;
+  font-size: 50px;
+  font-weight: lighter;
+  letter-spacing: 2px;
+  opacity: .90;
+}
+
+.tag {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #ffe6cd;
+  margin-top: 20%;
+  position: absolute;
+  margin-left: 32%;
+  width: 50em;
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 5px;
+  font-weight: 80rem;
+
+}
+
+
+.profileInfo {
+  position: absolute;
+  margin-top: .5%;
+  margin-left: 80%;
+  z-index: 2;
+  text-align: center;
+  color: #ffe6cd;
+  font-family: sans-serif;
+  font-size: medium;
+  letter-spacing: 5px;
+
+  
+}
+
+.start_button {
+  padding: .25rem .5rem;
+  border-radius: 10px;
+  height: 2rem;
+  font-family: sans-serif;
+  width: 10rem;
+  letter-spacing: .5em;
+  background-color: purple;
+  opacity: .70;
+  color: white;
+  border-color: orange;
+  position: absolute;
+  margin-top: 30%;
+  margin-left: 65%;
+  cursor: pointer;
+  
+}
+
 nav {
   background-color: #0a2137;
   justify-content: end;
   opacity: 0.9;
   color: white;
-  height: 35px;
+  height: 45px;
   width: 100%;
   margin: 0px;
   border: 2px solid black;
@@ -80,18 +213,39 @@ nav {
   overflow: hidden;
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 2;
+  margin-top: -100vh;
+  position: absolute;
+  z-index: 1;
+
 }
 
 nav a {
-  text-decoration: none;
-  color: white;
+  color: #ffe6cd;
   font-family: sans-serif;
-  margin-left: 5%;
+  margin-left: 3%;
   justify-content: end;
+  padding: 5px;
+  letter-spacing: 5px;
+  position: relative
 
 }
 
+.logout_button {
+  color: #ffe6cd;
+  margin-top: -42.7rem;
+  position: absolute;
+  margin-left: 90%;
+  z-index: 2;
+  letter-spacing: 5px;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: medium;
+}
+
+#gamePage {
+  background-image: url();
+}
 
 
  .container {
@@ -107,10 +261,10 @@ nav a {
 
 
 .App {
-  background-image: url(Background.png);
+  /* background-image: url(Background.png); */
   background-size: cover;
   background-repeat: no-repeat;
-  width: 100em;
+  width: 80em;
   height: 100vh;
 } 
 
@@ -377,7 +531,8 @@ nav a {
 
 .audioButtons {
   position: absolute;
-  margin-top: -44%;
+  margin-top: -40%;
+  display: block
   
 }
 
@@ -388,9 +543,7 @@ nav a {
   margin-top: 1%
 }
 
-.user{
-  margin-top:5%;
-}
+
 
 .playlists {
   background-color: black;
@@ -402,13 +555,19 @@ nav a {
 }
 
 .playlistinfo {
-  margin-left: 5%;
+  margin-left: 1%;
   font-family: sans-serif;
+  background-color: black;
+  color: rgb(53, 1, 1), ;
+
+
 }
 
 .addplaylist {
   margin-top: 5%;
   margin-left: 5%;
   height: 30px;
-  width: 100px
+  width: 100px;
+  background-color: orange;
+  border-style: outset;
 }
