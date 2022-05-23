@@ -10,27 +10,27 @@ function Profile() {
   const [genres, setGenres] = useState([]);
   const [genreSelection, setGenreSelection] = useState("");
 
-  fetch(
-    "https://api.spotify.com/v1/me",
+  // fetch(
+  //   "https://api.spotify.com/v1/me",
 
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + accessToken,
-      },
-    }
-  ).then((response) => {
-    console.log(
-      response.json().then((data) => {
-        console.log(data["display_name"]);
-        setName(data["display_name"]);
-        setID(data["id"]);
-        console.log(ID);
-      })
-    );
-  });
+  //   {
+  //     method: "GET",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + accessToken,
+  //     },
+  //   }
+  // ).then((response) => {
+  //   console.log(
+  //     response.json().then((data) => {
+  //       console.log(data["display_name"]);
+  //       setName(data["display_name"]);
+  //       setID(data["id"]);
+  //       console.log(ID);
+  //     })
+  //   );
+  // });
 
   const handleStart = (e) => {
     window.location.href = "/game";

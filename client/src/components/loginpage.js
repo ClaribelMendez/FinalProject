@@ -10,6 +10,19 @@ const Login = () => {
 return (
 
   <div className='loginbackground'>
+    <div id="logo">
+          <h1>InTune </h1>
+        </div>
+        <span className="tag">
+          CONNECTING YOU TO THE
+          <br></br>
+          SOUNDS YOU LOVE AND
+          <br></br>
+          SOON TO DISCOVER.
+          <br></br>A MUSIC TRIVIA GAME
+          <br></br>
+          TO LEARN SUBGENRES.
+        </span>
     <div className='loginpagebuttons'>
   <div className='login_button'>
     <a href="http://localhost:8888/login">
