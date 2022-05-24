@@ -343,17 +343,19 @@ App{
   border-color: yellowgreen;
   border-style: outset;
   width: 35%;
-  height: 20%;
+  height: 10%;
   display: block;
-  margin-right: -5px;
+  /* margin-right: -10px; */
   padding: 5%;
   justify-items: center;
   font-size: 10%;
-  margin-left: 45%;
+  margin-left: 55%;
   margin-top: -15vh;
-  
   display: grid;
-  position:relative
+  position:relative;
+  min-height: 400px;
+  max-height: 400px;
+
 }
 
 .glow-on-hover {
@@ -371,14 +373,15 @@ App{
   border-radius: 10px;
   font-size:15px;
   font-family:'Times New Roman', Times, serif;
-  padding-left: 20px;
-  padding-right: 10px;
+  /* padding-left: 20px;
+  padding-right: 10px; */
   /* padding: 10px; */
   margin-bottom: 12px;
   display: grid;
   justify-items: center;
-  align-items: baseline;
+  align-items:flex-start;
   align-content: space-between;
+  
 }
 
 
@@ -448,30 +451,25 @@ App{
   }
 }
 
-.artist_container {
-  border-color: black;
-  border-radius: 2px;
-  border-style: solid;
-  width: 60vh;
-  height: 80vh;
-  margin-top: -40%;
-  position: absolute
-}
 
-/* #artistInfo {
+ /* #artistInfo {
   margin-bottom: 100vh;
-  margin-top: -600px;
+  margin-top: -50vh;
   margin-left: 50px;
   font-family:  'Courier New', Courier, monospace;
   color: black;
   position: relative;
-} */
+}  */
 
 .artistInfo {
-  margin-left: 35%;
-  margin-top: -20%;
-  /* position: relative; */
-  display: inline-block;
+  margin-left: 5%;
+  top: 3%;
+  position: absolute;
+  color: orange;
+  text-shadow: 2px 2px black;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  /* display: inline-block; */
+
 }
 
 
@@ -481,6 +479,8 @@ App{
   width: 300px;
   height: 200px;
   margin-left: 2%;
+  position: absolute;
+  margin-top: -70vh;
   /* border: 1px solid #f1f1f1; */
   /* perspective: 1000px; Remove this if you don't want the 3D effect */
 }
@@ -590,8 +590,8 @@ App{
 
 .trackTitles {
   position: absolute;
-  margin-top: 20vh;
-  margin-left: 1%;
+  margin-top: -22vh;
+  margin-left: 2%;
   color: black;
   font-family: sans-serif;
   font-weight: bold;
@@ -601,9 +601,12 @@ App{
 
 .audioButtons {
   position: absolute;
-  margin-top: -40%;
+  margin-top: -12%;
   display: block
-  
+}
+
+.fa {
+  size: 20px;
 }
 
 .score {

@@ -1,4 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import { FaPlayCircle } from "react-icons/fa";
+import { FaRegPauseCircle } from "react-icons/fa";
+
 
 function Sound(props) {
   let track1 = props.trackPreview1;
@@ -54,29 +57,33 @@ function Sound(props) {
 
   return (
     <div className="audioButtons">
-      (<div>
+      <div>
       <audio ref={myRef1} src={track1} />
       
       {audioStatus1 ? (
-        <button onClick={pauseAudio1}>pause</button>
+        <div onClick={pauseAudio1}><FaRegPauseCircle /></div>
       ) : (
-        <button onClick={startAudio1}>play</button>
+        <div onClick={startAudio1}><FaPlayCircle /></div>
       )}
-      
+      <br></br>
+      <br></br>
+
       <audio ref={myRef2} src={track2} />
       {audioStatus2 ? (
-        <button onClick={pauseAudio2}>pause</button>
+        <div onClick={pauseAudio2}><FaRegPauseCircle /></div>
       ) : (
-        <button onClick={startAudio2}>play</button>
+        <div onClick={startAudio2}><FaPlayCircle /></div>
       )}
+      <br></br>
+      <br></br>
 
       <audio ref={myRef3} src={track3} />
       {audioStatus3 ? (
-        <button onClick={pauseAudio3}>pause</button>
+        <div onClick={pauseAudio3}><FaRegPauseCircle /></div>
       ) : (
-        <button onClick={startAudio3}>play</button>
+        <div onClick={startAudio3}><FaPlayCircle /></div>
       )}
-    </div>) 
+    </div>
     </div>
   );
 }

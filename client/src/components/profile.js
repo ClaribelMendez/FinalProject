@@ -1,6 +1,5 @@
 import { accessToken } from "./spotify";
-import Playlist from "./playlist";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Dropdown } from "semantic-ui-react";
 import SelectSearch from "react-select-search";
 
@@ -83,7 +82,7 @@ function Profile() {
         </div> 
          </div>
     
-    /* <Playlist id={ID} /> */
+
     
   );
 }

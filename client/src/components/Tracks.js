@@ -3,6 +3,7 @@ import { accessToken } from "./spotify";
 import Video from "./video";
 import Sound from "./sound";
 import TrackAnalysis from "./trackAnalysis";
+import Playlist from './playlist'
 
 function Tracks(props) {
   const [track1, setTrack1] = useState("");
@@ -16,6 +17,10 @@ function Tracks(props) {
   const [trackPreview3, setTrackPreview3] = useState("");
   const [artist, setArtist] = useState("");
   const [show, setShow] = useState(false)
+  const [favorites1, setFavorites1] = useState('');
+  const [favorites2, setFavorites2] = useState('');
+  const [favorites3, setFavorites3] = useState('');
+
 
   let id = props.info;
   let artistImage = props.image;
@@ -56,6 +61,21 @@ function Tracks(props) {
   useEffect(() => { 
     callTracks();
    }, [id]);
+
+   let favorite1 = (e) => {
+
+     setFavorites1({trackId1})
+   }
+
+   let favorite2 = (e) => {
+    setFavorites2({trackId2})
+  
+  }
+
+  let favorite3 = (e) => {
+     setFavorites3({trackId3})
+  
+  }
   
 
   // let trackTitles = [track1, track2, track3];
@@ -63,16 +83,19 @@ function Tracks(props) {
   return (
     <div>
       <div className='trackTitles' >
-      {track1}
+      {track1} <button  onClick={favorite1}> favorite</button>
       <br></br>
-      <br></br>
-
-      {track2}
       <br></br>
       <br></br>
 
+      {track2} <button  onClick={favorite2}>favorite</button>
+      <br></br>
+      <br></br>
+      <br></br>
 
-      {track3}
+
+      {track3} <button  onClick={favorite3}>favorite</button>
+      <br></br>
       <br></br>
       <br></br>
 
@@ -87,7 +110,7 @@ function Tracks(props) {
       />
 
       <TrackAnalysis track1={trackId1} track2={trackId2} track3={trackId3}/>
-
+      <Playlist fav1 = {favorites1} fav2 ={favorites2} fav3 = {favorites3}/>
  
     </div>
   );

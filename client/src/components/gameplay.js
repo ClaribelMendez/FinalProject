@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
-import { Modal, Button } from "react-bootstrap";
-import Playlist from "./playlist";
+import Biography from './biography'
+
+
 
 
 function Game(props) {
@@ -190,10 +191,17 @@ function Game(props) {
   // arrayOfNums = arrayOfNums.splice(randomNumber)
   // };
 
+ const audio = new Audio(
+   "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"
+ );
+ 
+
   let handleAnswer = (e) => {
     if (index === 10) {
       setShow(false);
       setPlaylistButton(true);
+     audio.play()
+     
     }
     if (subgenres[index].toString() === e.target.value) {
       console.log("correct");
@@ -267,6 +275,7 @@ function Game(props) {
           <div className={show ? "subgenres-container" : ""}>
             {show
               ? subgenres.map((item, index) => (
+                <div className='answer_buttons'>
                   <button
                     type="radio"
                     key={item.index}
@@ -276,6 +285,7 @@ function Game(props) {
                   >
                     {"\n" + item}
                   </button>
+                  </div>
                 ))
               : ""}
           </div>
@@ -288,7 +298,7 @@ function Game(props) {
           <div className='artist_container'>
 
           <div id="artistInfo">
-            {show ? <h2 className="artistInfo">{artists[index]}</h2> : ""}
+            {show ? <h2 className="artistInfo"> {artists[index]}</h2> : ""}
 
             {show ? (
               <div class="flip-card">
@@ -316,11 +326,7 @@ function Game(props) {
           
 
           <Tracks index={index} info={artistId[index]} image={image[index]} />
-          <br></br>
-          <br></br>
-          <br></br>
-
-         
+          <Biography name ={artists} />
           </div>
           {/* 
      <Playlist   
