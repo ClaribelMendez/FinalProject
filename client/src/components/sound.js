@@ -1,19 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function Sound(props) {
   let track1 = props.trackPreview1;
   let track2 = props.trackPreview2;
   let track3 = props.trackPreview3;
 
-  const [show, setShow] = useState(false)
   const [audioStatus1, changeAudioStatus1] = useState(false);
   const [audioStatus2, changeAudioStatus2] = useState(false);
   const [audioStatus3, changeAudioStatus3] = useState(false);
+
   const myRef1 = useRef();
   const myRef2 = useRef();
-
   const myRef3 = useRef();
-
 
   const startAudio1 = () => {
     myRef1.current.play();
@@ -56,7 +54,7 @@ function Sound(props) {
 
   return (
     <div className="audioButtons">
-     {show ? (<div>
+      (<div>
       <audio ref={myRef1} src={track1} />
       
       {audioStatus1 ? (
@@ -78,7 +76,7 @@ function Sound(props) {
       ) : (
         <button onClick={startAudio3}>play</button>
       )}
-    </div>) : ('')}
+    </div>) 
     </div>
   );
 }

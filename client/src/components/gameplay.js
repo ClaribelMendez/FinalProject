@@ -4,6 +4,7 @@ import Tracks from "./Tracks";
 import { Modal, Button } from "react-bootstrap";
 import Playlist from "./playlist";
 
+
 function Game(props) {
   const [genres, setGenres] = useState([]);
   const [genre, setGenre] = useState(" ");
@@ -283,6 +284,8 @@ function Game(props) {
             {show ? "score " : ""}
             {show ? score : ""}
           </div>
+          
+          <div className='artist_container'>
 
           <div id="artistInfo">
             {show ? <h2 className="artistInfo">{artists[index]}</h2> : ""}
@@ -313,6 +316,12 @@ function Game(props) {
           
 
           <Tracks index={index} info={artistId[index]} image={image[index]} />
+          <br></br>
+          <br></br>
+          <br></br>
+
+         
+          </div>
           {/* 
      <Playlist   
       genre = {genre}
