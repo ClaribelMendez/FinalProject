@@ -16,7 +16,7 @@ import Login from "./components/loginpage";
 import Mainpage from "./components/mainpage";
 import Gameplay from "./components/game";
 import Profile from "./components/profile";
-import Playlist from "./components/playlist";
+import Playlists from "./components/playlists";
 import About from "./components/about";
 
 // function ScrollToTop() {
@@ -63,7 +63,7 @@ function App() {
             </Routes>
             <nav>
               <a href="/game">Play/Discover</a> &nbsp;
-              <a href="/playlists">Playlists</a> &nbsp;
+              {/* <a href="/playlist">Playlists</a> &nbsp; */}
               <a href="/about">About</a>
               <br></br>
             </nav>
@@ -74,6 +74,9 @@ function App() {
               ></Route>
             </Routes>
             <Routes>
+            <Route path="/playlists" element={<Playlists />}></Route>
+          </Routes>
+            <Routes>
               <Route path="/game" element={<Game />}></Route>
             </Routes>
             <Routes>
@@ -82,7 +85,7 @@ function App() {
                 element={<a href className='logout_button'onClick={logout}>Log Out</a>}
               ></Route>
             </Routes>
-            
+          
             <Routes>
             <Route path="/about" element={<About />}></Route>
           </Routes>

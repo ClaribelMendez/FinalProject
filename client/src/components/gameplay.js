@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
 import Biography from './biography'
+// import Playlist from './playlist'
 
 
 
@@ -213,9 +214,7 @@ function Game(props) {
     }
   };
 
-  let playlist = (e) => {
-    window.location.href = "/playlist";
-  };
+ 
 
   return (
     <div id="gamePage">
@@ -258,19 +257,15 @@ function Game(props) {
 
         There are 10 artists to match to the subgenres category the artist is labelled as according to Spotify.
         <br></br>
-        Score 8/10 correct to earn a playlist made from these tracks.
+        When  the game is over, you will see a list of playlists from this category.
         <br></br>
-        You get two guesses for each. Have fun, hope you find some new tunes you enjoy!
+        <br></br>
+
+        Have fun, hope you find some new tunes you enjoy!
           </div>
           ) : (' ') }
 
-          {playlistButton ? (
-            <button onClick={playlist}>
-              You earned A playlist! Click here to check it out
-            </button>
-          ) : (
-            ""
-          )}
+        
 
           <div className={show ? "subgenres-container" : ""}>
             {show
@@ -328,10 +323,8 @@ function Game(props) {
           <Tracks index={index} info={artistId[index]} image={image[index]} />
           <Biography name ={artists} />
           </div>
-          {/* 
-     <Playlist   
-      genre = {genre}
-      />    */}
+          
+ 
         </div>
       </div>
     </div>

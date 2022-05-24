@@ -3,7 +3,6 @@ import { accessToken } from "./spotify";
 import Video from "./video";
 import Sound from "./sound";
 import TrackAnalysis from "./trackAnalysis";
-import Playlist from './playlist'
 
 function Tracks(props) {
   const [track1, setTrack1] = useState("");
@@ -110,7 +109,7 @@ function Tracks(props) {
       />
 
       <TrackAnalysis track1={trackId1} track2={trackId2} track3={trackId3}/>
-      <Playlist fav1 = {favorites1} fav2 ={favorites2} fav3 = {favorites3}/>
+      {/* <Playlist fav1 = {favorites1} fav2 ={favorites2} fav3 = {favorites3}/> */}
  
     </div>
   );

@@ -619,28 +619,39 @@ App{
 
 
 .playlists {
-  background-color: black;
-  color: white;
-  width: 90%;
-  height: 90vh;
-  margin-left: 5%;
+  background-image: url(Red-Orange_BG.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 80em;
+  height: 100vh;
+  overflow: hidden;
 
 }
 
-.playlistinfo {
+.playlists a {
+  color: black;
+  font-weight: bold
+}
+
+.playlist_info {
+  
+  height: 50%;
+  padding-top: 10px;
+}
+/* .playlistinfo {
   margin-left: 1%;
   font-family: sans-serif;
   background-color: black;
   color: rgb(53, 1, 1), ;
 
 
-}
+} */
 
-.addplaylist {
+/* .addplaylist {
   margin-top: 5%;
   margin-left: 5%;
   height: 30px;
   width: 100px;
   background-color: orange;
   border-style: outset;
-}
+} */
