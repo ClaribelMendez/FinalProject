@@ -2,6 +2,7 @@ import { accessToken } from "./spotify";
 import { useState } from "react";
 import { Dropdown } from "semantic-ui-react";
 import SelectSearch from "react-select-search";
+import Playlist from './playlist'
 
 function Profile() {
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ function Profile() {
         console.log(data["display_name"]);
         setName(data["display_name"]);
         setID(data["id"]);
-        console.log(ID);
+        console.log('from profile', ID);
       })
     );
   });
@@ -75,7 +76,7 @@ function Profile() {
         <div> 
      
 
-
+        <Playlist id={ID} />
           
         </div>
 

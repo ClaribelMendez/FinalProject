@@ -64,16 +64,16 @@ function Tracks(props) {
 
    let favorite1 = (e) => {
 
-     setFavorites1({trackId1})
+     setFavorites1(trackId1)
    }
 
    let favorite2 = (e) => {
-    setFavorites2({trackId2})
+    setFavorites2(trackId2)
   
   }
 
   let favorite3 = (e) => {
-     setFavorites3({trackId3})
+     setFavorites3(trackId3)
   
   }
   

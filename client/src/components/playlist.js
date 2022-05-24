@@ -3,8 +3,8 @@ import { accessToken } from './spotify'
 
 function Playlist(props){
     const [id, setId] = useState('')
-    const [favorites, setFavorites] = useState([])
-    let userId = props.id
+    const [playlistId, setPlaylistId] = useState('')
+    
     let fav1 = props.fav1
     let fav2 = props.fav2
     let fav3 = props.fav3
@@ -13,13 +13,31 @@ function Playlist(props){
 
   
 
-
+    fetch(
+      "https://api.spotify.com/v1/me",
+  
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    ).then((response) => {
+      console.log(
+        response.json().then((data) => {
+          setId(data["id"]);
+          console.log('from playlist ', id);
+        })
+      );
+    });
       
       
       
       const getPlaylist = (e) => {
       fetch(
-        `https://api.spotify.com/v1/users/${userId}/playlists`,{
+        `https://api.spotify.com/v1/users/${id}/playlists`,{
                 
         method: 'POST',
                 headers: {
@@ -27,32 +45,37 @@ function Playlist(props){
                   'Content-Type': 'application/json',
                   Authorization: "Bearer " + accessToken,
                 },
-                body: JSON.stringify({  "name": "Jazz",
+                body: JSON.stringify({  "name": "afro-house",
                 "description": "New playlist description",
                 "public": false})
             }).then(response => response.json()
             ).then(data => {
                     console.log(data.id)
-                    setId(data.id)
-                    console.log(id)
+                    setPlaylistId(data.id)
+                    console.log(playlistId)
           })
-      }
+      
             fetch(
-              `https://api.spotify.com/v1/playlists/${id}/tracks?uris=spotify%3Atrack${fav1}%2Cspotify%3Atrack%${fav2}%2Cspotify%3Atrack%${fav3}` ,{
+              `https://api.spotify.com/v1/playlists/${playlistId}/tracks` ,{
                       
               method: 'POST',
+              
                       headers: {
+                       
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
                         Authorization: "Bearer " + accessToken,
+                        
                       },
-                      body: JSON.stringify({ })
+                      body: JSON.stringify({ "uris": [`spotify:track:${fav1}`,`spotify:track:${fav2}`]
+                      })
                   }).then(response => response.json()
                   ).then(data => {
-                          console.log(data.id)
+                          console.log('line 70 ', data)
                    
                   
                 });
+              }
 
         return (
         <div className='playlists'>
