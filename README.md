@@ -18,7 +18,13 @@ Playlist is added to users Spotify account
 
 Intune is a (PERN) stack built using PostgreSQL, Express, React, and Node.
 
-It uses the Spotify API for authentication, as well as all of the endpoints used to fetch data.
+It uses the Spotify API for authentication, as well as the following endpoints to fetch data:
+
+- Search item -> to get subgenres, artists uri and playlists
+- Artist top tracks -> to fetch track id
+- Get track -> to fetch track preview for 30s sample
+- Track audio features ->  audio analysis
+
 
 ### Getting Started
 
