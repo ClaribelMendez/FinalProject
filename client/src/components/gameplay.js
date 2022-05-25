@@ -122,7 +122,7 @@ function Game(props) {
         setArtistId(allArtistsIds);
         console.log(allArtistsIds);
       });
-  };
+    }
 
   // console.log(allArtists);
   // let arrayOfNums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
