@@ -50,7 +50,7 @@ function Game(props) {
 
     console.log("Line 13 frontend ", genre);
     // add to request body
-    fetch(`/game?genre=${genre}&token=${token}`, {
+    fetch(`http://localhost:8888/game?genre=${genre}&token=${token}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
