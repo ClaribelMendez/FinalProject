@@ -3,6 +3,7 @@ import { accessToken } from './spotify'
 import Game from './gameplay'
 import Tracks from './Tracks'
 
+
 function TrackAnalysis (props){
 
 let track1 = props.track1
@@ -36,6 +37,9 @@ fetch(
       // setAnalysis1([ 'Danceability: ', data.audio_features[0].danceability, <br></br>, 'Energy : ', data.audio_features[0].energy,<br></br> ,'Key : ', data.audio_features[0].key, <br></br> ,'Loudness : ', data.audio_features[0].loudness, <br></br>,'Speechiness : ', data.audio_features[0].speechiness, <br></br> ,'Acousticness : ', data.audio_features[0].acousticness, <br></br> ,'Instrumentalness : ', data.audio_features[0].instrumentalness, <br></br> ,'Liveness : ', data.audio_features[0].liveness, <br></br> ,'Valence : ', data.audio_features[0].valence, <br></br>, 'Tempo : ', data.audio_features[0].tempo])
       // setAnalysis1((state)  =>  data.audio_features[0].danceability)
       setAnalysis1([data.audio_features[0].energy, data.audio_features[0].danceability])
+      setAnalysis2([data.audio_features[0].energy, data.audio_features[0].danceability])
+      setAnalysis3([data.audio_features[0].energy, data.audio_features[0].danceability])
+
       console.log('analysis ', analysis1)
       console.log(data)
     })
@@ -52,7 +56,9 @@ useEffect(() => {
 
 
 return (
-<div></div>
+<div>
+
+</div>
 
 );
 }

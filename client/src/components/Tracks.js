@@ -82,18 +82,18 @@ function Tracks(props) {
   return (
     <div>
       <div className='trackTitles' >
-      {track1} <button  onClick={favorite1}> favorite</button>
+      {track1} 
       <br></br>
       <br></br>
       <br></br>
 
-      {track2} <button  onClick={favorite2}>favorite</button>
+      {track2} 
       <br></br>
       <br></br>
       <br></br>
 
 
-      {track3} <button  onClick={favorite3}>favorite</button>
+      {track3}
       <br></br>
       <br></br>
       <br></br>

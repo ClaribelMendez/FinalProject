@@ -28,7 +28,6 @@ function Game(props) {
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
 
-  let analysis1 = props.analysis1;
 
   const loadGenres = () => {
     fetch("/genres")
@@ -125,83 +124,18 @@ function Game(props) {
       });
   };
 
-  // console.log(allArtists);
-  // let arrayOfNums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  // let randomNumber = Math.floor(Math.random() * arrayOfNums.length); // // random number from array of indices
-  // setIndex(randomNumber);
-  // console.log("this is random number" + index);
-  // let randomArtist = allArtists[randomNumber]; // random artist
-  // console.log("artist " + randomArtist);
-  // setCurrentArtist(randomArtist);
-
-  // setCurrentGenre(data.response.currentGenre);
-  // console.log("Line 198 front" + data.response.artists.items[0]['id']);
-
-  // .catch((err) => console.error(`Error: ${err}`));
-
-  //       let trackNames = []
-
-  // let trackPreview = allTracks[0]
-  // console.log('track preview line 147' , trackPreview)
-
-  // console.log('this is array ',  allTracks)
-  // let trackPreview = allTracks[index][0].split(' ').join('+')
-  // console.log(trackPreview)
-  // fetch(`https://itunes.apple.com/search?term=${allTracks[index]}&entity=musicTrack`)
-  // .then((response) => {
-  //    response.json().then(
-  //         (data) => {
-  //           let trackPreview = data.results[0]['previewUrl']
-  //           console.log('track preview', trackPreview)
-  //           console.log(data.results[0]['name'])
-
-  //           // console.log(data.results[0]['previewUrl'])
-  //           setTrackAudio(trackPreview)
-  //           // setInfo(data.results[0]['previewUrl'])
-  //           // console.log(data.results[0].artworkUrl100)
-
-  //         }
-  //     );
-  // })
-
-  // let artistName = currentArtist.split(' ').join('+')
-  // fetch(`https://itunes.apple.com/search?term=${artistName}`)
-  // .then((response) => {
-  //    response.json().then(
-  //         (data) => {
-  //           // console.log(data)
-  //           setMusic(data.results[0])
-
-  //         }
-  //     );
-  // });
-
-  // let chooseIndex = () => {
-  //   let arrayOfNums = [];
-  //   for (let i = 0; i < 10; i++) {
-  //     arrayOfNums.push(i);
-  //   }
-  //   console.log(arrayOfNums);
-  //   let randomNumber = Math.floor(Math.random() * arrayOfNums.length);
-  //   console.log(randomNumber);
-  // let randomArtist = artists[randomNumber];
-  // setCurrentArtist(randomArtist);
-  // console.log("this is the artist" + randomArtist);
-
-  // arrayOfNums = arrayOfNums.splice(randomNumber)
-  // };
-
- const audio = new Audio(
-   "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"
- );
+//  const audio = new Audio(
+//   scclient/public/mixkit-game-flute-bonus-2313.wav"
+//  );
  
 
   let handleAnswer = (e) => {
-    if (index === 10) {
+    if (index === 9) {
       setShow(false);
       setPlaylistButton(true);
-     audio.play()
+      window.location.href='/playlists'
+    //  audio.play()
      
     }
     if (subgenres[index].toString() === e.target.value) {
@@ -245,14 +179,12 @@ function Game(props) {
                Image of the current Artist.
            </li>
            <li>
-               An audio analysis such as danceability/energy/tempo of playing track by hovering over the image
+               An audio analysis such as danceability/energy/tempo of playing track by hovering over the image.
            </li>
           <li>
-              Clickable bottom arrow to listen to three 30s sample tracks.
+              Three 30s track samples to listen to.
           </li>
-          <li>
-             Clickable right arrow to view artist biography.
-          </li>
+         
       </ul>
 
         There are 10 artists to match to the subgenres category the artist is labelled as according to Spotify.
@@ -286,7 +218,7 @@ function Game(props) {
           </div>
 
           <div className="score">
-            {show ? "score " : ""}
+            {show ? "Correct / "  : ""}
             {show ? score : ""}
           </div>
           
@@ -306,6 +238,7 @@ function Game(props) {
                     />
                   </div>
                   <div class="flip-card-back">
+                    <br></br>
                     danceability: .75
                     <br></br>
                     energy: .29
@@ -319,9 +252,9 @@ function Game(props) {
             )}
           </div>
           
-
+                {show ? 
           <Tracks index={index} info={artistId[index]} image={image[index]} />
-          <Biography name ={artists} />
+        : '' }
           </div>
           
  

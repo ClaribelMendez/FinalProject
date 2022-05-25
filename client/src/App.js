@@ -85,6 +85,12 @@ function App() {
                 element={<a href className='logout_button'onClick={logout}>Log Out</a>}
               ></Route>
             </Routes>
+            <Routes>
+              <Route
+                path="/playlists"
+                element={<a href className='logout_button'onClick={logout}>Log Out</a>}
+              ></Route>
+            </Routes>
           
             <Routes>
             <Route path="/about" element={<About />}></Route>

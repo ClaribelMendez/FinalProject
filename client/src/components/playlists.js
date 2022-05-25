@@ -3,11 +3,14 @@ import React from 'react'
 const Playlists = () => {
   return (
     <div className='playlists'>
-      <h1>Playlists</h1>
+         <div className='playlist_info'>
+      <h2>Playlists</h2>
       Click on the name of the playlist to check these out on Spotify! 
       <br></br>
       <br></br>
-    <div className='playlist_info'>
+      <br></br>
+
+   
       <img
                       src={'https://i.scdn.co/image/ab67706c0000bebb774c35b4cf17ad95cd25c170'}
                       alt="album cover"
@@ -43,6 +46,7 @@ const Playlists = () => {
 
                      Description: "if u ever lose ur latine friends just shuffle this playlist and theyll flock to u"
                      </div>        
+                     <div className='border'></div>
     </div>
   )
 }
