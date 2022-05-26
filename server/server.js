@@ -166,7 +166,31 @@ app.get("/game", async (req, res) => {
       })
     );
   });
+
+
+app.get("/playlists", async (req, res) => {
+
+  fetch(
+    `https://api.spotify.com/v1/search?q=playlist%3A%20${genre}&type=playlist&limit=3&offset=11`,
+    {
+      method: "get",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+  ).then((response) => {
+    console.log(
+      response.json().then((data) => {
+        res.json(data);
+        console.log(data.playlists);
+      })
+    );
+  });
 });
+});
+
 
 app.post("/profile", cors(), async (req, res) => {
   const newUser = { name: req.body.name };

@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
-import Biography from './biography'
-// import Playlist from './playlist'
-
-
-
+import Playlists from "./playlists";
 
 function Game(props) {
   const [genres, setGenres] = useState([]);
@@ -15,19 +11,15 @@ function Game(props) {
   const [score, setScore] = useState(0);
   const [info, setInfo] = useState([]);
   const [index, setIndex] = useState(0);
-  const [currentArtist, setCurrentArtist] = useState(" ");
   const [image, setImage] = useState([]);
-  const [music, setMusic] = useState([]);
   const [artistId, setArtistId] = useState([]);
   const [tracks, setTracks] = useState(" ");
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
-  const [modal, setModal] = useState(false);
   const [playlistButton, setPlaylistButton] = useState(false);
+  // const [hidePlaylist, setHidePlaylist] = useState(false);
 
-  const handleClose = () => setModal(false);
-  const handleShow = () => setModal(true);
-
+ 
 
   const loadGenres = () => {
     fetch("/genres")
@@ -50,7 +42,9 @@ function Game(props) {
 
     console.log("Line 13 frontend ", genre);
     // add to request body
-    fetch(`http://localhost:8888/game?genre=${genre}&token=${token}`, {
+
+
+    fetch(`/game?genre=${genre}&token=${token}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -124,19 +118,18 @@ function Game(props) {
       });
   };
 
-
-//  const audio = new Audio(
-//   scclient/public/mixkit-game-flute-bonus-2313.wav"
-//  );
- 
+  //  const audio = new Audio(
+  //   scclient/public/mixkit-game-flute-bonus-2313.wav"
+  //  );
 
   let handleAnswer = (e) => {
     if (index === 9) {
       setShow(false);
       setPlaylistButton(true);
-      window.location.href='/playlists'
-    //  audio.play()
-     
+      // setHidePlaylist(true)
+      
+      window.location.href = "/playlists";
+      //  audio.play()
     }
     if (subgenres[index].toString() === e.target.value) {
       console.log("correct");
@@ -147,8 +140,6 @@ function Game(props) {
       setIndex(index + 1);
     }
   };
-
- 
 
   return (
     <div id="gamePage">
@@ -172,92 +163,93 @@ function Game(props) {
             )}
           </div>
           {!show ? (
-          <div className='instructions'>
-          Begin by choosing a genre to see:
-       <ul>
-           <li>
-               Image of the current Artist.
-           </li>
-           <li>
-               An audio analysis such as danceability/energy/tempo of playing track by hovering over the image.
-           </li>
-          <li>
-              Three 30s track samples to listen to.
-          </li>
-         
-      </ul>
-
-        There are 10 artists to match to the subgenres category the artist is labelled as according to Spotify.
-        <br></br>
-        When  the game is over, you will see a list of playlists from this category.
-        <br></br>
-        <br></br>
-
-        Have fun, hope you find some new tunes you enjoy!
-          </div>
-          ) : (' ') }
-
-        
+            <div className="instructions">
+              Begin by choosing a genre to see:
+              <ul>
+                <li>Image of the current Artist.</li>
+                <li>
+                  An audio analysis such as danceability/energy/tempo of playing
+                  track by hovering over the image.
+                </li>
+                <li>Three 30s track samples to listen to.</li>
+              </ul>
+              There are 10 artists to match to the subgenres category the artist
+              is labelled as according to Spotify.
+              <br></br>
+              When the game is over, you will see a list of playlists from this
+              category.
+              <br></br>
+              <br></br>
+              Have fun, hope you find some new tunes you enjoy!
+            </div>
+          ) : (
+            " "
+          )}
 
           <div className={show ? "subgenres-container" : ""}>
             {show
               ? subgenres.map((item, index) => (
-                <div className='answer_buttons'>
-                  <button
-                    type="radio"
-                    key={item.index}
-                    value={item}
-                    onClick={handleAnswer}
-                    className="glow-on-hover"
-                  >
-                    {"\n" + item}
-                  </button>
+                  <div className="answer_buttons">
+                    <button
+                      type="radio"
+                      key={item.index}
+                      value={item}
+                      onClick={handleAnswer}
+                      className="glow-on-hover"
+                    >
+                      {"\n" + item}
+                    </button>
                   </div>
                 ))
               : ""}
           </div>
 
           <div className="score">
-            {show ? "Correct / "  : ""}
+            {show ? "Correct / " : ""}
             {show ? score : ""}
           </div>
-          
-          <div className='artist_container'>
 
-          <div id="artistInfo">
-            {show ? <h2 className="artistInfo"> {artists[index]}</h2> : ""}
+          <div className="artist_container">
+            <div id="artistInfo">
+              {show ? <h2 className="artistInfo"> {artists[index]}</h2> : ""}
 
-            {show ? (
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <img
-                      src={image[index]}
-                      alt="Artist"
-                      style={{ width: "300px", height: "300px" }}
-                    />
-                  </div>
-                  <div class="flip-card-back">
-                    <br></br>
-                    danceability: .75
-                    <br></br>
-                    energy: .29
-                    <br></br>
-                    tempo: 140.134
+              {show ? (
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <img
+                        src={image[index]}
+                        alt="Artist"
+                        style={{ width: "300px", height: "300px" }}
+                      />
+                    </div>
+                    <div class="flip-card-back">
+                      <br></br>
+                      danceability: .75
+                      <br></br>
+                      energy: .29
+                      <br></br>
+                      tempo: 140.134
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                ""
+              )}
+            </div>
+
+            {show ? (
+              <Tracks
+                index={index}
+                info={artistId[index]}
+                image={image[index]}
+              />
             ) : (
               ""
             )}
+
+           
           </div>
-          
-                {show ? 
-          <Tracks index={index} info={artistId[index]} image={image[index]} />
-        : '' }
-          </div>
-          
- 
         </div>
       </div>
     </div>

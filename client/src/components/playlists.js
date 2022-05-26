@@ -1,7 +1,61 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { accessToken } from './spotify'
 
-const Playlists = () => {
-  return (
+const Playlists = (props) => {
+  const genre = props.genre
+console.log(genre)
+  const [image1, setImage1] = useState('')
+  const [image2, setImage2] = useState('')
+  const [image3, setImage3] = useState('')
+  const [name1, setName1] = useState('')
+  const [name2, setName2] = useState('')
+  const [name3, setName3] = useState('')
+  const [url1, setUrl1] = useState('')
+  const [url2, setUrl2] = useState('')
+  const [url3, setUrl3] = useState('')
+  
+  
+
+    // const getPlaylists = () => {
+    fetch(
+      '/playlists',
+  
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    ).then((response) => {
+      console.log(
+        response.json().then((data) => {
+          console.log(data.playlists)
+          setName1(data.playlists.items[0]['name'])
+          setName2(data.playlists.items[1]['name'])
+          setName3(data.playlists.items[2]['name'])
+          setImage1(data.playlists.items[0]['images'][0]['url'])
+          setImage2(data.playlists.items[1]['images'][0]['url'])
+          setImage3(data.playlists.items[2]['images'][0]['url'])
+          setUrl1(data.playlists.items[0]['external_urls']['spotify'])
+          setUrl2(data.playlists.items[1]['external_urls']['spotify'])
+          setUrl3(data.playlists.items[2]['external_urls']['spotify'])
+
+
+        })
+      );
+    });
+  
+
+
+    // useEffect(() => { 
+    //   getPlaylists();
+    //  }, []);
+  
+   
+      return (
     <div className='playlists'>
          <div className='playlist_info'>
       <h2>Playlists</h2>
@@ -12,39 +66,36 @@ const Playlists = () => {
 
    
       <img
-                      src={'https://i.scdn.co/image/ab67706c0000bebb774c35b4cf17ad95cd25c170'}
+                      src={image1}
                       alt="album cover"
                       style={{ width: "100px", height: "100px" }}
                     />     
                     <br></br>
-                    < a href ='https://open.spotify.com/playlist/5U6pDCKthOnaEtvBGJ1R2v'>Afro Latin House</a>
+                    < a href ={url1}>{name1}</a>
                     <br></br>
 
-                     Description: "Selection of our favourite house tracks. Updating our Playlist every Friday. Playlist curated by Triplepoint.
                      <br></br>
       <br></br>
                      <img
-                      src={'https://i.scdn.co/image/ab67706c0000bebb9d07b67fe8b5af3b2b3c64e7'}
+                      src={image2}
                       alt="album cover"
                       style={{ width: "100px", height: "100px" }}
                     />     
                     <br></br>
-                    < a href ="https://api.spotify.com/v1/playlists/03g5NZj1QR8YYsgITELxbl">"Pop Latino-Reggaeton-Latin House"</a>
+                    < a href ={url2}>{name2}</a>
                     <br></br>
 
-                     Description: "Una Playlist che racchiude tutto il mondo  Caliente , e che sicuramente non potrà non farvi ballare"
                      <br></br>
       <br></br>
                      <img
-                      src={'https://i.scdn.co/image/ab67706c0000bebb64868e0252be5c69c3d393f2'}
+                      src={image3}
                       alt="album cover"
                       style={{ width: "100px", height: "100px" }}
                     />     
                     <br></br>
-                    < a href ="https://open.spotify.com/playlist/5TzoOqGXpPC13KwGwHjRsd">"Latino House Party"</a>
+                    < a href ={url3}>{name3}</a>
                     <br></br>
 
-                     Description: "if u ever lose ur latine friends just shuffle this playlist and theyll flock to u"
                      </div>        
                      <div className='border'></div>
     </div>
