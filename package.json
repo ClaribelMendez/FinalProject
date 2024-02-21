@@ -3,7 +3,11 @@
     "@remotion/media-utils": "^3.0.7",
     "axios": "^0.27.2",
     "build": "^0.1.4",
-    "create-react-app": "^1.2.1"
+    "cors": "^2.8.5",
+    "create-react-app": "^1.2.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "pg-promise": "^10.11.1"
   },
   "devDependencies": {
     "eslint": "^8.11.0",
@@ -12,5 +16,15 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.3.0"
-  }
+  },
+  "name": "finalproject",
+  "description": "Intune is a music genre discovering app in the form of a trivia game that allows the user to discover new music while also learning about different subgenres.",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": []
 }

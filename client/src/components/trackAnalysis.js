@@ -10,7 +10,6 @@ let track1 = props.track1
 let track2 = props.track2
 let track3 = props.track3
 let image = props.image
-// console.log(image)
 
 const [analysis1, setAnalysis1] = useState('')
 const [analysis2, setAnalysis2] = useState([])
@@ -50,10 +49,6 @@ fetch(
 useEffect(() => { 
   callTrackAnalysis();
  }, [track1]);
-
-
-
-
 
 return (
 <div>

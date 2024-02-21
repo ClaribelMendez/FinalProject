@@ -1,19 +1,19 @@
+require("dotenv").config();
 const axios = require("axios");
 const querystring = require("querystring");
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 const db = require("../server/db/db-connection.js");
 const path = require("path");
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 const { response } = require("express");
 const app = express();
 const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "build");
-const PORT = process.env.PORT || 8888;
+const PORT = process.env.PORT || 3004;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors(), function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000" || "http://localhost:3001"); // update to match the domain you will make the request from
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -21,11 +21,6 @@ app.use(cors(), function(req, res, next) {
   next();
 });
 
-const config = {
-  CLIENT_ID: process.env.CLIENTID,
-  CLIENT_SECRET: process.env.SECRET,
-  REDIRECT_URI: process.env.REDIRECTURI,
-};
 app.use(express.static(REACT_BUILD_DIR));
 //creates an endpoint for the route /api
 
@@ -33,7 +28,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
-app.get("/profile", (req, res) => {
+app.get("/test", (req, res) => {
   res.json({ message: "This is the profile page" });
 });
 
@@ -71,9 +66,9 @@ app.get("/login", (req, res) => {
     "user-read-private user-read-email playlist-modify-public playlist-modify-private";
 
   const queryParams = querystring.stringify({
-    client_id: process.env.CLIENTID,
+    client_id: process.env.CLIENT_ID,
     response_type: "code",
-    redirect_uri: process.env.REDIRECTURI,
+    redirect_uri: process.env.REDIRECT_URI,
     state: state,
     scope: scope,
   });
@@ -90,12 +85,12 @@ app.get("/callback", (req, res) => {
     data: querystring.stringify({
       grant_type: "authorization_code",
       code: code,
-      redirect_uri: process.env.REDIRECTURI,
+      redirect_uri: process.env.REDIRECT_URI,
     }),
     headers: {
       "content-type": "application/x-www-form-urlencoded",
       Authorization: `Basic ${new Buffer.from(
-        `${process.env.CLIENTID}:${process.env.SECRET}`
+        `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`
       ).toString("base64")}`,
     },
   })
@@ -203,6 +198,6 @@ app.post("/profile", cors(), async (req, res) => {
   res.json(result.rows[0]);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+app.listen(`${PORT}`, '0.0.0.0', () => {
+  console.log('Server started on port 3002');
 });

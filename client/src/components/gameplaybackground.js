@@ -6,5 +6,4 @@ function GamePlayBackground(){
     )
 }
 
-
 export default GamePlayBackground

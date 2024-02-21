@@ -75,9 +75,6 @@ function Tracks(props) {
      setFavorites3(trackId3)
   
   }
-  
-
-  // let trackTitles = [track1, track2, track3];
 
   return (
     <div>
@@ -109,7 +106,6 @@ function Tracks(props) {
       />
 
       <TrackAnalysis track1={trackId1} track2={trackId2} track3={trackId3}/>
-      {/* <Playlist fav1 = {favorites1} fav2 ={favorites2} fav3 = {favorites3}/> */}
  
     </div>
   );

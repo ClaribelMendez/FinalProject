@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: genres; Type: TABLE; Schema: public; Owner: tpl_1121_10
+-- Name: genres; Type: TABLE; Schema: public; postgres: tpl_1121_10
 --
 
 CREATE TABLE public.genres (
@@ -30,10 +30,10 @@ CREATE TABLE public.genres (
 );
 
 
-ALTER TABLE public.genres OWNER TO tpl_1121_10;
+ALTER TABLE public.genres postgres TO tpl_1121_10;
 
 --
--- Name: favorites_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl_1121_10
+-- Name: favorites_id_seq; Type: SEQUENCE; Schema: public; postgres: tpl_1121_10
 --
 
 ALTER TABLE public.genres ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
@@ -47,7 +47,7 @@ ALTER TABLE public.genres ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: playlists; Type: TABLE; Schema: public; Owner: tpl_1121_10
+-- Name: playlists; Type: TABLE; Schema: public; postgres: tpl_1121_10
 --
 
 CREATE TABLE public.playlists (
@@ -61,10 +61,10 @@ CREATE TABLE public.playlists (
 );
 
 
-ALTER TABLE public.playlists OWNER TO tpl_1121_10;
+ALTER TABLE public.playlists postgres TO tpl_1121_10;
 
 --
--- Name: playlists_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl_1121_10
+-- Name: playlists_id_seq; Type: SEQUENCE; Schema: public; postgres: tpl_1121_10
 --
 
 ALTER TABLE public.playlists ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
@@ -78,7 +78,7 @@ ALTER TABLE public.playlists ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: scores; Type: TABLE; Schema: public; Owner: tpl_1121_10
+-- Name: scores; Type: TABLE; Schema: public; postgres: tpl_1121_10
 --
 
 CREATE TABLE public.scores (
@@ -89,10 +89,10 @@ CREATE TABLE public.scores (
 );
 
 
-ALTER TABLE public.scores OWNER TO tpl_1121_10;
+ALTER TABLE public.scores postgres TO tpl_1121_10;
 
 --
--- Name: scores_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl_1121_10
+-- Name: scores_id_seq; Type: SEQUENCE; Schema: public; postgres: tpl_1121_10
 --
 
 ALTER TABLE public.scores ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
@@ -106,7 +106,7 @@ ALTER TABLE public.scores ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: tpl_1121_10
+-- Name: users; Type: TABLE; Schema: public; postgres: tpl_1121_10
 --
 
 CREATE TABLE public.users (
@@ -117,10 +117,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO tpl_1121_10;
+ALTER TABLE public.users postgres TO tpl_1121_10;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl_1121_10
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; postgres: tpl_1121_10
 --
 
 ALTER TABLE public.users ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
@@ -134,7 +134,7 @@ ALTER TABLE public.users ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: tpl_1121_10
+-- Data for Name: genres; Type: TABLE DATA; Schema: public; postgres: tpl_1121_10
 --
 
 COPY public.genres (id, genre) FROM stdin;
@@ -154,7 +154,7 @@ COPY public.genres (id, genre) FROM stdin;
 
 
 --
--- Data for Name: playlists; Type: TABLE DATA; Schema: public; Owner: tpl_1121_10
+-- Data for Name: playlists; Type: TABLE DATA; Schema: public; postgres: tpl_1121_10
 --
 
 COPY public.playlists (id, image, name, link, genre, description, user_id) FROM stdin;
@@ -162,7 +162,7 @@ COPY public.playlists (id, image, name, link, genre, description, user_id) FROM 
 
 
 --
--- Data for Name: scores; Type: TABLE DATA; Schema: public; Owner: tpl_1121_10
+-- Data for Name: scores; Type: TABLE DATA; Schema: public; postgres: tpl_1121_10
 --
 
 COPY public.scores (id, user_id, genre, score) FROM stdin;
@@ -170,7 +170,7 @@ COPY public.scores (id, user_id, genre, score) FROM stdin;
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: tpl_1121_10
+-- Data for Name: users; Type: TABLE DATA; Schema: public; postgres: tpl_1121_10
 --
 
 COPY public.users (id, firstname, lastname, username) FROM stdin;
@@ -445,35 +445,35 @@ COPY public.users (id, firstname, lastname, username) FROM stdin;
 
 
 --
--- Name: favorites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl_1121_10
+-- Name: favorites_id_seq; Type: SEQUENCE SET; Schema: public; postgres: tpl_1121_10
 --
 
 SELECT pg_catalog.setval('public.favorites_id_seq', 12, true);
 
 
 --
--- Name: playlists_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl_1121_10
+-- Name: playlists_id_seq; Type: SEQUENCE SET; Schema: public; postgres: tpl_1121_10
 --
 
 SELECT pg_catalog.setval('public.playlists_id_seq', 1, false);
 
 
 --
--- Name: scores_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl_1121_10
+-- Name: scores_id_seq; Type: SEQUENCE SET; Schema: public; postgres: tpl_1121_10
 --
 
 SELECT pg_catalog.setval('public.scores_id_seq', 1, false);
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl_1121_10
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; postgres: tpl_1121_10
 --
 
 SELECT pg_catalog.setval('public.users_id_seq', 269, true);
 
 
 --
--- Name: genres favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl_1121_10
+-- Name: genres favorites_pkey; Type: CONSTRAINT; Schema: public; postgres: tpl_1121_10
 --
 
 ALTER TABLE ONLY public.genres
@@ -481,7 +481,7 @@ ALTER TABLE ONLY public.genres
 
 
 --
--- Name: playlists playlists_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl_1121_10
+-- Name: playlists playlists_pkey; Type: CONSTRAINT; Schema: public; postgres: tpl_1121_10
 --
 
 ALTER TABLE ONLY public.playlists
@@ -489,7 +489,7 @@ ALTER TABLE ONLY public.playlists
 
 
 --
--- Name: scores scores_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl_1121_10
+-- Name: scores scores_pkey; Type: CONSTRAINT; Schema: public; postgres: tpl_1121_10
 --
 
 ALTER TABLE ONLY public.scores
@@ -497,7 +497,7 @@ ALTER TABLE ONLY public.scores
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl_1121_10
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; postgres: tpl_1121_10
 --
 
 ALTER TABLE ONLY public.users
@@ -505,7 +505,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: scores scores_user_fkey; Type: FK CONSTRAINT; Schema: public; Owner: tpl_1121_10
+-- Name: scores scores_user_fkey; Type: FK CONSTRAINT; Schema: public; postgres: tpl_1121_10
 --
 
 ALTER TABLE ONLY public.scores

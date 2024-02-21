@@ -1,4 +1,4 @@
-import "./App.css";
+import "./Login.css";
 import {
   BrowserRouter as Router,
   Route,
@@ -13,8 +13,6 @@ import {
   getCurrentUserProfile,
 } from "./components/spotify";
 import Login from "./components/loginpage";
-import Mainpage from "./components/mainpage";
-import Gameplay from "./components/game";
 import Profile from "./components/profile";
 import Playlists from "./components/playlists";
 import About from "./components/about";

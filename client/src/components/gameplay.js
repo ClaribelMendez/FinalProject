@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { accessToken } from "./spotify";
 import Tracks from "./Tracks";
-import Playlists from "./playlists";
 
 function Game(props) {
   const [genres, setGenres] = useState([]);
@@ -17,9 +16,6 @@ function Game(props) {
   const [artists, setArtists] = useState([]);
   const [show, setShow] = useState(false);
   const [playlistButton, setPlaylistButton] = useState(false);
-  // const [hidePlaylist, setHidePlaylist] = useState(false);
-
- 
 
   const loadGenres = () => {
     fetch("/genres")
@@ -40,10 +36,6 @@ function Game(props) {
     setGenre(genre);
     setShow(true);
 
-    console.log("Line 13 frontend ", genre);
-    // add to request body
-
-
     fetch(`/game?genre=${genre}&token=${token}`, {
       method: "GET",
       headers: {
@@ -54,83 +46,61 @@ function Game(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        let allgenres = [
-          data.artists.items[0]["genres"],
-          data.artists.items[1]["genres"],
-          data.artists.items[2]["genres"],
-          data.artists.items[3]["genres"],
-          data.artists.items[4]["genres"],
-          data.artists.items[5]["genres"],
-          data.artists.items[6]["genres"],
-          data.artists.items[7]["genres"],
-          data.artists.items[8]["genres"],
-          data.artists.items[9]["genres"],
-        ];
-        setSubgenres(allgenres);
-        // console.log(allgenres);
+        let availableGenres = data.artists.items.map((item) => item.genres).filter(genres => genres !== null);
+        let randomGenresArray = [];
+        let selectedIndices = new Set();
+
+        // Loop to select 10 random indices
+        for (let i = 0; i < 10; i++) {
+          let randomIndex;
+          do {
+            randomIndex = Math.floor(Math.random() * availableGenres.length);
+          } while (selectedIndices.has(randomIndex)); 
+
+          selectedIndices.add(randomIndex);
+          let randomGenres = data.artists.items[randomIndex]["genres"];
+          randomGenresArray.push(randomGenres);
+        }
+
+        setSubgenres(randomGenresArray);
         setInfo(data);
-        // console.log(data)
-        let allArtists = [
-          data.artists.items[0]["name"],
-          data.artists.items[1]["name"],
-          data.artists.items[2]["name"],
-          data.artists.items[3]["name"],
-          data.artists.items[4]["name"],
-          data.artists.items[5]["name"],
-          data.artists.items[6]["name"],
-          data.artists.items[7]["name"],
-          data.artists.items[8]["name"],
-          data.artists.items[9]["name"],
-        ];
+
+        // convert set to array to iterate indices
+        let selectedIndicesArray = Array.from(selectedIndices); 
+
+        let allArtists = [];
+        for (let i = 0; i < 10; i++) {
+          let artistsName = data.artists.items[selectedIndicesArray[i]]["name"];
+          allArtists.push(artistsName);
+        }
+
         setArtists(allArtists);
 
-        // setCurrentArtist(data.artists.items[index]['name'])
-        let allArtistImages = [
-          data.artists.items[0]["images"][1]["url"],
-          data.artists.items[1]["images"][1]["url"],
-          data.artists.items[2]["images"][1]["url"],
-          data.artists.items[3]["images"][1]["url"],
-          data.artists.items[4]["images"][1]["url"],
-          data.artists.items[5]["images"][1]["url"],
-          data.artists.items[6]["images"][1]["url"],
-          data.artists.items[7]["images"][1]["url"],
-          data.artists.items[8]["images"][1]["url"],
-          data.artists.items[9]["images"][1]["url"],
-        ];
-        setImage(allArtistImages);
-        // setArtistId(data.artists.items[index]['id'])
-        console.log("image", image);
+        let allArtistImages = [];
+        for (let i = 0; i < 10; i++) {
+          let artistImages = data.artists.items[selectedIndicesArray[i]]["images"][1]["url"];
+          allArtistImages.push(artistImages);
+        }
 
-        let allArtistsIds = [
-          data.artists.items[0]["id"],
-          data.artists.items[1]["id"],
-          data.artists.items[2]["id"],
-          data.artists.items[3]["id"],
-          data.artists.items[4]["id"],
-          data.artists.items[5]["id"],
-          data.artists.items[6]["id"],
-          data.artists.items[7]["id"],
-          data.artists.items[8]["id"],
-          data.artists.items[9]["id"],
-        ];
+        setImage(allArtistImages);
+
+        let allArtistsIds = [];
+        for (let i = 0; i < 10; i++) {
+          let artistId = data.artists.items[selectedIndicesArray[i]]["id"];
+          allArtistsIds.push(artistId);
+        }
+        
         setArtistId(allArtistsIds);
-        console.log(allArtistsIds);
       });
   };
-
-  //  const audio = new Audio(
-  //   scclient/public/mixkit-game-flute-bonus-2313.wav"
-  //  );
 
   let handleAnswer = (e) => {
     if (index === 9) {
       setShow(false);
       setPlaylistButton(true);
-      // setHidePlaylist(true)
-      
       window.location.href = "/playlists";
-      //  audio.play()
     }
+
     if (subgenres[index].toString() === e.target.value) {
       console.log("correct");
       setScore(score + 1);
