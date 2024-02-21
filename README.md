@@ -1,5 +1,14 @@
+https://github.com/ClaribelMendez/FinalProject/assets/95108034/d3997c14-79af-4818-b041-04e593777cff
+
 ### About
 Intune is a music genre discovering app in the form of a trivia game that allows the user to discover new music while also learning about different subgenres.
+
+
+
+
+
+
+
 
 
 #
