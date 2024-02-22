@@ -1,5 +1,14 @@
+https://github.com/ClaribelMendez/FinalProject/assets/95108034/d3997c14-79af-4818-b041-04e593777cff
+
 ### About
 Intune is a music genre discovering app in the form of a trivia game that allows the user to discover new music while also learning about different subgenres.
+
+
+
+
+
+
+
 
 
 #
@@ -58,7 +67,6 @@ Install all NPM packages using this in the root directory:
 
 #### 2. Install NPM packagages  
 npm install
-Database setup:
 
 #### 3. Database 
 
@@ -69,9 +77,6 @@ Database setup:
 
 CD into client directory and and use the command  'npm start', from here you should be redirected to http://localhost:3000/
 Shut Down the Express and React development servers using Ctrl-C .
-
-
-
 
 2. To restore the DB dump file that the project already contain, just run the command `psql -U postgres -f db.sql`. Make sure that you have your Postgres password on hand. The psql console will ask you for your password. 
 3. To clean your folder from the owner git, run the command `rm -rf .git`
