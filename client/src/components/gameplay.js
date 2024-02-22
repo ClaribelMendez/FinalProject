@@ -48,25 +48,21 @@ function Game(props) {
       .then((data) => {
         let availableGenres = data.artists.items.map((item) => item.genres).filter(genres => genres !== null);
         let randomGenresArray = [];
-        let selectedIndices = new Set();
+        let selectedIndices = [];
+        let randomIndex;
 
-        // Loop to select 10 random indices
+        // Loop to select 10 random genres
         for (let i = 0; i < 10; i++) {
-          let randomIndex;
-          do {
-            randomIndex = Math.floor(Math.random() * availableGenres.length);
-          } while (selectedIndices.has(randomIndex)); 
-
-          selectedIndices.add(randomIndex);
-          let randomGenres = data.artists.items[randomIndex]["genres"];
+          randomIndex = Math.floor(Math.random() * availableGenres.length);
+          let randomGenres = availableGenres[randomIndex];
           randomGenresArray.push(randomGenres);
+          selectedIndices.push(randomIndex)
+          // Removes genre at selected index to avoid duplication of data
+          availableGenres.splice(randomIndex, 1);
         }
 
         setSubgenres(randomGenresArray);
         setInfo(data);
-
-        // convert set to array to iterate indices
-        let selectedIndicesArray = Array.from(selectedIndices); 
 
         let allArtists = [];
         for (let i = 0; i < 10; i++) {
