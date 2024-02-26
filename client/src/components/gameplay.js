@@ -66,7 +66,7 @@ function Game(props) {
 
         let allArtists = [];
         for (let i = 0; i < 10; i++) {
-          let artistsName = data.artists.items[selectedIndicesArray[i]]["name"];
+          let artistsName = data.artists.items[selectedIndices[i]]["name"];
           allArtists.push(artistsName);
         }
 
@@ -74,7 +74,7 @@ function Game(props) {
 
         let allArtistImages = [];
         for (let i = 0; i < 10; i++) {
-          let artistImages = data.artists.items[selectedIndicesArray[i]]["images"][1]["url"];
+          let artistImages = data.artists.items[selectedIndices[i]]["images"][1]["url"];
           allArtistImages.push(artistImages);
         }
 
@@ -82,7 +82,7 @@ function Game(props) {
 
         let allArtistsIds = [];
         for (let i = 0; i < 10; i++) {
-          let artistId = data.artists.items[selectedIndicesArray[i]]["id"];
+          let artistId = data.artists.items[selectedIndices[i]]["id"];
           allArtistsIds.push(artistId);
         }
         
