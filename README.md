@@ -1,5 +1,10 @@
+### THIS IS CURRENTLY A WORK IN PROGRESS AS I REDO THIS APP
+#
+
 
 ### About
+
+
 Intune is a music genre discovering app in the form of a trivia game that allows the user to discover new music while also learning about different subgenres.
 
 
